@@ -89,6 +89,11 @@ public class VoicePlayerService extends Service {
             return voicePlayerService.getFilePath();
         }
 
+        @Override
+        public boolean getMediaPlayerState() throws RemoteException {
+            return voicePlayerService.getMediaPlayerState();
+        }
+
 
     };
 
@@ -146,5 +151,9 @@ public class VoicePlayerService extends Service {
         if (mediaPlayer != null) {
             mediaPlayer.start();
         }
+    }
+
+    private boolean getMediaPlayerState() {
+        return mediaPlayer == null;
     }
 }

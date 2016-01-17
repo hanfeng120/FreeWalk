@@ -110,7 +110,6 @@ public class SceneActivity extends BaseActivity {
             case R.id.tb_media_play:
                 if (file.exists()) {
                     if (playerService != null) {
-                        createPlayerService();
                         playOrPause();
                     }
                 } else if (isLoading) {
@@ -197,6 +196,7 @@ public class SceneActivity extends BaseActivity {
                     sbProgress.setProgress(0);
                     tvCurDur.setText("00:00");
                     tvDuration.setText("00:00");
+                    createPlayerService();
                 }
             }
             if (playerService != null) {

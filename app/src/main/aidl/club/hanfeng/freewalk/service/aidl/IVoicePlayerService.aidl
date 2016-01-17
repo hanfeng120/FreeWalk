@@ -24,4 +24,6 @@ interface IVoicePlayerService {
 
     String getFilePath();
 
+    boolean getMediaPlayerState();
+
 }
