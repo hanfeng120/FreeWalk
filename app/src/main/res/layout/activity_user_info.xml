@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgGray"
+    android:orientation="vertical"
+    tools:context="club.hanfeng.freewalk.activity.UserInfoActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_ui_icon"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/bg_setting_item"
+        android:layout_marginTop="@dimen/setting_margin_top"
+        android:clickable="true"
+        android:onClick="clickItem"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            style="@style/ItemStyle"
+            android:text="头像"
+            />
+
+        <ImageView
+            android:id="@+id/img_ui_icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/menu_share_icon"
+            android:onClick="clickItem"
+            />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/segment_thin"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_ui_name"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_setting_item"
+        android:clickable="true"
+        android:onClick="clickItem"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/ItemStyle"
+            android:text="昵称"
+             />
+
+        <TextView
+            android:id="@+id/tv_ui_name"
+            style="@style/ItemRightStyle"
+            android:text="寒枫"
+            />
+
+    </RelativeLayout>
+    <include
+        layout="@layout/segment_thin"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_ui_tdcode"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_setting_item"
+        android:clickable="true"
+        android:onClick="clickItem"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/ItemStyle"
+            android:text="二维码名片"
+            />
+
+        <ImageView
+            android:id="@+id/img_ui_tdcode"
+            android:layout_width="@dimen/setting_item_height"
+            android:layout_height="@dimen/setting_item_height"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
+            android:onClick="clickItem"
+            />
+
+    </RelativeLayout>
+    <include
+        layout="@layout/segment_thin"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_ui_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_setting_item"
+        android:clickable="true"
+        android:onClick="clickItem"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/ItemStyle"
+            android:text="手机号"
+            />
+
+        <TextView
+            android:id="@+id/tv_ui_phone"
+            style="@style/ItemRightStyle"
+            android:text="已绑定"
+            />
+
+    </RelativeLayout>
+    <include
+        layout="@layout/segment_thin"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_ui_sex"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_setting_item"
+        android:clickable="true"
+        android:onClick="clickItem"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/ItemStyle"
+            android:text="性别"
+            />
+
+        <TextView
+            android:id="@+id/tv_ui_sex"
+            style="@style/ItemRightStyle"
+            android:text="男"
+            />
+
+    </RelativeLayout>
+    <include
+        layout="@layout/segment_thin"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_ui_tag"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_setting_item"
+        android:clickable="true"
+        android:onClick="clickItem"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/ItemStyle"
+            android:text="个性签名"
+            />
+
+        <TextView
+            android:id="@+id/tv_ui_tag"
+            style="@style/ItemRightStyle"
+            android:text="stay hungry, stay foolish"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

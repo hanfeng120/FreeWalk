@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <com.zxing.view.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="#333"
+            >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="扫 一 扫"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_camera_option"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="#333"
+            >
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="将取景框对准二维码，即可自动扫描。"
+            android:layout_above="@id/ll_camera_option"
+            android:layout_marginBottom="30dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageView
+            android:id="@+id/btn_cancel_scan"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00fdfd"
+            android:clickable="true"
+            />
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>

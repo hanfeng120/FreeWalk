@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:orientation="vertical"
+    android:background="#fff"
+    >
+
+    <TextView
+        android:id="@+id/tv_type_scene_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="故宫博物院"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_type_scene_name_en"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="THE FORBIDDEN CITY"
+        android:textSize="14dp"
+        android:textColor="@color/textGray"
+        android:layout_marginTop="5dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="14dp"
+        >
+
+        <ImageView
+            android:id="@+id/iv_type_scene_star"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:src="@android:drawable/star_big_on"
+            />
+
+        <TextView
+            android:id="@+id/tv_type_scene_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7585条评论"
+            android:textSize="14dp"
+            android:textColor="@color/textGray"
+            android:gravity="center_vertical"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

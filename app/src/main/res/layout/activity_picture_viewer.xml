@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_picture_viewer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#111"
+    android:onClick="clickItem"
+    tools:context="club.hanfeng.freewalk.activity.PictureViewerActivity">
+
+    <ImageView
+        android:id="@+id/iv_picture_viewer_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:onClick="clickItem"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/test_bg" />
+
+    <RelativeLayout
+        android:id="@+id/rl_picture_viewer_label"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_height">
+
+            <ImageView
+                android:id="@+id/iv_picture_viewer_back"
+                android:layout_width="@dimen/actionbar_height"
+                android:layout_height="match_parent"
+                android:background="#ccc"
+                android:onClick="clickItem" />
+
+            <ImageView
+                android:id="@+id/iv_picture_viewer_share"
+                android:layout_width="@dimen/actionbar_height"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="#ccc"
+                android:onClick="clickItem" />
+
+            <LinearLayout
+                android:id="@+id/ll_picture_viewer_user"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:onClick="clickItem"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/actionbar_height"
+                    android:layout_height="@dimen/actionbar_height" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="虚幻"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/iv_picture_viewer_comments"
+                android:layout_width="@dimen/actionbar_height"
+                android:layout_height="@dimen/actionbar_height"
+                android:background="#ccc"
+                android:onClick="clickItem" />
+
+            <TextView
+                android:id="@+id/tv_picture_viewer_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/iv_picture_viewer_comments"
+                android:gravity="center"
+                android:text="234"
+                android:textColor="#fff"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/iv_picture_viewer_stars"
+                android:layout_width="@dimen/actionbar_height"
+                android:layout_height="@dimen/actionbar_height"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tv_picture_viewer_comments"
+                android:background="#ccc"
+                android:onClick="clickItem" />
+
+            <TextView
+                android:id="@+id/tv_picture_viewer_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/iv_picture_viewer_stars"
+                android:gravity="center"
+                android:text="234"
+                android:textColor="#fff"
+                android:textSize="14dp"
+
+                />
+
+            <ImageView
+                android:id="@+id/iv_picture_viewer_save"
+                android:layout_width="@dimen/actionbar_height"
+                android:layout_height="@dimen/actionbar_height"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="4dp"
+                android:background="#ccc"
+                android:onClick="clickItem" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_picture_viewer_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="150dp"
+            android:layout_marginLeft="12dp"
+            android:onClick="clickItem"
+            android:text="南诏风情岛"
+            android:textColor="#fff"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="150dp"
+            android:layout_marginRight="12dp"
+            android:text="11月27日"
+            android:textColor="#fff" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

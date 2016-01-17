@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_scene_play"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#eee"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="5dp">
+
+        <ToggleButton
+            android:id="@+id/tb_media_play"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="8dp"
+            android:padding="5dp"
+            android:textOff="播放"
+            android:textOn="暂停" />
+
+        <TextView
+            android:id="@+id/tv_media_current"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_toRightOf="@id/tb_media_play"
+            android:gravity="left|center_vertical"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/tv_media_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right|center_vertical"
+            android:text="00:00" />
+
+        <SeekBar
+            android:id="@+id/sb_progress"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_alignLeft="@id/tv_media_current"
+            android:layout_alignRight="@id/tv_media_duration"
+            android:layout_below="@id/tv_media_current"
+            android:layout_toRightOf="@id/tb_media_play" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_scene"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_scene_play"
+        android:divider="@null">
+
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/rl_scene_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:id="@+id/tv_scene_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:text="故宫博物院"
+            />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_scene_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_back_sel"
+        android:scaleType="centerInside"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="club.hanfeng.freewalk.activity.MainActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rg_main"
+        />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ccc"
+        android:layout_above="@id/rg_main"
+        />
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            style="@style/RbMainStyle"
+            android:text="首页"
+            android:drawableTop="@drawable/sel_tab_icon_home"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_server"
+            style="@style/RbMainStyle"
+            android:text="服务"
+            android:drawableTop="@drawable/sel_tab_icon_server"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_find"
+            style="@style/RbMainStyle"
+            android:text="发现"
+            android:drawableTop="@drawable/sel_tab_icon_discover"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_user"
+            style="@style/RbMainStyle"
+            android:text="我"
+            android:drawableTop="@drawable/sel_tab_icon_me"
+            />
+
+    </RadioGroup>
+
+</RelativeLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/holo_blue_dark</color>
+    <color name="colorPrimaryDark">@android:color/holo_blue_dark</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorActionBar">#111</color>
+
+    <color name="bgGray">#ededed</color>
+    <color name="textGray">#777</color>
+    <color name="dividerGray">#eee</color>
+    <color name="textBlack">#111</color>
+    <color name="subtitle">#444</color>
+</resources>

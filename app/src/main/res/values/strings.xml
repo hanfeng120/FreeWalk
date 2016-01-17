@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FreeWalk</string>
+    <string name="title_activity_direct_send">DirectSendActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_travels">TravelsActivity</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_scan">ScanActivity</string>
+    <string name="title_activity_shake">ShakeActivity</string>
+</resources>

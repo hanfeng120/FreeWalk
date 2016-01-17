@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgGray"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:id="@+id/rl_set_user"
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/bg_setting_item"
+                android:layout_marginTop="@dimen/setting_margin_top"
+                android:clickable="true"
+                android:onClick="clickSettingItem"
+                >
+
+                <TextView
+                    android:id="@+id/tv_set_user_login"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:text="登录自由行体验更多功能"
+                    android:gravity="center"
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/rl_set_user_login"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:visibility="invisible"
+                    >
+
+                    <ImageView
+                        android:id="@+id/img_set_icon"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:padding="10dp"
+                        android:scaleType="centerInside"
+                        android:layout_marginRight="12dp"
+                        android:src="@mipmap/menu_share_icon"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_set_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:text="寒枫"
+                        android:textSize="16dp"
+                        android:layout_toRightOf="@id/img_set_icon"
+                        android:gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_set_user_tag1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center_vertical"
+                        android:text="简介："
+                        android:textSize="13dp"
+                        android:textColor="#999"
+                        android:layout_toRightOf="@id/img_set_icon"
+                        android:layout_below="@id/tv_set_username"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_set_usertag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center_vertical"
+                        android:text="stay hungry,stay foolish"
+                        android:textSize="13dp"
+                        android:textColor="#999"
+                        android:layout_toRightOf="@id/tv_set_user_tag1"
+                        android:layout_below="@id/tv_set_username"
+                        />
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_picture"
+                android:onClick="clickSettingItem"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:layout_marginTop="@dimen/setting_margin_top"
+                android:background="@drawable/bg_setting_item"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="相册"
+                android:textSize="16dp"
+                />
+
+            <include layout="@layout/segment_thin" />
+
+            <TextView
+                android:id="@+id/tv_collect"
+                android:onClick="clickSettingItem"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:clickable="true"
+                android:background="@drawable/bg_setting_item"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="收藏"
+                android:textSize="16dp" />
+
+            <include layout="@layout/segment_thin" />
+
+            <TextView
+                android:id="@+id/tv_resource"
+                android:onClick="clickSettingItem"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:clickable="true"
+                android:background="@drawable/bg_setting_item"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="离线资源"
+                android:textSize="16dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:layout_marginTop="@dimen/setting_margin_top"
+                android:background="#fff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:text="新消息提醒"
+                    android:textSize="16dp" />
+
+                <Switch
+                    android:id="@+id/sw_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="15dp" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/segment_thin" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:background="#fff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:text="自动播放语音导览"
+                    android:textSize="16dp" />
+
+                <Switch
+                    android:id="@+id/sw_auto_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="15dp" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/segment_thin" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:background="#fff"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:text="允许非WiFi网络下载资源"
+                    android:textSize="16dp" />
+
+                <Switch
+                    android:id="@+id/sw_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="15dp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_helper"
+                android:onClick="clickSettingItem"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:layout_marginTop="@dimen/setting_margin_top"
+                android:background="@drawable/bg_setting_item"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="使用帮助"
+                android:textSize="16dp" />
+
+            <include layout="@layout/segment_thin" />
+
+            <TextView
+                android:id="@+id/tv_feedback"
+                android:onClick="clickSettingItem"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:background="@drawable/bg_setting_item"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:paddingLeft="15dp"
+                android:text="问题反馈"
+                android:textSize="16dp" />
+
+            <include layout="@layout/segment_thin" />
+
+            <RelativeLayout
+                android:id="@+id/rl_update"
+                android:onClick="clickSettingItem"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:background="@drawable/bg_setting_item"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:text="版本更新"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_setting_vercode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:paddingRight="15dp"
+                    android:text="当前版本 1.1"
+                    android:textColor="#777" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/segment_thin" />
+
+            <TextView
+                android:id="@+id/tv_about"
+                android:onClick="clickSettingItem"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/setting_item_height"
+                android:clickable="true"
+                android:background="@drawable/bg_setting_item"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="关于"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/btn_set_exit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+
+                android:enabled="false"
+                android:onClick="clickSettingItem"
+                android:text="退出登录" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
