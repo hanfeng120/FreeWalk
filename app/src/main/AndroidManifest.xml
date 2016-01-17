@@ -43,10 +43,10 @@
             android:name=".activity.SceneActivity"
             android:theme="@style/NoActionBar" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".user.RegistStep2Activity"
             android:label="注册" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".user.LoginActivity"
             android:label="登录" />
         <activity android:name=".activity.PictureActivity" />
         <activity android:name=".activity.CollectActivity" />
@@ -55,7 +55,7 @@
         <activity android:name=".activity.AboutActivity" />
         <activity
             android:name=".activity.UserInfoActivity"
-            android:label="个人信息"></activity>
+            android:label="个人信息" />
         <activity
             android:name=".activity.DirectSendActivity"
             android:label="现场直播" />
@@ -73,14 +73,15 @@
             android:label="@string/title_activity_shake" />
         <activity
             android:name=".activity.PictureViewerActivity"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar" />
 
         <service android:name=".service.VoicePlayerService">
             <intent-filter>
-                <action android:name="club.hanfeng.freewalk.service.VOICEPLAYERSERVICE"/>
+                <action android:name="club.hanfeng.freewalk.service.VOICEPLAYERSERVICE" />
             </intent-filter>
         </service>
 
+        <activity android:name=".user.RegistStep1Activity"></activity>
     </application>
 
 </manifest>

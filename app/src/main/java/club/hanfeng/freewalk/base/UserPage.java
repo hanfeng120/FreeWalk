@@ -17,7 +17,7 @@ import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.AboutActivity;
 import club.hanfeng.freewalk.activity.CollectActivity;
 import club.hanfeng.freewalk.activity.FeedbackActivity;
-import club.hanfeng.freewalk.activity.LoginActivity;
+import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.activity.PictureActivity;
 import club.hanfeng.freewalk.activity.ResourceActivity;
 import club.hanfeng.freewalk.activity.UserInfoActivity;

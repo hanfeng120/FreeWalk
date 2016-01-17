@@ -7,7 +7,7 @@
     android:paddingLeft="12dp"
     android:paddingRight="12dp"
     android:paddingTop="20dp"
-    tools:context="club.hanfeng.freewalk.activity.LoginActivity">
+    tools:context=".user.LoginActivity">
 
     <EditText
         android:id="@+id/et_login_phone"

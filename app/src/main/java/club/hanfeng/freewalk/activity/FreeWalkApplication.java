@@ -5,7 +5,9 @@ import android.content.Context;
 
 import org.xutils.x;
 
+import club.hanfeng.freewalk.constants.Constants;
 import club.hanfeng.freewalk.utils.SpUtils;
+import cn.bmob.v3.Bmob;
 
 /**
  * Created by HanFeng on 2016/1/10.
@@ -20,8 +22,17 @@ public class FreeWalkApplication extends Application {
         super.onCreate();
         FreeWalkApplication.context = getApplicationContext();
 
-        initXUtils();
+        init();
         setSid(null);
+    }
+
+    private void init() {
+        initBmob();
+        initXUtils();
+    }
+
+    private void initBmob() {
+        Bmob.initialize(this, Constants.BMOB_ID);
     }
 
     private void initXUtils() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -15,10 +16,24 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
         init();
     }
 
+    protected boolean initBackActionBar() {
+        return false;
+    }
+
     private void init() {
+        if (initBackActionBar()) {
+            initBackBar();
+        }
         initIntentData();
         initView();
         initData();
+    }
+
+    /**
+     * step0 初始化ActionBar
+     */
+    private void initBackBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     /**
@@ -139,6 +154,14 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
