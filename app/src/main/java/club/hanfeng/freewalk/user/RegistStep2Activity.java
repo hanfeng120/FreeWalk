@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
+
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.MainActivity;
 import club.hanfeng.freewalk.bean.MyUser;
@@ -15,8 +17,10 @@ import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import club.hanfeng.freewalk.utils.FreeWalkUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.RequestSMSCodeListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.VerifySMSCodeListener;
@@ -113,7 +117,7 @@ public class RegistStep2Activity extends BaseActivity {
                     OutputUtils.toastShort(this, "还有没填写的哦");
                 } else {
                     FreeWalkProgress.show(getContext(), "正在注册");
-                    getDataFromServer();
+                    checkSmsCode();
                 }
                 break;
             case R.id.tv_smscode:
@@ -136,14 +140,14 @@ public class RegistStep2Activity extends BaseActivity {
      * 验证验证码是否正确
      */
 
-    private void getDataFromServer() {
+    private void checkSmsCode() {
         String smsCode = etSmsCode.getText().toString();
 
         BmobSMS.verifySmsCode(this, phoneNum, smsCode, new VerifySMSCodeListener() {
             @Override
             public void done(BmobException e) {
-                if (e == null) {//验证码正确
-                    register();
+                if (e == null) {
+                    checkUserInfo();
                 } else {
                     FreeWalkProgress.dismiss(getContext());
                     OutputUtils.toastShort(RegistStep2Activity.this, "验证码错误");
@@ -153,24 +157,34 @@ public class RegistStep2Activity extends BaseActivity {
                 }
             }
         });
-
-
     }
 
-    /**
-     * 在Bmob数据库中注册用户信息
-     */
-    private void register() {
-        String nickName = etNickName.getText().toString().toLowerCase();
-        String pwd = FreeWalkUtils.md5(etPwd.getText().toString());
+    private void checkUserInfo() {
+        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
+        query.addWhereEqualTo("username", phoneNum);
+        query.findObjects(this, new FindListener<MyUser>() {
+            @Override
+            public void onSuccess(List<MyUser> list) {
+                if (list.size() > 0) {
+                    OutputUtils.toastShort(getContext(), "该用户已经注册");
+                } else {
+                    regist();
+                }
+            }
 
+            @Override
+            public void onError(int code, String msg) {
+            }
+        });
+    }
+
+    private void regist() {
         MyUser user = new MyUser();
         user.setUsername(phoneNum);
-        user.setPassword(pwd);
-        user.setNickName(nickName);
+        user.setPassword(FreeWalkUtils.md5(etPwd.getText().toString()));
+        user.setNickName(etNickName.getText().toString());
         user.setMobilePhoneNumber(phoneNum);
         user.setMobilePhoneNumberVerified(true);
-
         user.signUp(this, new SaveListener() {
             @Override
             public void onSuccess() {

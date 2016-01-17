@@ -67,7 +67,7 @@ public class RegistStep1Activity extends BaseActivity {
     }
 
     private boolean checkNum(String num) {
-        return true;
+        return num.matches("^1[345678]\\d{9}$");
     }
 
     private void requestSmsCode() {
