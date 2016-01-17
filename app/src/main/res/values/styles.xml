@@ -22,8 +22,14 @@
         <item name="colorAccent">@android:color/holo_blue_dark</item>
     </style>
 
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#ededed</item>
+    </style>
+
     <!-- RadioButton的样式 -->
-    <style name="RbMainStyle" >
+    <style name="RbMainStyle">
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
@@ -36,7 +42,7 @@
     </style>
 
     <!-- 页面自定义Item样式 -->
-    <style name="ItemStyle" >
+    <style name="ItemStyle">
         <item name="android:layout_height">45dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">15dp</item>
@@ -45,7 +51,7 @@
     </style>
 
     <!-- 页面自定义Item右侧TextView样式 -->
-    <style name="ItemRightStyle" >
+    <style name="ItemRightStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">45dp</item>
         <item name="android:gravity">center_vertical</item>
@@ -55,7 +61,7 @@
         <item name="android:layout_alignParentRight">true</item>
     </style>
 
-    <style name="tallerBarStyle" parent="@android:style/Widget.SeekBar" >
+    <style name="tallerBarStyle" parent="@android:style/Widget.SeekBar">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@android:drawable/progress_horizontal</item>
         <item name="android:indeterminateDrawable">@android:drawable/progress_horizontal</item>
@@ -63,7 +69,7 @@
         <item name="android:maxHeight">5dip</item>
     </style>
 
-    <style name="voiceGuideProgressBarStyle" parent="@android:style/Widget.ProgressBar.Horizontal" >
+    <style name="voiceGuideProgressBarStyle" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:indeterminateOnly">false</item>
     </style>
 

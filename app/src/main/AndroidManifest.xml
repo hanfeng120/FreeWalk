@@ -47,7 +47,8 @@
             android:label="注册" />
         <activity
             android:name=".user.LoginActivity"
-            android:label="登录" />
+            android:label="登录"
+            android:launchMode="singleTask" />
         <activity android:name=".activity.PictureActivity" />
         <activity android:name=".activity.CollectActivity" />
         <activity android:name=".activity.ResourceActivity" />

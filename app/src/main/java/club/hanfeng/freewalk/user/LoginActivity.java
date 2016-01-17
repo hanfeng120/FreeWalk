@@ -1,90 +1,112 @@
 package club.hanfeng.freewalk.user;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.bean.MyUser;
-import club.hanfeng.freewalk.constants.Constants;
+import club.hanfeng.freewalk.framework.BaseActivity;
+import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import club.hanfeng.freewalk.utils.FreeWalkUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.listener.SaveListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private EditText etPhone, etPwd;
-    private ProgressDialog dialog;
-
+    private TextView tvRegister, tvForget;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        Bmob.initialize(this, Constants.BMOB_ID);
-
-        etPhone = (EditText) findViewById(R.id.et_login_phone);
-        etPwd = (EditText) findViewById(R.id.et_login_pwd);
-
-        dialog = new ProgressDialog(this);
-        dialog.setMessage("登录中...");
-
-    }
-
-    public void login(View view) {
-        String username = etPhone.getText().toString();
-        String pwd = etPwd.getText().toString();
-
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
-            OutputUtils.toastShort(this, "还有没填写的哦");
-        } else {
-            dialog.show();
-            pwd = FreeWalkUtils.md5(pwd);
-            getDataFromServer(username, pwd);
+    protected void initIntentData() {
+        if (getIntent().getBooleanExtra(UserConstants.FROM_USERPAGE, false)) {
+            initBackBar();
         }
     }
 
-    /**
-     * 查询数据库验证用户信息是否正确
-     */
-    private void getDataFromServer(String username, String pwd) {
+    @Override
+    protected int getContentViewResId() {
+        return R.layout.activity_login;
+    }
 
+    @Override
+    protected View getContentRootView() {
+        return null;
+    }
+
+    @Override
+    protected void initTopBar() {
+
+    }
+
+    @Override
+    protected void initContent() {
+        etPhone = (EditText) findViewById(R.id.et_phone_num);
+        etPwd = (EditText) findViewById(R.id.et_password);
+        findViewById(R.id.tv_register).setOnClickListener(getOnClickListener());
+        findViewById(R.id.tv_forget).setOnClickListener(getOnClickListener());
+        findViewById(R.id.btn_login).setOnClickListener(getOnClickListener());
+    }
+
+    @Override
+    protected void initBottomBar() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void refreshView(int viewId) {
+
+    }
+
+    private void checkUserInfo(String username, String pwd) {
         MyUser user = new MyUser();
         user.setUsername(username);
         user.setPassword(pwd);
         user.login(this, new SaveListener() {
             @Override
             public void onSuccess() {
-                dialog.dismiss();
+                FreeWalkProgress.dismiss(getContext());
                 setResult(RESULT_OK);
-                OutputUtils.toastShort(LoginActivity.this, "登录成功");
                 finish();
             }
 
             @Override
             public void onFailure(int i, String s) {
-                dialog.dismiss();
-                setResult(RESULT_CANCELED);
+                FreeWalkProgress.dismiss(getContext());
                 OutputUtils.toastShort(LoginActivity.this, "用户名或密码错误");
-                etPwd.setText(null);
             }
         });
 
     }
 
-    /**
-     * 打开注册界面
-     *
-     * @param view
-     */
-    public void register(View view) {
-        startActivity(new Intent(this, RegistStep1Activity.class));
-    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_login:
+                String username = etPhone.getText().toString();
+                String pwd = etPwd.getText().toString();
+
+                if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
+                    OutputUtils.toastShort(this, "还有没填写的哦");
+                } else {
+                    FreeWalkProgress.show(getContext(), "正在登陆...");
+                    pwd = FreeWalkUtils.md5(pwd);
+                    checkUserInfo(username, pwd);
+                }
+                break;
+            case R.id.tv_register:
+                startActivity(new Intent(getContext(), RegistStep1Activity.class));
+                break;
+            case R.id.tv_forget:
+                break;
+        }
+    }
 }

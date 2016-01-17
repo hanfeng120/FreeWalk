@@ -6,5 +6,6 @@ package club.hanfeng.freewalk.user;
 public class UserConstants {
 
     public static final String PHONE_NUM = "phone_num";
+    public static final String FROM_USERPAGE = "from_userpage";
 
 }
