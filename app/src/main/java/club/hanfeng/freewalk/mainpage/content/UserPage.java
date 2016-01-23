@@ -32,7 +32,7 @@ import cn.bmob.v3.BmobUser;
 /**
  * Created by HanFeng on 2015/10/22.
  */
-public class UserPage extends BaseViewGroup implements CompoundButton.OnCheckedChangeListener {
+public class UserPage extends BaseViewGroup implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private Switch swNews, swAutoPlay, swDownLoad;
     private TextView tvVerCode, tvName, tvTag, tvLogin;
@@ -68,12 +68,29 @@ public class UserPage extends BaseViewGroup implements CompoundButton.OnCheckedC
         swAutoPlay.setOnCheckedChangeListener(this);
         swDownLoad.setOnCheckedChangeListener(this);
 
+        setListener();
         setState();
         initUserInfo();
     }
 
+    private void setListener() {
+        setOnClickListener(R.id.rl_set_user);
+        setOnClickListener(R.id.tv_picture);
+        setOnClickListener(R.id.tv_collect);
+        setOnClickListener(R.id.tv_resource);
+        setOnClickListener(R.id.tv_helper);
+        setOnClickListener(R.id.tv_feedback);
+        setOnClickListener(R.id.rl_update);
+        setOnClickListener(R.id.tv_about);
+        setOnClickListener(R.id.btn_set_exit);
+    }
+
+    private void setOnClickListener(int id) {
+        getRootView().findViewById(id).setOnClickListener(this);
+    }
+
     /**
-     * 设置当前应用状态
+     * step 1 : 设置当前应用状态
      */
     private void setState() {
         //1  设置新消息状态
@@ -104,7 +121,7 @@ public class UserPage extends BaseViewGroup implements CompoundButton.OnCheckedC
     }
 
     /**
-     * 用户已经登录设置登录初始信息
+     * step 2 : 用户已经登录设置登录初始信息
      */
     private void initUserInfo() {
         user = BmobUser.getCurrentUser(getContext(), MyUser.class);
@@ -140,79 +157,16 @@ public class UserPage extends BaseViewGroup implements CompoundButton.OnCheckedC
     }
 
 
-    /**
-     * 控件的点击监听事件
-     *
-     * @param view
-     */
-    public void clickSettingItem(View view) {
-        switch (view.getId()) {
-            case R.id.tv_picture:
-                if (loginState) {
-                    toActivity(PictureActivity.class);
-                } else {
-                    OutputUtils.toastShort(getContext(), "请先登录");
-                }
-                break;
-            case R.id.tv_collect:
-                if (loginState) {
-                    toActivity(CollectActivity.class);
-                } else {
-                    OutputUtils.toastShort(getContext(), "请先登录");
-                }
-                break;
-            case R.id.tv_resource:
-                toActivity(ResourceActivity.class);
-                break;
-            case R.id.tv_helper:
-                break;
-            case R.id.tv_feedback:
-                toActivity(FeedbackActivity.class);
-                break;
-            case R.id.rl_update:
-                OutputUtils.toastShort(getContext(), "rl_update");
-                break;
-            case R.id.tv_about:
-                toActivity(AboutActivity.class);
-                break;
-            case R.id.btn_set_exit:
-                rlLogin.setVisibility(View.GONE);
-                tvLogin.setVisibility(View.VISIBLE);
-                btnExit.setEnabled(false);
-                loginState = false;
-                BmobUser.logOut(getContext());//退出登录
-                break;
-            case R.id.rl_set_user://进入个人信息界面
-                if (loginState) {
-                    toActivity(UserInfoActivity.class);
-                } else {
-                    ((Activity) getContext()).startActivityForResult(new Intent(getContext(), LoginActivity.class), 1);
-                }
-                break;
-        }
-    }
-
     public void onResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             initUserInfo();
         }
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param contextClass 要启动的Activity
-     */
-    private void toActivity(Class contextClass) {
+    private void startActivity(Class contextClass) {
         getContext().startActivity(new Intent(getContext(), contextClass));
     }
 
-    /**
-     * switch的选择监听
-     *
-     * @param buttonView
-     * @param isChecked
-     */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == swNews) {//新消息提醒开启
@@ -233,6 +187,54 @@ public class UserPage extends BaseViewGroup implements CompoundButton.OnCheckedC
             } else {
                 SpUtils.getInstance(getContext()).save(SpUtils.SETTING_DOWNLOAD, false);
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_picture:
+                if (loginState) {
+                    startActivity(PictureActivity.class);
+                } else {
+                    OutputUtils.toastShort(getContext(), "请先登录");
+                }
+                break;
+            case R.id.tv_collect:
+                if (loginState) {
+                    startActivity(CollectActivity.class);
+                } else {
+                    OutputUtils.toastShort(getContext(), "请先登录");
+                }
+                break;
+            case R.id.tv_resource:
+                startActivity(ResourceActivity.class);
+                break;
+            case R.id.tv_helper:
+                break;
+            case R.id.tv_feedback:
+                startActivity(FeedbackActivity.class);
+                break;
+            case R.id.rl_update:
+                OutputUtils.toastShort(getContext(), "rl_update");
+                break;
+            case R.id.tv_about:
+                startActivity(AboutActivity.class);
+                break;
+            case R.id.btn_set_exit:
+                rlLogin.setVisibility(View.GONE);
+                tvLogin.setVisibility(View.VISIBLE);
+                btnExit.setEnabled(false);
+                loginState = false;
+                BmobUser.logOut(getContext());//退出登录
+                break;
+            case R.id.rl_set_user://进入个人信息界面
+                if (loginState) {
+                    startActivity(UserInfoActivity.class);
+                } else {
+                    ((Activity) getContext()).startActivityForResult(new Intent(getContext(), LoginActivity.class), 1);
+                }
+                break;
         }
     }
 }
