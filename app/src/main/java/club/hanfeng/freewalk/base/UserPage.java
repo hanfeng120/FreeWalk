@@ -1,6 +1,7 @@
 package club.hanfeng.freewalk.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -39,7 +40,8 @@ public class UserPage extends BasePage implements CompoundButton.OnCheckedChange
     private RelativeLayout rlLogin;
     private boolean loginState;//用户登录状态
     private MyUser user;
-    public UserPage(Activity activity) {
+
+    public UserPage(Context activity) {
         super(activity);
     }
 
@@ -181,14 +183,14 @@ public class UserPage extends BasePage implements CompoundButton.OnCheckedChange
                 if (loginState) {
                     toActivity(UserInfoActivity.class);
                 } else {
-                    mActivity.startActivityForResult(new Intent(mActivity, LoginActivity.class), 1);
+                    ((Activity) mActivity).startActivityForResult(new Intent(mActivity, LoginActivity.class), 1);
                 }
                 break;
         }
     }
 
     public void onResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == mActivity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             initUserInfo();
         }
     }

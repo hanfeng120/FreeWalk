@@ -1,6 +1,5 @@
 package club.hanfeng.freewalk.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -12,12 +11,12 @@ import club.hanfeng.freewalk.R;
  */
 public class BasePage {
 
-    public Activity mActivity;
+    public Context mActivity;
     public View rootView;
     public FrameLayout flBasePage;
 
-    public BasePage(Activity activity) {
-        this.mActivity = activity;
+    public BasePage(Context context) {
+        this.mActivity = context;
         initView();
     }
 

@@ -1,6 +1,7 @@
 package club.hanfeng.freewalk.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
@@ -16,7 +17,7 @@ import club.hanfeng.freewalk.utils.OutputUtils;
 public class FindPage extends BasePage {
 
 
-    public FindPage(Activity activity) {
+    public FindPage(Context activity) {
         super(activity);
     }
 
@@ -52,11 +53,10 @@ public class FindPage extends BasePage {
     }
 
     public void onResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == mActivity.RESULT_OK) {//扫描二维码
+        if (resultCode == Activity.RESULT_OK) {//扫描二维码
             OutputUtils.toastShort(mActivity, data.getStringExtra("result"));
         }
     }
-
 
 
 }

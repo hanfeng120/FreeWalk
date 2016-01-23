@@ -1,6 +1,6 @@
 package club.hanfeng.freewalk.base;
 
-import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -9,8 +9,8 @@ import android.widget.TextView;
  */
 public class HomePage extends BasePage {
 
-    public HomePage(Activity activity) {
-        super(activity);
+    public HomePage(Context context) {
+        super(context);
     }
 
     @Override

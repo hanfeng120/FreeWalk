@@ -1,6 +1,5 @@
 package club.hanfeng.freewalk.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,8 +12,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,11 +68,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         initView();
         initData();
         update();
-    }
-
-    private void initXUtils() {
-        x.Ext.init(getApplication());
-        x.Ext.setDebug(true);
     }
 
     /**

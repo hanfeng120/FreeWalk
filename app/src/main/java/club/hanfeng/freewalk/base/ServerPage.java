@@ -1,10 +1,8 @@
 package club.hanfeng.freewalk.base;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -21,7 +19,6 @@ import club.hanfeng.freewalk.bean.SceneListInfo;
 import club.hanfeng.freewalk.bean.ServerInfo;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import club.hanfeng.freewalk.utils.SpUtils;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
@@ -36,7 +33,7 @@ public class ServerPage extends BasePage {
     private List<SceneListInfo> listScene = new ArrayList<>();
     private String sid;//景区标识
 
-    public ServerPage(Activity activity) {
+    public ServerPage(Context activity) {
         super(activity);
     }
 

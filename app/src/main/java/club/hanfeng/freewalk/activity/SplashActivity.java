@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import org.xutils.x;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.mainpage.MainPageActivity;
 
 
 public class SplashActivity extends Activity {
@@ -33,7 +34,7 @@ public class SplashActivity extends Activity {
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
                         finish();
                     }
                     break;
@@ -42,7 +43,7 @@ public class SplashActivity extends Activity {
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
                         finish();
                     }
             }

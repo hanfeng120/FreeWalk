@@ -82,7 +82,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".user.RegistStep1Activity"></activity>
+        <activity android:name=".user.RegistStep1Activity" />
+        <activity
+            android:name=".mainpage.MainPageActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/NoActionBar"></activity>
     </application>
 
 </manifest>

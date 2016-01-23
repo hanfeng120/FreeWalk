@@ -18,7 +18,7 @@ public class MainPagerAdapter extends PagerAdapter {
     private Context context;
     private List<BasePage> data;
 
-    public MainPagerAdapter(Context context, List<BasePage> list){
+    public MainPagerAdapter(Context context, List<BasePage> list) {
         this.context = context;
         this.data = list;
     }
@@ -36,13 +36,13 @@ public class MainPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         container.addView(data.get(position).rootView);
-        Log.i("TAG","instantiateItem()");
+        Log.i("TAG", "instantiateItem()");
         return data.get(position).rootView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        Log.i("TAG","destroyItem()");
+        Log.i("TAG", "destroyItem()");
         container.removeView((View) object);
     }
 }
