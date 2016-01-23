@@ -5,6 +5,6 @@ package club.hanfeng.freewalk.implement.main;
  */
 public interface OnBottomBarSelectedListener {
 
-    void onSelected(int index);
+    void onBottomBarSelected(int index);
 
 }

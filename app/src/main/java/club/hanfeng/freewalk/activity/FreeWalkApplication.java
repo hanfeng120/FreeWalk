@@ -6,7 +6,7 @@ import android.content.Context;
 import org.xutils.x;
 
 import club.hanfeng.freewalk.constants.Constants;
-import club.hanfeng.freewalk.utils.SpUtils;
+import club.hanfeng.freewalk.utils.sp.SpUtils;
 import cn.bmob.v3.Bmob;
 
 /**

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.implement.main.OnBottomBarSelectedListener;
-import club.hanfeng.freewalk.implement.main.OnPageChangeListener;
 
 /**
  * Created by HanFeng on 2016/1/23.
@@ -41,20 +40,9 @@ public class MainPageBottomBar extends BaseViewGroup implements RadioGroup.OnChe
 
     private void onBottomBarSelected(int index) {
         for (OnBottomBarSelectedListener onBottomBarSelectedListener : bottomBarSelectedListeners) {
-            onBottomBarSelectedListener.onSelected(index);
+            onBottomBarSelectedListener.onBottomBarSelected(index);
         }
     }
-
-    public OnPageChangeListener getOnPageChangeListener() {
-        return onPageChangeListener;
-    }
-
-    private OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
-        @Override
-        public void onPageChanged(int index) {
-            onChange(index);
-        }
-    };
 
     private void onChange(int index) {
         ((RadioButton) radioGroup.getChildAt(index)).setChecked(true);

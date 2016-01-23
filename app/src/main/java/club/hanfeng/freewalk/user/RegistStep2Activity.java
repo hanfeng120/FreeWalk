@@ -11,9 +11,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.activity.MainActivity;
 import club.hanfeng.freewalk.bean.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
+import club.hanfeng.freewalk.mainpage.MainPageActivity;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import club.hanfeng.freewalk.utils.FreeWalkUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
@@ -189,7 +189,7 @@ public class RegistStep2Activity extends BaseActivity {
             @Override
             public void onSuccess() {
                 FreeWalkProgress.dismiss(RegistStep2Activity.this);
-                startActivity(new Intent(getContext(), MainActivity.class));
+                startActivity(new Intent(getContext(), MainPageActivity.class));
             }
 
             @Override

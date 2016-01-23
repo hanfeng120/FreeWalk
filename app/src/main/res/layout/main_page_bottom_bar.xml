@@ -8,14 +8,12 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/rg_main"
         android:background="#ccc" />
 
     <RadioGroup
         android:id="@+id/rg_main"
         android:layout_width="fill_parent"
         android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <RadioButton

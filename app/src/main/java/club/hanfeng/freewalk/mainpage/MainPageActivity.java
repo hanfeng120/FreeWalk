@@ -53,7 +53,7 @@ public class MainPageActivity extends BaseActivity {
     @Override
     protected void initContent() {
         mainPageContent = new MainPageContent(getContext());
-        mainPageContent.createRootView(null);
+        mainPageContent.setRootView(findViewById(R.id.fl_content));
         mainPageContent.init();
 
 
@@ -68,14 +68,12 @@ public class MainPageActivity extends BaseActivity {
 
     @Override
     protected void initOtherView() {
-        ((FrameLayout) findViewById(R.id.fl_content)).addView(mainPageContent.getRootView());
         ((FrameLayout) findViewById(R.id.fl_bottom_bar)).addView(bottomBar.getRootView());
     }
 
     @Override
     protected void initData() {
-        mainPageContent.setOnPageChangeListener(bottomBar.getOnPageChangeListener());
-        bottomBar.setOnBottomBarSelectedListeners(mainPageContent.getOnBottomBarSelectedListener());
+        bottomBar.setOnBottomBarSelectedListeners(mainPageContent);
     }
 
     @Override

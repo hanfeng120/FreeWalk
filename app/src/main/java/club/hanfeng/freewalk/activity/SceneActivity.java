@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
@@ -37,7 +36,7 @@ import club.hanfeng.freewalk.service.VoicePlayerService;
 import club.hanfeng.freewalk.service.aidl.IVoicePlayerService;
 import club.hanfeng.freewalk.utils.CommonUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
-import club.hanfeng.freewalk.utils.SpUtils;
+import club.hanfeng.freewalk.utils.sp.SpUtils;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 

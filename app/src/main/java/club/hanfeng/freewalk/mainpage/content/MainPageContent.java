@@ -1,31 +1,19 @@
 package club.hanfeng.freewalk.mainpage.content;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.FrameLayout;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.adapter.MainPagerAdapter;
-import club.hanfeng.freewalk.base.BasePage;
-import club.hanfeng.freewalk.base.FindPage;
-import club.hanfeng.freewalk.base.HomePage;
-import club.hanfeng.freewalk.base.ServerPage;
-import club.hanfeng.freewalk.base.UserPage;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.implement.main.OnBottomBarSelectedListener;
-import club.hanfeng.freewalk.implement.main.OnPageChangeListener;
+import club.hanfeng.freewalk.implement.view.IView;
 
 /**
  * Created by HanFeng on 2016/1/23.
  */
-public class MainPageContent extends BaseViewGroup {
+public class MainPageContent extends BaseViewGroup implements OnBottomBarSelectedListener {
 
-    private ArrayList<OnPageChangeListener> onPageChangeListeners = new ArrayList<>();
-    private List<BasePage> pageContains = new ArrayList<>();
-    private BasePage homePage, serverPage, findPage, userPage;
-    private ViewPager viewPager;
+    private IView homePage, serverPage, findPage, userPage;
 
     public MainPageContent(Context context) {
         super(context);
@@ -39,51 +27,34 @@ public class MainPageContent extends BaseViewGroup {
     @Override
     public void onInitChildren() {
         homePage = new HomePage(getContext());
+        homePage.createRootView(null);
+        homePage.init();
+
         serverPage = new ServerPage(getContext());
+        serverPage.createRootView(null);
+        serverPage.init();
+
         findPage = new FindPage(getContext());
+        findPage.createRootView(null);
+        findPage.init();
+
         userPage = new UserPage(getContext());
+        userPage.createRootView(null);
+        userPage.init();
 
-        pageContains.add(homePage);
-        pageContains.add(serverPage);
-        pageContains.add(findPage);
-        pageContains.add(userPage);
+        children.add(homePage);
+        children.add(serverPage);
+        children.add(findPage);
+        children.add(userPage);
 
-        viewPager = (ViewPager) getRootView().findViewById(R.id.vp_main);
-        viewPager.setAdapter(new MainPagerAdapter(getContext(), pageContains));
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                pageContains.get(position).initData();
-                for (OnPageChangeListener onPageChangeListener : onPageChangeListeners) {
-                    onPageChangeListener.onPageChanged(position);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
-    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
-        onPageChangeListeners.add(onPageChangeListener);
-    }
-
-    public OnBottomBarSelectedListener getOnBottomBarSelectedListener() {
-        return onBottomBarSelectedListener;
-    }
-
-    private OnBottomBarSelectedListener onBottomBarSelectedListener = new OnBottomBarSelectedListener() {
-        @Override
-        public void onSelected(int index) {
-            viewPager.setCurrentItem(index);
+    @Override
+    public void onBottomBarSelected(int index) {
+        FrameLayout rootView = (FrameLayout) getRootView();
+        if (rootView.getChildAt(0) != children.get(index).getRootView()) {
+            rootView.removeAllViews();
+            rootView.addView(children.get(index).getRootView());
         }
-    };
-
+    }
 }

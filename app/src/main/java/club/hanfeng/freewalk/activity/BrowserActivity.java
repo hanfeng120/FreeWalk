@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.mainpage.MainPageActivity;
 
 public class BrowserActivity extends AppCompatActivity{
 	
@@ -141,7 +142,7 @@ public class BrowserActivity extends AppCompatActivity{
 			return true;
 		}else if(keyCode==KeyEvent.KEYCODE_BACK && !mBrowser.canGoBack()){
 			if(flag){
-				Intent intent = new Intent(this, MainActivity.class);
+				Intent intent = new Intent(this, MainPageActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
@@ -165,7 +166,7 @@ public class BrowserActivity extends AppCompatActivity{
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				if(flag){
-					Intent intent = new Intent(this, MainActivity.class);
+					Intent intent = new Intent(this, MainPageActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 				}else{

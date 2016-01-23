@@ -32,10 +32,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
-            android:icon="@null"
-            android:label="掌上西柏坡" />
-        <activity
             android:name=".activity.GuideActivity"
             android:theme="@style/NoActionBar" />
         <activity android:name=".activity.BrowserActivity" />
@@ -86,7 +82,7 @@
         <activity
             android:name=".mainpage.MainPageActivity"
             android:launchMode="singleTask"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/Toolbar"></activity>
     </application>
 
 </manifest>
