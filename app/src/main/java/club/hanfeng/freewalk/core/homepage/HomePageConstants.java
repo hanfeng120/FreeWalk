@@ -5,6 +5,9 @@ package club.hanfeng.freewalk.core.homepage;
  */
 public class HomePageConstants {
 
+
+    public static final String TYPE_HOME_TAB_BAR = "hometabbar";
+
     /**
      * 所有景点
      */

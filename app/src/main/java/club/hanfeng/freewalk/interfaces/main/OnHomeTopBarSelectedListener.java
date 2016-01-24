@@ -5,6 +5,6 @@ package club.hanfeng.freewalk.interfaces.main;
  */
 public interface OnHomeTopBarSelectedListener {
 
-    void onTopBarSelected(int type);
+    void onTopBarSelected(String type);
 
 }

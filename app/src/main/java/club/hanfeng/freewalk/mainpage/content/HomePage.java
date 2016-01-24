@@ -15,9 +15,9 @@ import java.util.List;
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.core.homepage.HomePageManager;
 import club.hanfeng.freewalk.core.homepage.data.HomePagePoi;
+import club.hanfeng.freewalk.core.tabbar.TabBarConstants;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
-import club.hanfeng.freewalk.utils.OutputUtils;
 import cn.bmob.v3.listener.FindListener;
 
 /**
@@ -53,11 +53,10 @@ public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListe
     }
 
     private void initData() {
-        HomePageManager.getInstance().getAllScene(getContext(), new FindListener<HomePagePoi>() {
-
+        HomePageManager.getInstance().getScenes(getContext(), TabBarConstants.TYPE_ID_ALL_SCENE, new FindListener<HomePagePoi>() {
             @Override
             public void onSuccess(List<HomePagePoi> list) {
-
+                showAllPoi(list);
             }
 
             @Override
@@ -68,8 +67,22 @@ public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListe
     }
 
     @Override
-    public void onTopBarSelected(int type) {
-        OutputUtils.toastShort(getContext(), "type >>> " + type);
+    public void onTopBarSelected(String type) {
+        HomePageManager.getInstance().getScenes(getContext(), type, new FindListener<HomePagePoi>() {
+            @Override
+            public void onSuccess(List<HomePagePoi> list) {
+                showAllPoi(list);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    private void showAllPoi(List<HomePagePoi> list) {
+
     }
 
     private void initAMap() {

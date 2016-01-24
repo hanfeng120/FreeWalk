@@ -1,7 +1,6 @@
 package club.hanfeng.freewalk.mainpage.topbar;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -11,11 +10,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.adapter.HomeTopBarAdapter;
+import club.hanfeng.freewalk.core.tabbar.data.TabBarType;
+import club.hanfeng.freewalk.core.homepage.HomePageManager;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by HanFeng on 2016/1/23.
@@ -23,7 +26,6 @@ import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
 public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
 
     private ArrayList<OnHomeTopBarSelectedListener> onHomeTopBarSelectedListeners = new ArrayList<>();
-    private ArrayList<String> items = new ArrayList<>();
     private ListPopupWindow listPopupWindow;
     private RelativeLayout titleContent;
 
@@ -49,7 +51,7 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
         tvTitle.setOnClickListener(this);
         ivMoer.setOnClickListener(this);
 
-        createListPopupWindow();
+        getTabBars();
     }
 
     public void setOnCheckedIndex(int index) {
@@ -60,12 +62,24 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
         }
     }
 
-    private void createListPopupWindow() {
-        items.add("热门景点");
-        items.add("游客服务中心");
-        items.add("卫生间");
+    private void getTabBars() {
+        HomePageManager.getInstance().getHomeTabBars(getContext(), new FindListener<TabBarType>() {
+            @Override
+            public void onSuccess(List<TabBarType> list) {
+                createListPopupWindow(list);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    private void createListPopupWindow(List<TabBarType> list) {
+        final HomeTopBarAdapter adapter = new HomeTopBarAdapter(getContext(), list);
         listPopupWindow = new ListPopupWindow(getContext());
-        listPopupWindow.setAdapter(new HomeTopBarAdapter(getContext(), items));
+        listPopupWindow.setAdapter(adapter);
         listPopupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         listPopupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
         listPopupWindow.setAnchorView(titleContent);
@@ -74,14 +88,15 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
         listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) view.findViewWithTag(position)).setTextColor(Color.BLUE);
+                onHomeTopBarSelected(adapter.getItem(position).getId());
+                adapter.setSelected(position);
+                adapter.notifyDataSetChanged();
                 listPopupWindow.dismiss();
-                onHomeTopBarSelected(position);
             }
         });
     }
 
-    private void onHomeTopBarSelected(int type) {
+    private void onHomeTopBarSelected(String type) {
         for (OnHomeTopBarSelectedListener listener : onHomeTopBarSelectedListeners) {
             listener.onTopBarSelected(type);
         }
@@ -98,6 +113,9 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
             case R.id.topbar_left:
                 break;
             case R.id.title:
+                if (listPopupWindow == null) {
+                    return;
+                }
                 if (listPopupWindow.isShowing()) {
                     listPopupWindow.dismiss();
                 } else {
@@ -108,4 +126,5 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
                 break;
         }
     }
+
 }
