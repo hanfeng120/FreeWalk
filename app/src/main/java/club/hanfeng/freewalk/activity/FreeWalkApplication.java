@@ -6,6 +6,7 @@ import android.content.Context;
 import org.xutils.x;
 
 import club.hanfeng.freewalk.constants.Constants;
+import club.hanfeng.freewalk.utils.sp.SpConstants;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
 import cn.bmob.v3.Bmob;
 
@@ -15,7 +16,8 @@ import cn.bmob.v3.Bmob;
 public class FreeWalkApplication extends Application {
 
     private static Context context;
-    public static String sid;
+    private static String sid;
+    private static String cityCode;
 
     @Override
     public void onCreate() {
@@ -23,7 +25,7 @@ public class FreeWalkApplication extends Application {
         FreeWalkApplication.context = getApplicationContext();
 
         init();
-        setSid(null);
+        setSid(null, null);
     }
 
     private void init() {
@@ -40,12 +42,21 @@ public class FreeWalkApplication extends Application {
         x.Ext.setDebug(true);
     }
 
-    public static void setSid(String sid) {
-        if (sid == null) {
-            FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpUtils.SCENIC_ID, null);
+    public static void setSid(String sid, String cityCode) {
+        if (sid == null || cityCode == null) {
+            FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpConstants.SCENIC_ID, "0001");
+            FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpConstants.CITY_CODE, "");
         } else {
             FreeWalkApplication.sid = sid;
+            FreeWalkApplication.cityCode = cityCode;
         }
     }
 
+    public static String getSid() {
+        return FreeWalkApplication.sid;
+    }
+
+    public static String getCityCode() {
+        return FreeWalkApplication.cityCode;
+    }
 }
