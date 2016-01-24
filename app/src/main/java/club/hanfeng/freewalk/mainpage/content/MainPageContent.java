@@ -11,6 +11,7 @@ import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.interfaces.main.OnBottomBarSelectedListener;
 import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
 import club.hanfeng.freewalk.interfaces.view.IView;
+import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.mainpage.content.server.ServerPage;
 
 /**
@@ -54,6 +55,14 @@ public class MainPageContent extends BaseViewGroup implements OnBottomBarSelecte
 
         onBottomBarSelected(0);
 
+    }
+
+    public void onActivityResult(int index) {
+        switch (index) {
+            case MainPageConstants.INDEX_USER_PAGE:
+                ((UserPage) userPage).onResult();
+                break;
+        }
     }
 
     @Override

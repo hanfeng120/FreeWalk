@@ -19,13 +19,7 @@ public class LoginActivity extends BaseActivity {
 
     private EditText etPhone, etPwd;
     private TextView tvRegister, tvForget;
-
-    @Override
-    protected void initIntentData() {
-        if (getIntent().getBooleanExtra(UserConstants.FROM_USERPAGE, false)) {
-            initBackBar();
-        }
-    }
+    private boolean fromUserPage;
 
     @Override
     protected int getContentViewResId() {
@@ -35,6 +29,15 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected View getContentRootView() {
         return null;
+    }
+
+    @Override
+    protected void initIntentData() {
+
+        if (getIntent().getBooleanExtra(UserConstants.FROM_USERPAGE, false)) {
+            fromUserPage = true;
+            initBackBar();
+        }
     }
 
     @Override
@@ -74,8 +77,11 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess() {
                 FreeWalkProgress.dismiss(getContext());
-                setResult(RESULT_OK);
-                startActivity(new Intent(getContext(), MainPageActivity.class));
+                if (fromUserPage) {
+                    setResult(RESULT_OK);
+                } else {
+                    startActivity(new Intent(getContext(), MainPageActivity.class));
+                }
                 finish();
             }
 

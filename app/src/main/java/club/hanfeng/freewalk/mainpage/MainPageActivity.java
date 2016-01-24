@@ -1,5 +1,6 @@
 package club.hanfeng.freewalk.mainpage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,8 +21,6 @@ import club.hanfeng.freewalk.utils.map.AMapUtils;
 
 public class MainPageActivity extends BaseActivity {
 
-    private static final int REQUEST_USERPAGE = 1;
-    private static final int REQUEST_FINDPAGE = 2;
     private static final int WHAT_UPDATE = 1;//应用更新
     private static final int WHAT_EXIT = 2;
 
@@ -112,6 +111,14 @@ public class MainPageActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MainPageConstants.REQUEST_USER_PAGE && resultCode == RESULT_OK) {
+            mainPageContent.onActivityResult(MainPageConstants.INDEX_USER_PAGE);
+        }
     }
 
     @Override

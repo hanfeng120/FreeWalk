@@ -19,11 +19,13 @@ import club.hanfeng.freewalk.activity.AboutActivity;
 import club.hanfeng.freewalk.activity.CollectActivity;
 import club.hanfeng.freewalk.activity.FeedbackActivity;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
+import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.activity.PictureActivity;
 import club.hanfeng.freewalk.activity.ResourceActivity;
 import club.hanfeng.freewalk.activity.UserInfoActivity;
 import club.hanfeng.freewalk.core.user.data.MyUser;
+import club.hanfeng.freewalk.user.UserConstants;
 import club.hanfeng.freewalk.utils.CommonUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
@@ -157,10 +159,8 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
     }
 
 
-    public void onResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            initUserInfo();
-        }
+    public void onResult() {
+        initUserInfo();
     }
 
     private void startActivity(Class contextClass) {
@@ -232,7 +232,9 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
                 if (loginState) {
                     startActivity(UserInfoActivity.class);
                 } else {
-                    ((Activity) getContext()).startActivityForResult(new Intent(getContext(), LoginActivity.class), 1);
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    intent.putExtra(UserConstants.FROM_USERPAGE, true);
+                    ((Activity) getContext()).startActivityForResult(intent, MainPageConstants.REQUEST_USER_PAGE);
                 }
                 break;
         }
