@@ -32,7 +32,7 @@
             android:value="c7c1c361def02d77a76c40135aeb0667" />
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".guide.SplashActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.GuideActivity"
+            android:name=".guide.GuideActivity"
             android:theme="@style/NoActionBar" />
         <activity android:name=".activity.BrowserActivity" />
         <activity

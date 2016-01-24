@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.guide.GuideActivity;
 import club.hanfeng.freewalk.utils.CommonUtils;
 
 public class AboutActivity extends AppCompatActivity {

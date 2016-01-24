@@ -17,7 +17,7 @@ import android.widget.TextView;
 import org.xutils.x;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.bean.MyUser;
+import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import cn.bmob.v3.BmobSMS;

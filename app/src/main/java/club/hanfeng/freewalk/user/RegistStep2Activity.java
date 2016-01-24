@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.bean.MyUser;
+import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.mainpage.MainPageActivity;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;

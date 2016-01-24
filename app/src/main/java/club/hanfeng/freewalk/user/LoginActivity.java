@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.bean.MyUser;
+import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import club.hanfeng.freewalk.utils.FreeWalkUtils;

@@ -16,4 +16,5 @@ public class SpConstants {
     public static final String VERSION_NAME = "VERSION_NAME";
 
     public static final String CITY_CODE = "city_code";
+    public static final String IS_FIRST = "is_first";
 }

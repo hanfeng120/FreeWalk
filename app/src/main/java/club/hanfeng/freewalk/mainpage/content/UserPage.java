@@ -23,7 +23,7 @@ import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.activity.PictureActivity;
 import club.hanfeng.freewalk.activity.ResourceActivity;
 import club.hanfeng.freewalk.activity.UserInfoActivity;
-import club.hanfeng.freewalk.bean.MyUser;
+import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.utils.CommonUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import club.hanfeng.freewalk.utils.sp.SpUtils;

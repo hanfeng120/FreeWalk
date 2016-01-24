@@ -30,8 +30,12 @@ public final class SpUtils {
 
     public static SpUtils getInstance(Context context) {
         if (instance == null) {
-            sp = context.getSharedPreferences("freewalk", Context.MODE_PRIVATE);
-            instance = new SpUtils();
+            synchronized (SpUtils.class) {
+                if (instance == null) {
+                    sp = context.getSharedPreferences("freewalk", Context.MODE_PRIVATE);
+                    instance = new SpUtils();
+                }
+            }
         }
         return instance;
     }
@@ -42,7 +46,7 @@ public final class SpUtils {
      * @param key
      * @param value 支持String,int,boolean三种类型
      */
-    public void save(String key, Object value) {
+    public synchronized void save(String key, Object value) {
         if (value instanceof String) {
             sp.edit().putString(key, (String) value).commit();
         } else if (value instanceof Integer) {
@@ -59,7 +63,7 @@ public final class SpUtils {
      * @param defValue
      * @return
      */
-    public <T> T getValue(String key, T defValue) {
+    public synchronized <T> T getValue(String key, T defValue) {
         T t = null;
         if (defValue == null || defValue instanceof String) {
             t = (T) sp.getString(key, (String) defValue);
@@ -78,7 +82,7 @@ public final class SpUtils {
      *
      * @param key
      */
-    public void remove(String key) {
+    public synchronized void remove(String key) {
         sp.edit().remove(key);
     }
 
