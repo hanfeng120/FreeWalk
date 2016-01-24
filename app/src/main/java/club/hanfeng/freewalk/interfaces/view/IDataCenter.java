@@ -1,4 +1,4 @@
-package club.hanfeng.freewalk.implement.view;
+package club.hanfeng.freewalk.interfaces.view;
 
 public interface IDataCenter {
 

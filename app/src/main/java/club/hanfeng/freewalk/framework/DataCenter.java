@@ -3,8 +3,8 @@ package club.hanfeng.freewalk.framework;
 import java.util.HashMap;
 import java.util.Stack;
 
-import club.hanfeng.freewalk.implement.view.IDataCenter;
-import club.hanfeng.freewalk.implement.view.OnDataChangeListener;
+import club.hanfeng.freewalk.interfaces.view.IDataCenter;
+import club.hanfeng.freewalk.interfaces.view.OnDataChangeListener;
 
 public class DataCenter implements IDataCenter {
     private static volatile DataCenter instance;

@@ -1,4 +1,4 @@
-package club.hanfeng.freewalk.implement.view;
+package club.hanfeng.freewalk.interfaces.view;
 
 import android.content.Context;
 import android.view.View;

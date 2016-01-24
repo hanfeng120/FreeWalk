@@ -15,16 +15,19 @@ import java.util.ArrayList;
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.adapter.HomeTopBarAdapter;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
+import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
 
 /**
  * Created by HanFeng on 2016/1/23.
  */
 public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
 
+    private ArrayList<OnHomeTopBarSelectedListener> onHomeTopBarSelectedListeners = new ArrayList<>();
     private ArrayList<String> items = new ArrayList<>();
     private ListPopupWindow listPopupWindow;
     private RelativeLayout titleContent;
 
+    private TextView tvTitle;
 
     public HomeTopBar(Context context) {
         super(context);
@@ -38,7 +41,7 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
     @Override
     public void onInitChildren() {
         TextView tvScene = (TextView) getRootView().findViewById(R.id.topbar_left);
-        TextView tvTitle = (TextView) getRootView().findViewById(R.id.title);
+        tvTitle = (TextView) getRootView().findViewById(R.id.title);
         ImageView ivMoer = (ImageView) getRootView().findViewById(R.id.topbar_right);
         titleContent = (RelativeLayout) getRootView().findViewById(R.id.title_content);
 
@@ -51,9 +54,9 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
 
     public void setOnCheckedIndex(int index) {
         if (index == 0) {
-
+            tvTitle.setEnabled(true);
         } else {
-
+            tvTitle.setEnabled(false);
         }
     }
 
@@ -67,13 +70,25 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
         listPopupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
         listPopupWindow.setAnchorView(titleContent);
         listPopupWindow.setModal(true);
+
         listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) view.findViewWithTag(position)).setTextColor(Color.BLUE);
                 listPopupWindow.dismiss();
+                onHomeTopBarSelected(position);
             }
         });
+    }
+
+    private void onHomeTopBarSelected(int type) {
+        for (OnHomeTopBarSelectedListener listener : onHomeTopBarSelectedListeners) {
+            listener.onTopBarSelected(type);
+        }
+    }
+
+    public void setOnHomeTopBarSelectedListener(OnHomeTopBarSelectedListener onHomeTopBarSelectedListener) {
+        onHomeTopBarSelectedListeners.add(onHomeTopBarSelectedListener);
     }
 
 

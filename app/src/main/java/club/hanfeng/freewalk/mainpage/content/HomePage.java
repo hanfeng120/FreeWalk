@@ -10,13 +10,20 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.UiSettings;
 
+import java.util.List;
+
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.core.homepage.HomePageManager;
+import club.hanfeng.freewalk.core.homepage.data.HomePagePoi;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
+import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
+import club.hanfeng.freewalk.utils.OutputUtils;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by HanFeng on 2015/10/22.
  */
-public class HomePage extends BaseViewGroup implements LocationSource, AMapLocationListener {
+public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListener, LocationSource, AMapLocationListener {
 
     private AMap aMap;
     private UiSettings uiSettings;
@@ -42,9 +49,30 @@ public class HomePage extends BaseViewGroup implements LocationSource, AMapLocat
         this.aMap = aMap;
         this.uiSettings = aMap.getUiSettings();
         initAMap();
+        initData();
     }
 
-    public void initAMap() {
+    private void initData() {
+        HomePageManager.getInstance().getAllScene(getContext(), new FindListener<HomePagePoi>() {
+
+            @Override
+            public void onSuccess(List<HomePagePoi> list) {
+
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onTopBarSelected(int type) {
+        OutputUtils.toastShort(getContext(), "type >>> " + type);
+    }
+
+    private void initAMap() {
         uiSettings.setScaleControlsEnabled(true);
         uiSettings.setZoomControlsEnabled(true);
         uiSettings.setCompassEnabled(true);
@@ -98,4 +126,5 @@ public class HomePage extends BaseViewGroup implements LocationSource, AMapLocat
             locationChangedListener.onLocationChanged(aMapLocation);
         }
     }
+
 }

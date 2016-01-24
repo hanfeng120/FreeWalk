@@ -59,4 +59,5 @@ public class FreeWalkApplication extends Application {
     public static String getCityCode() {
         return FreeWalkApplication.cityCode;
     }
+
 }

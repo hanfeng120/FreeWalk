@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
-import club.hanfeng.freewalk.implement.main.OnBottomBarSelectedListener;
+import club.hanfeng.freewalk.interfaces.main.OnBottomBarSelectedListener;
 
 /**
  * Created by HanFeng on 2016/1/23.

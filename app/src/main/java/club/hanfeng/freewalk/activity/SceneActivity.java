@@ -284,7 +284,7 @@ public class SceneActivity extends BaseActivity {
      */
     public void getDataFromServer() {
         BmobQuery<SceneInfo> bmobQuery = new BmobQuery<>();
-        bmobQuery.addWhereEqualTo("sid", FreeWalkApplication.sid);
+//        bmobQuery.addWhereEqualTo("sid", FreeWalkApplication.getSid());
         bmobQuery.addWhereEqualTo("id", id);
         bmobQuery.findObjects(this, new FindListener<SceneInfo>() {
             @Override

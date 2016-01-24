@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import club.hanfeng.freewalk.implement.view.IDataRefreshTask;
-import club.hanfeng.freewalk.implement.view.IView;
-import club.hanfeng.freewalk.implement.view.OnDataChangeListener;
+import club.hanfeng.freewalk.interfaces.view.IDataRefreshTask;
+import club.hanfeng.freewalk.interfaces.view.IView;
+import club.hanfeng.freewalk.interfaces.view.OnDataChangeListener;
 
 public abstract class BaseViewGroup implements IView, OnDataChangeListener {
     private static final int MSG_REFRESH_DATA = 0;

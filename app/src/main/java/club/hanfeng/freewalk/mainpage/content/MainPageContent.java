@@ -8,8 +8,9 @@ import com.amap.api.maps.AMap;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
-import club.hanfeng.freewalk.implement.main.OnBottomBarSelectedListener;
-import club.hanfeng.freewalk.implement.view.IView;
+import club.hanfeng.freewalk.interfaces.main.OnBottomBarSelectedListener;
+import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
+import club.hanfeng.freewalk.interfaces.view.IView;
 
 /**
  * Created by HanFeng on 2016/1/23.
@@ -76,5 +77,9 @@ public class MainPageContent extends BaseViewGroup implements OnBottomBarSelecte
 
     public void setAMap(AMap aMap) {
         ((HomePage) homePage).setAMap(aMap);
+    }
+
+    public OnHomeTopBarSelectedListener getOnHomeTopBarSelectedListener() {
+        return (HomePage) homePage;
     }
 }

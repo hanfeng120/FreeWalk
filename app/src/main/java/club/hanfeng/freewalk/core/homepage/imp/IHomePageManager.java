@@ -1,26 +1,26 @@
 package club.hanfeng.freewalk.core.homepage.imp;
 
-import java.util.List;
+import android.content.Context;
 
-import club.hanfeng.freewalk.core.homepage.data.HomePagePoi;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by HanFeng on 2016/1/24.
  */
 public interface IHomePageManager {
 
-    List<HomePagePoi> getAllScene();
+    void getAllScene(Context context, FindListener findListener);
 
-    List<HomePagePoi> getHotScene();
+    void getHotScene(Context context, FindListener findListener);
 
-    List<HomePagePoi> getServerCenter();
+    void getServerCenter(Context context, FindListener findListener);
 
-    List<HomePagePoi> getToilet();
+    void getToilet(Context context, FindListener findListener);
 
-    List<HomePagePoi> getFood();
+    void getFood(Context context, FindListener findListener);
 
-    List<HomePagePoi> getHotel();
+    void getHotel(Context context, FindListener findListener);
 
-    List<HomePagePoi> getShopping();
+    void getShopping(Context context, FindListener findListener);
 
 }

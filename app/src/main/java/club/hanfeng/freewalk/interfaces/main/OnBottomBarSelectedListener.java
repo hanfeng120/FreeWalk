@@ -1,4 +1,4 @@
-package club.hanfeng.freewalk.implement.main;
+package club.hanfeng.freewalk.interfaces.main;
 
 /**
  * Created by HanFeng on 2016/1/23.

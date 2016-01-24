@@ -99,6 +99,7 @@ public class MainPageActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        mainPageTopBar.setOnHomeTopBarSelectedListener(mainPageContent.getOnHomeTopBarSelectedListener());
         bottomBar.setOnBottomBarSelectedListeners(mainPageTopBar);
         bottomBar.setOnBottomBarSelectedListeners(mainPageContent);
     }

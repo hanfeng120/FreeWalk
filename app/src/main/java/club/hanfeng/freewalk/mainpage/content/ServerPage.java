@@ -19,8 +19,6 @@ import club.hanfeng.freewalk.bean.SceneListInfo;
 import club.hanfeng.freewalk.bean.ServerInfo;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.utils.OutputUtils;
-import club.hanfeng.freewalk.utils.sp.SpConstants;
-import club.hanfeng.freewalk.utils.sp.SpUtils;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
@@ -56,12 +54,13 @@ public class ServerPage extends BaseViewGroup {
     }
 
     private void checkSid() {
-        sid = SpUtils.getInstance(getContext()).getValue(SpConstants.SCENIC_ID, null);
-        if (sid != null) {
-            getDataFromServer();
-        } else {
-            //TODO 景区唯一编号为空，跳转到景区选择页面
-        }
+//        sid = SpUtils.getInstance(getContext()).getValue(SpConstants.SCENIC_ID, null);
+//        if (sid != null) {
+//            getDataFromServer();
+//        } else {
+//            //TODO 景区唯一编号为空，跳转到景区选择页面
+//        }
+        getDataFromServer();
     }
 
     public void getDataFromServer() {
@@ -72,7 +71,7 @@ public class ServerPage extends BaseViewGroup {
         list.add(new ServerInfo("更多攻略", "http://192.168.20.75:8080/freewalk/images/btn_index_amuse.png", ""));
 
         BmobQuery<SceneListInfo> bmob = new BmobQuery<>();
-        bmob.addWhereEqualTo("sid", sid);
+//        bmob.addWhereEqualTo("sid", sid);
         bmob.setLimit(1000);
         bmob.findObjects(getContext(), new FindListener<SceneListInfo>() {
             @Override

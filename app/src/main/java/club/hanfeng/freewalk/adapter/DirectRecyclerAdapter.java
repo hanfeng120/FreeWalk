@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.bean.DirectSendBean;
-import club.hanfeng.freewalk.interfaces.OnRecyclerItemClickListener;
+import club.hanfeng.freewalk.interfaces.studio.OnRecyclerItemClickListener;
 
 /**
  * Created by HanFeng on 2015/12/2.

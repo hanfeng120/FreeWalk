@@ -1,25 +1,20 @@
 package club.hanfeng.freewalk.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 
 import java.util.ArrayList;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.adapter.DirectRecyclerAdapter;
 import club.hanfeng.freewalk.bean.DirectSendBean;
-import club.hanfeng.freewalk.interfaces.OnRecyclerItemClickListener;
+import club.hanfeng.freewalk.interfaces.studio.OnRecyclerItemClickListener;
 
 public class DirectSendActivity extends AppCompatActivity {
 
