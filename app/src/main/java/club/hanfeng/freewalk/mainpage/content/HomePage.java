@@ -1,6 +1,7 @@
 package club.hanfeng.freewalk.mainpage.content;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -9,10 +10,16 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 
+import java.util.HashMap;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.core.scene.SceneConstants;
+import club.hanfeng.freewalk.scene.SceneActivity;
 import club.hanfeng.freewalk.core.homepage.HomePageManager;
 import club.hanfeng.freewalk.core.homepage.data.HomePagePoi;
 import club.hanfeng.freewalk.core.tabbar.TabBarConstants;
@@ -23,13 +30,15 @@ import cn.bmob.v3.listener.FindListener;
 /**
  * Created by HanFeng on 2015/10/22.
  */
-public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListener, LocationSource, AMapLocationListener {
+public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListener, LocationSource, AMapLocationListener, AMap.OnMarkerClickListener, AMap.OnInfoWindowClickListener, AMap.OnMapClickListener {
 
     private AMap aMap;
     private UiSettings uiSettings;
     private OnLocationChangedListener locationChangedListener;
     private AMapLocationClient locationClient;
     private AMapLocationClientOption optionClient;
+    private Marker marker;
+    private HashMap<String, String> idMaps = new HashMap<>();
 
     public HomePage(Context context) {
         super(context);
@@ -82,7 +91,15 @@ public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListe
     }
 
     private void showAllPoi(List<HomePagePoi> list) {
-
+        aMap.clear();
+        for (HomePagePoi poi : list) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(new LatLng(Double.valueOf(poi.getLat()), Double.valueOf(poi.getLon())));
+            markerOptions.title(poi.getName());
+            marker = aMap.addMarker(markerOptions);
+            marker.setTitle(poi.getName());
+            idMaps.put(poi.getName(), poi.getId());
+        }
     }
 
     private void initAMap() {
@@ -93,6 +110,9 @@ public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListe
         uiSettings.setScrollGesturesEnabled(true);
         uiSettings.setRotateGesturesEnabled(true);
 
+        aMap.setOnMapClickListener(this);
+        aMap.setOnMarkerClickListener(this);
+        aMap.setOnInfoWindowClickListener(this);
         aMap.setMyLocationEnabled(true);
         aMap.setLocationSource(this);
     }
@@ -140,4 +160,20 @@ public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListe
         }
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Intent intent = new Intent(getContext(), SceneActivity.class);
+        intent.putExtra(SceneConstants.EXTRA_ID, idMaps.get(marker.getTitle()));
+        getContext().startActivity(intent);
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+
+    }
 }

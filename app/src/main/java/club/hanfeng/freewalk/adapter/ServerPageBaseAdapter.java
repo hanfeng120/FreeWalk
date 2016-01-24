@@ -12,7 +12,7 @@ import org.xutils.x;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.bean.ServerInfo;
+import club.hanfeng.freewalk.core.serverpage.data.ServerInfo;
 
 /**
  * Created by HanFeng on 2015/10/22.

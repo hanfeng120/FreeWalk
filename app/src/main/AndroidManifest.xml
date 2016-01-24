@@ -45,7 +45,7 @@
             android:theme="@style/NoActionBar" />
         <activity android:name=".activity.BrowserActivity" />
         <activity
-            android:name=".activity.SceneActivity"
+            android:name=".scene.SceneActivity"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".user.RegistStep2Activity"

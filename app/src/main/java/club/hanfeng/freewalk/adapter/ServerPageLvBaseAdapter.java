@@ -12,7 +12,7 @@ import org.xutils.x;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.bean.SceneListInfo;
+import club.hanfeng.freewalk.core.serverpage.data.SceneListInfo;
 
 /**
  * 景区服务景点列表 Adapter

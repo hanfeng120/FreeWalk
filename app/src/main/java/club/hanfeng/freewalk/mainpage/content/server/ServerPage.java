@@ -1,4 +1,4 @@
-package club.hanfeng.freewalk.mainpage.content;
+package club.hanfeng.freewalk.mainpage.content.server;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,12 @@ import java.util.List;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.BrowserActivity;
-import club.hanfeng.freewalk.activity.SceneActivity;
+import club.hanfeng.freewalk.core.scene.SceneConstants;
+import club.hanfeng.freewalk.scene.SceneActivity;
 import club.hanfeng.freewalk.adapter.ServerPageBaseAdapter;
 import club.hanfeng.freewalk.adapter.ServerPageLvBaseAdapter;
-import club.hanfeng.freewalk.bean.SceneListInfo;
-import club.hanfeng.freewalk.bean.ServerInfo;
+import club.hanfeng.freewalk.core.serverpage.data.SceneListInfo;
+import club.hanfeng.freewalk.core.serverpage.data.ServerInfo;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import cn.bmob.v3.BmobQuery;
@@ -115,8 +116,8 @@ public class ServerPage extends BaseViewGroup {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 position--;
                 Intent intent = new Intent(getContext(), SceneActivity.class);
-                intent.putExtra("title", listScene.get(position).name);
-                intent.putExtra("id", listScene.get(position).id);
+                intent.putExtra(SceneConstants.EXTRA_TITLE, listScene.get(position).name);
+                intent.putExtra(SceneConstants.EXTRA_ID, listScene.get(position).id);
                 getContext().startActivity(intent);
             }
         });

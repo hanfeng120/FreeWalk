@@ -114,6 +114,7 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
                 break;
             case R.id.title:
                 if (listPopupWindow == null) {
+                    getTabBars();
                     return;
                 }
                 if (listPopupWindow.isShowing()) {

@@ -45,7 +45,7 @@ public class FreeWalkApplication extends Application {
     public static void setSid(String sid, String cityCode) {
         if (sid == null || cityCode == null) {
             FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpConstants.SCENIC_ID, "32030001");
-            FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpConstants.CITY_CODE, "");
+            FreeWalkApplication.cityCode = SpUtils.getInstance(context).getValue(SpConstants.CITY_CODE, "");
         } else {
             FreeWalkApplication.sid = sid;
             FreeWalkApplication.cityCode = cityCode;

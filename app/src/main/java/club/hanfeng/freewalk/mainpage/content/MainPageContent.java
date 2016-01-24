@@ -11,6 +11,7 @@ import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.interfaces.main.OnBottomBarSelectedListener;
 import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
 import club.hanfeng.freewalk.interfaces.view.IView;
+import club.hanfeng.freewalk.mainpage.content.server.ServerPage;
 
 /**
  * Created by HanFeng on 2016/1/23.

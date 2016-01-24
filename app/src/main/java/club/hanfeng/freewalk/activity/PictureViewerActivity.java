@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.scene.SceneActivity;
 
 public class PictureViewerActivity extends AppCompatActivity {
 
