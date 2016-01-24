@@ -36,8 +36,7 @@ public class GuideActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
 
-        mPrep = getSharedPreferences("config", MODE_PRIVATE);
-        once = getIntent().getBooleanExtra("once", false);
+        SpUtils.getInstance(this).getValue(SpConstants.IS_FIRST, true);
 
         vpGuide = (ViewPager) findViewById(R.id.vp_guide);
         llGuide = (LinearLayout) findViewById(R.id.ll_guide);

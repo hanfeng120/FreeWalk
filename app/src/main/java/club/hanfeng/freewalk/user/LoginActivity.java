@@ -9,6 +9,7 @@ import android.widget.TextView;
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
+import club.hanfeng.freewalk.mainpage.MainPageActivity;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import club.hanfeng.freewalk.utils.FreeWalkUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
@@ -74,6 +75,7 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess() {
                 FreeWalkProgress.dismiss(getContext());
                 setResult(RESULT_OK);
+                startActivity(new Intent(getContext(), MainPageActivity.class));
                 finish();
             }
 

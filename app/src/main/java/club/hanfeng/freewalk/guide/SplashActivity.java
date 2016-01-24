@@ -33,19 +33,19 @@ public class SplashActivity extends BaseActivity {
             switch (msg.what) {
                 case WHAT_ENTER:
                     if (isFirst) {
-                        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+                        startActivity(new Intent(getContext(), GuideActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
+                        startActivity(new Intent(getContext(), MainPageActivity.class));
                         finish();
                     }
                     break;
                 case WHAT_ENTER_DELAYED:
                     if (isFirst) {
-                        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+                        startActivity(new Intent(getContext(), GuideActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
+                        startActivity(new Intent(getContext(), MainPageActivity.class));
                         finish();
                     }
             }
@@ -69,7 +69,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initContent() {
-
+        imgLoad = (ImageView) findViewById(R.id.img_sp_net);
     }
 
     @Override
@@ -80,8 +80,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void initData() {
         startTime = System.currentTimeMillis();
-        isFirst = SpUtils.getInstance(getContext()).getValue(SpConstants.IS_FIRST, false);
-        imgLoad = (ImageView) findViewById(R.id.img_sp_net);
+        isFirst = SpUtils.getInstance(getContext()).getValue(SpConstants.IS_FIRST, true);
         getDataFromNet();
     }
 
