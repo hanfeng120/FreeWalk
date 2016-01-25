@@ -1,6 +1,7 @@
 package club.hanfeng.freewalk.mainpage.topbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import club.hanfeng.freewalk.core.tabbar.data.TabBarType;
 import club.hanfeng.freewalk.core.homepage.HomePageManager;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
+import club.hanfeng.freewalk.scene.SceneListActivity;
 import cn.bmob.v3.listener.FindListener;
 
 /**
@@ -111,6 +113,7 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.topbar_left:
+                getContext().startActivity(new Intent(getContext(), SceneListActivity.class));
                 break;
             case R.id.title:
                 if (listPopupWindow == null) {

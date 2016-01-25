@@ -4,6 +4,7 @@ import android.content.Context;
 
 import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.core.scene.data.SceneInfo;
+import club.hanfeng.freewalk.core.scene.data.SceneListItemInfo;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
@@ -34,6 +35,13 @@ public class SceneManager {
         bmobQuery.addWhereEqualTo("sid", FreeWalkApplication.getSid());
         bmobQuery.addWhereEqualTo("id", id);
         bmobQuery.order("num");
+        bmobQuery.findObjects(context, findListener);
+    }
+
+    public void getSceneList(Context context, FindListener findListener) {
+        BmobQuery<SceneListItemInfo> bmobQuery = new BmobQuery<>();
+        bmobQuery.setLimit(1000);
+        bmobQuery.order("aid,num");
         bmobQuery.findObjects(context, findListener);
     }
 

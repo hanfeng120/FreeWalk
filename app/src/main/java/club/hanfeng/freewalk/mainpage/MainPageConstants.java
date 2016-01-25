@@ -12,4 +12,6 @@ public class MainPageConstants {
 
     public static final int REQUEST_USER_PAGE = INDEX_USER_PAGE;
 
+    public static final String EXTRA_TYPE_SCENE_LIST_NAME = "extra_type_scene_list_name";
+
 }

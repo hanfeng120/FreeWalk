@@ -26,7 +26,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c7c1c361def02d77a76c40135aeb0667" />
@@ -91,7 +90,8 @@
         <activity
             android:name=".mainpage.MainPageActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Toolbar"></activity>
+            android:theme="@style/Toolbar" />
+        <activity android:name=".scene.SceneListActivity"></activity>
     </application>
 
 </manifest>

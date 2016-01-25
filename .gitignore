@@ -1,0 +1,14 @@
+/.gradle
+/.idea
+/build
+/gradle
+/FreeWalk.iml
+/gradlew
+/gradlew.bat
+/local.properties
+/app/app.iml
+/app/build.gradle
+/app/build
+/xUtils/build
+/xUtils/build.gradle
+/xUtils/xUtils.iml
