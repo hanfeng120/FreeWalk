@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorActionBar">#111</color>
 
+    <color name="white">#fff</color>
     <color name="bgGray">#ededed</color>
     <color name="textGray">#777</color>
     <color name="dividerGray">#eee</color>

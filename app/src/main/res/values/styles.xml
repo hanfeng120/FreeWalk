@@ -5,21 +5,22 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@android:color/holo_blue_dark</item>
         <item name="android:actionBarSize">50dp</item>
         <item name="android:textColor">#dd000000</item>
     </style>
 
     <style name="Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@android:color/holo_blue_dark</item>
-        <item name="android:actionBarSize">50dp</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="ToolbarWhite" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorActionBar</item>
-        <item name="colorAccent">@android:color/holo_blue_dark</item>
     </style>
 
     <style name="divider">

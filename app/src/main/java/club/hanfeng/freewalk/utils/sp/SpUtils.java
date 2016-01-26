@@ -11,10 +11,6 @@ public final class SpUtils {
     /**
      * 景区标识sid
      */
-    public static final String SCENIC_ID = "SCENIC_ID";
-    public static final String USER_ICON = "USER_ICON";//头像，保存头像imagePath
-    public static final String USER_TDCODE = "USER_ICON";//二维码，保存二维码imagePath
-
     public static final String SETTING_NEWS = "SETTING_NEWS";
     public static final String SETTING_AUTOPLAY = "SETTING_AUTOPLAY";
     public static final String SETTING_DOWNLOAD = "SETTING_DOWNLOAD";

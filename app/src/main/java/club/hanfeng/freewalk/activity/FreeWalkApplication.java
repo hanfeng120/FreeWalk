@@ -17,7 +17,9 @@ public class FreeWalkApplication extends Application {
 
     private static Context context;
     private static String sid;
+    private static String sceneName;
     private static String cityCode;
+    private static String cityName;
 
     @Override
     public void onCreate() {
@@ -25,7 +27,7 @@ public class FreeWalkApplication extends Application {
         FreeWalkApplication.context = getApplicationContext();
 
         init();
-        setSid(null, null);
+        setSid(null, null, null, null);
     }
 
     private void init() {
@@ -42,15 +44,20 @@ public class FreeWalkApplication extends Application {
         x.Ext.setDebug(true);
     }
 
-    public static void setSid(String sid, String cityCode) {
-        if (sid == null || cityCode == null) {
+    public static void setSid(String sid, String cityCode, String cityName, String sceneName) {
+        if (sid == null || cityCode == null || cityName == null || sceneName == null) {
             FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpConstants.SCENIC_ID, "32030001");
-            FreeWalkApplication.cityCode = SpUtils.getInstance(context).getValue(SpConstants.CITY_CODE, "");
+            FreeWalkApplication.sceneName = SpUtils.getInstance(context).getValue(SpConstants.SCENE_NAME, "天安门");
+            FreeWalkApplication.cityCode = SpUtils.getInstance(context).getValue(SpConstants.CITY_CODE, "010");
+            FreeWalkApplication.cityCode = SpUtils.getInstance(context).getValue(SpConstants.CITY_NAME, "北京");
         } else {
             FreeWalkApplication.sid = sid;
             FreeWalkApplication.cityCode = cityCode;
+            FreeWalkApplication.cityName = cityName;
             SpUtils.getInstance(context).save(SpConstants.SCENIC_ID, sid);
+            SpUtils.getInstance(context).save(SpConstants.SCENE_NAME, sceneName);
             SpUtils.getInstance(context).save(SpConstants.CITY_CODE, cityCode);
+            SpUtils.getInstance(context).save(SpConstants.CITY_NAME, cityName);
         }
     }
 
@@ -60,6 +67,14 @@ public class FreeWalkApplication extends Application {
 
     public static String getCityCode() {
         return FreeWalkApplication.cityCode;
+    }
+
+    public static String getCityName() {
+        return FreeWalkApplication.cityName;
+    }
+
+    public static String getSceneName() {
+        return FreeWalkApplication.sceneName;
     }
 
 }

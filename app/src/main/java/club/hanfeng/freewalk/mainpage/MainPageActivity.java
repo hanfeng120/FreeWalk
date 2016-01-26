@@ -59,6 +59,11 @@ public class MainPageActivity extends BaseActivity {
     }
 
     @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
     protected int getContentViewResId() {
         return R.layout.activity_main_page;
     }
@@ -66,6 +71,11 @@ public class MainPageActivity extends BaseActivity {
     @Override
     protected View getContentRootView() {
         return null;
+    }
+
+    @Override
+    protected void initIntentData() {
+        handlerIntent();
     }
 
     @Override
@@ -104,12 +114,14 @@ public class MainPageActivity extends BaseActivity {
     }
 
     @Override
-    protected void refreshView(int viewId) {
-
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handlerIntent();
     }
 
     @Override
-    public void onClick(View v) {
+    protected void refreshView(int viewId) {
 
     }
 
@@ -119,6 +131,22 @@ public class MainPageActivity extends BaseActivity {
         if (requestCode == MainPageConstants.REQUEST_USER_PAGE && resultCode == RESULT_OK) {
             mainPageContent.onActivityResult(MainPageConstants.INDEX_USER_PAGE);
         }
+    }
+
+    private void handlerIntent() {
+        Intent fromIntent = getIntent();
+        if (fromIntent != null) {
+            Intent intent = new Intent();
+            switch (fromIntent.getIntExtra(MainPageConstants.EXTRA_TYPE_FROM, -1)) {
+                case MainPageConstants.EXTRA_TYPE_FROM_SCENE_LIST:
+                    setTopBarInfo(fromIntent.getStringExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_SCENE_NAME), fromIntent.getStringExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_CITY_NAME));
+                    break;
+            }
+        }
+    }
+
+    private void setTopBarInfo(String sceneName, String cityName) {
+        mainPageTopBar.setTopBarInfo(sceneName, cityName);
     }
 
     @Override

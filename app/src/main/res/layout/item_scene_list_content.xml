@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_type_title"
-    android:minHeight="@dimen/list_type_title">
+    android:layout_height="@dimen/list_type_content"
+    android:minHeight="@dimen/list_type_content">
 
     <TextView
         android:id="@+id/tv_content"

@@ -118,6 +118,8 @@ public class SceneActivity extends BaseActivity {
                     downloadVoiceFile();
                 }
                 break;
+            case R.id.iv_scene_go:
+                break;
         }
     }
 

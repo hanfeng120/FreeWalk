@@ -3,6 +3,7 @@ package club.hanfeng.freewalk.scene;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
@@ -20,13 +21,8 @@ import cn.bmob.v3.listener.FindListener;
 public class SceneListActivity extends BaseActivity {
 
     private ListView listView;
+    private EditText searchContent;
     private SceneListBaseAdapter adapter;
-
-    @Override
-    protected boolean initBackActionBar() {
-        setTitle("选择参观景区");
-        return true;
-    }
 
     @Override
     protected int getContentViewResId() {
@@ -40,7 +36,9 @@ public class SceneListActivity extends BaseActivity {
 
     @Override
     protected void initTopBar() {
-
+        searchContent = (EditText) findViewById(R.id.et_content);
+        findViewById(R.id.iv_back).setOnClickListener(getOnClickListener());
+        findViewById(R.id.tv_search).setOnClickListener(getOnClickListener());
     }
 
     @Override
@@ -70,12 +68,15 @@ public class SceneListActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (adapter == null) {
+                if (adapter.getItem(position).getType() == 0) {
                     return;
                 }
-                FreeWalkApplication.setSid(adapter.getItem(position).getSid(), adapter.getItem(position).getCityCode());
+                FreeWalkApplication.setSid(adapter.getItem(position).getSid(), adapter.getItem(position).getCityCode(), adapter.getItem(position).getCityName(), adapter.getItem(position).getName());
                 Intent intent = new Intent(getContext(), MainPageActivity.class);
-                intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_NAME, adapter.getItem(position).getName());
+                intent.putExtra(MainPageConstants.EXTRA_TYPE_FROM, MainPageConstants.EXTRA_TYPE_FROM_SCENE_LIST);
+                intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_SCENE_NAME, adapter.getItem(position).getName());
+                intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_CITY_CODE, adapter.getItem(position).getCityCode());
+                intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_CITY_NAME, adapter.getItem(position).getCityName());
                 startActivity(intent);
                 finish();
             }
@@ -99,6 +100,12 @@ public class SceneListActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.tv_search:
+                break;
+        }
     }
 }

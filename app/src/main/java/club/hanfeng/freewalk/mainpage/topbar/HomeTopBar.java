@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.adapter.HomeTopBarAdapter;
 import club.hanfeng.freewalk.core.tabbar.data.TabBarType;
 import club.hanfeng.freewalk.core.homepage.HomePageManager;
@@ -31,7 +32,8 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
     private ListPopupWindow listPopupWindow;
     private RelativeLayout titleContent;
 
-    private TextView tvTitle;
+    private TextView sceneName;
+    private TextView cityName;
 
     public HomeTopBar(Context context) {
         super(context);
@@ -44,23 +46,24 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
 
     @Override
     public void onInitChildren() {
-        TextView tvScene = (TextView) getRootView().findViewById(R.id.topbar_left);
-        tvTitle = (TextView) getRootView().findViewById(R.id.title);
+        cityName = (TextView) getRootView().findViewById(R.id.topbar_left);
+        sceneName = (TextView) getRootView().findViewById(R.id.title);
         ImageView ivMoer = (ImageView) getRootView().findViewById(R.id.topbar_right);
         titleContent = (RelativeLayout) getRootView().findViewById(R.id.title_content);
 
-        tvScene.setOnClickListener(this);
-        tvTitle.setOnClickListener(this);
+        cityName.setOnClickListener(this);
+        sceneName.setOnClickListener(this);
         ivMoer.setOnClickListener(this);
 
+        setTopBarInfo(FreeWalkApplication.getSceneName(), FreeWalkApplication.getCityName());
         getTabBars();
     }
 
     public void setOnCheckedIndex(int index) {
         if (index == 0) {
-            tvTitle.setEnabled(true);
+            sceneName.setEnabled(true);
         } else {
-            tvTitle.setEnabled(false);
+            sceneName.setEnabled(false);
         }
     }
 
@@ -131,4 +134,8 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
         }
     }
 
+    public void setTopBarInfo(String sceneName, String cityName) {
+        this.cityName.setText(cityName);
+        this.sceneName.setText(sceneName);
+    }
 }

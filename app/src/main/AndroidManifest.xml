@@ -91,7 +91,9 @@
             android:name=".mainpage.MainPageActivity"
             android:launchMode="singleTask"
             android:theme="@style/Toolbar" />
-        <activity android:name=".scene.SceneListActivity"></activity>
+        <activity
+            android:name=".scene.SceneListActivity"
+            android:theme="@style/ToolbarWhite" />
     </application>
 
 </manifest>

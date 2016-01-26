@@ -12,6 +12,12 @@ public class MainPageConstants {
 
     public static final int REQUEST_USER_PAGE = INDEX_USER_PAGE;
 
-    public static final String EXTRA_TYPE_SCENE_LIST_NAME = "extra_type_scene_list_name";
+    public static final String EXTRA_TYPE_FROM = "extra_type_from";
+
+    public static final int EXTRA_TYPE_FROM_SCENE_LIST = 1;
+
+    public static final String EXTRA_TYPE_SCENE_LIST_SCENE_NAME = "extra_type_scene_list_scene_name";
+    public static final String EXTRA_TYPE_SCENE_LIST_CITY_CODE = "extra_type_scene_list_city_code";
+    public static final String EXTRA_TYPE_SCENE_LIST_CITY_NAME = "extra_type_scene_list_city_name";
 
 }

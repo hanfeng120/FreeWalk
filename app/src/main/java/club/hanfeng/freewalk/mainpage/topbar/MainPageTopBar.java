@@ -34,4 +34,8 @@ public class MainPageTopBar extends BaseViewGroup implements OnBottomBarSelected
     public void setOnHomeTopBarSelectedListener(OnHomeTopBarSelectedListener onHomeTopBarSelectedListener) {
         homeTopBar.setOnHomeTopBarSelectedListener(onHomeTopBarSelectedListener);
     }
+
+    public void setTopBarInfo(String sceneName, String cityName) {
+        homeTopBar.setTopBarInfo(sceneName, cityName);
+    }
 }

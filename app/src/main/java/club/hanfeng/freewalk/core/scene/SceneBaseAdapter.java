@@ -61,26 +61,27 @@ public class SceneBaseAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             switch (getItemViewType(position)) {
-                case 0://景区中英文名称
+                case 0:
                     convertView = inflater.inflate(R.layout.type_scene_zero, parent, false);
                     holder.tvName = (TextView) convertView.findViewById(R.id.tv_type_scene_name);
                     holder.tvNameEN = (TextView) convertView.findViewById(R.id.tv_type_scene_name_en);
                     holder.ivStar = (ImageView) convertView.findViewById(R.id.iv_type_scene_star);
                     holder.tvComment = (TextView) convertView.findViewById(R.id.tv_type_scene_comment);
                     break;
-                case 1://列表头
+                case 1:
+                    holder = new ViewHolder();
                     convertView = inflater.inflate(R.layout.type_scene_one, parent, false);
                     holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_type_scene_one_title);
                     break;
-                case 2://文本内容
+                case 2:
                     convertView = inflater.inflate(R.layout.type_scene_two, parent, false);
                     holder.tvContent = (TextView) convertView.findViewById(R.id.tv_type_scene_two_content);
                     break;
-                case 3://图片内容
+                case 3:
                     convertView = inflater.inflate(R.layout.type_scene_three, parent, false);
                     holder.ivContent = (ImageView) convertView.findViewById(R.id.iv_type_scene_three);
                     break;
-                case 4://门票
+                case 4:
                     break;
             }
             convertView.setTag(holder);
@@ -113,13 +114,14 @@ public class SceneBaseAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
+        public TextView tvTitle;
+        public TextView tvContent;
+        public ImageView ivContent;
         public TextView tvName;
         public TextView tvNameEN;
         public ImageView ivStar;
         public TextView tvComment;
-        public TextView tvTitle;
-        public TextView tvContent;
-        public ImageView ivContent;
-    }
+        public ImageView ivGo;
 
+    }
 }
