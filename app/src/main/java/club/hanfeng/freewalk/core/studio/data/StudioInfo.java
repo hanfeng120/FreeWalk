@@ -8,39 +8,82 @@ import cn.bmob.v3.BmobObject;
 public class StudioInfo extends BmobObject {
 
     public String uid;
-    public String time;
     public String id;
     public String sid;
     public String introduce;
-    public String imagePath;
-    public String sceneName;
+    public String imageUrl;
+
+    /**
+     * 具体景点的名称
+     */
+    public String name;
     public int comments;
     public int stars;
 
     public StudioInfo() {
     }
 
-    public StudioInfo(String uid, String sid, String id, String introduce, String imagePath, String sceneName, int comments, int stars) {
-        this.uid = uid;
-        this.sid = sid;
-        this.id = id;
-        this.introduce = introduce;
-        this.imagePath = imagePath;
-        this.sceneName = sceneName;
-        this.comments = comments;
-        this.stars = stars;
+    public String getUid() {
+        return uid;
     }
 
-    @Override
-    public String toString() {
-        return "StudioInfo{" +
-                "uid='" + uid + '\'' +
-                ", time='" + time + '\'' +
-                ", sid='" + sid + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", sceneName='" + sceneName + '\'' +
-                ", comments=" + comments +
-                ", stars=" + stars +
-                '}';
+    public String getId() {
+        return id;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getComments() {
+        return comments;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
     }
 }

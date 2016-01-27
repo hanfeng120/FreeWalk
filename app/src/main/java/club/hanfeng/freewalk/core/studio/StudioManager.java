@@ -2,13 +2,18 @@ package club.hanfeng.freewalk.core.studio;
 
 import android.content.Context;
 
+import com.bmob.btp.callback.UploadListener;
+
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.core.studio.data.StudioInfo;
 import club.hanfeng.freewalk.interfaces.studio.IStudioManager;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by zhaoxunyi on 2016/1/27.
@@ -42,11 +47,26 @@ public class StudioManager implements IStudioManager {
         bmobQuery.findObjects(context, findListener);
     }
 
-    public File getCacheFile() {
-        File file = new File(StudioConstants.STUDIO_CACHE_PATH);
+    public File getCacheFile(String path) {
+        File file = new File(path);
         if (!file.getParentFile().exists()) {
-            file.mkdirs();
+            file.getParentFile().mkdirs();
         }
         return file;
+    }
+
+    public String getPhotoName() {
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "'IMG'_yyyyMMdd_HHmmss");
+        return StudioConstants.STUDIO_CACHE_PATH + dateFormat.format(date) + ".jpg";
+    }
+
+    public void upLoadStudioPic(Context context, String filePath, UploadListener uploadListener) {
+
+    }
+
+    public void upLoadStudio(Context context, StudioInfo studioInfo, SaveListener listener) {
+        studioInfo.save(context, listener);
     }
 }

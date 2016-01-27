@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ededed"
+    android:orientation="vertical"
+    tools:context="club.hanfeng.freewalk.studio.StudioStep2Activity">
+
+    <RelativeLayout
+        android:id="@+id/studio_location_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_type_content"
+        android:background="#fff">
+
+        <ImageView
+            android:layout_width="@dimen/list_type_content"
+            android:layout_height="@dimen/list_type_content"
+            android:padding="5dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/studio_location"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <View style="@style/divider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+
+        android:background="#fff">
+
+        <ImageView
+            android:id="@+id/studio_image"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:scaleType="fitStart" />
+
+        <EditText
+            android:id="@+id/studio_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/studio_image"
+            android:background="#fff"
+            android:gravity="top"
+            android:hint="发表点评"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+    <View style="@style/divider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_type_content"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="评分"
+            android:textSize="16dp" />
+
+        <RatingBar
+            android:id="@+id/studio_rating"
+            style="@android:style/Widget.Holo.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/comment"
+            android:clickable="true" />
+
+    </RelativeLayout>
+
+    <View style="@style/divider" />
+
+</LinearLayout>

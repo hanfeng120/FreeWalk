@@ -55,15 +55,15 @@ public class DirectRecyclerAdapter extends RecyclerView.Adapter<DirectRecyclerAd
             }
         });
 
-        x.image().bind(holder.imageView, directSendInfo.imagePath);
+        x.image().bind(holder.imageView, directSendInfo.imageUrl);
         if (!TextUtils.isEmpty(directSendInfo.introduce)) {
             holder.tvIntroduce.setVisibility(View.VISIBLE);
             holder.tvIntroduce.setText(directSendInfo.introduce);
         } else {
             holder.tvIntroduce.setVisibility(View.GONE);
         }
-        holder.tvTime.setText(directSendInfo.time + position);
-        holder.tvSceneName.setText(directSendInfo.sceneName);
+//        holder.tvTime.setText(directSendInfo.time + position);
+        holder.tvSceneName.setText(directSendInfo.name);
 
     }
 
