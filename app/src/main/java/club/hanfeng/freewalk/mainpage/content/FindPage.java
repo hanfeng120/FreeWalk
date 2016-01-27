@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.activity.DirectSendActivity;
+import club.hanfeng.freewalk.studio.StudioActivity;
 import club.hanfeng.freewalk.activity.HotMapActivity;
 import club.hanfeng.freewalk.activity.TravelsActivity;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
@@ -49,7 +49,7 @@ public class FindPage extends BaseViewGroup {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tv_find_send:
-                    startActivity(DirectSendActivity.class);
+                    startActivity(StudioActivity.class);
                     break;
                 case R.id.tv_find_travels:
                     startActivity(TravelsActivity.class);

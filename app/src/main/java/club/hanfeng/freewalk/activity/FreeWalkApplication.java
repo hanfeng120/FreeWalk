@@ -49,7 +49,7 @@ public class FreeWalkApplication extends Application {
             FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpConstants.SCENIC_ID, "32030001");
             FreeWalkApplication.sceneName = SpUtils.getInstance(context).getValue(SpConstants.SCENE_NAME, "天安门");
             FreeWalkApplication.cityCode = SpUtils.getInstance(context).getValue(SpConstants.CITY_CODE, "010");
-            FreeWalkApplication.cityCode = SpUtils.getInstance(context).getValue(SpConstants.CITY_NAME, "北京");
+            FreeWalkApplication.cityName = SpUtils.getInstance(context).getValue(SpConstants.CITY_NAME, "北京");
         } else {
             FreeWalkApplication.sid = sid;
             FreeWalkApplication.cityCode = cityCode;

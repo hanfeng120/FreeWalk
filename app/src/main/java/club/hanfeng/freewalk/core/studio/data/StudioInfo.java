@@ -1,9 +1,11 @@
-package club.hanfeng.freewalk.bean;
+package club.hanfeng.freewalk.core.studio.data;
+
+import cn.bmob.v3.BmobObject;
 
 /**
  * Created by HanFeng on 2015/12/2.
  */
-public class DirectSendBean {
+public class StudioInfo extends BmobObject {
 
     public String uid;
     public String time;
@@ -15,14 +17,13 @@ public class DirectSendBean {
     public int comments;
     public int stars;
 
-    public DirectSendBean() {
+    public StudioInfo() {
     }
 
-    public DirectSendBean(String uid, String time, String id, String sid, String introduce, String imagePath, String sceneName, int comments, int stars) {
+    public StudioInfo(String uid, String sid, String id, String introduce, String imagePath, String sceneName, int comments, int stars) {
         this.uid = uid;
-        this.time = time;
-        this.id = id;
         this.sid = sid;
+        this.id = id;
         this.introduce = introduce;
         this.imagePath = imagePath;
         this.sceneName = sceneName;
@@ -32,7 +33,7 @@ public class DirectSendBean {
 
     @Override
     public String toString() {
-        return "DirectSendBean{" +
+        return "StudioInfo{" +
                 "uid='" + uid + '\'' +
                 ", time='" + time + '\'' +
                 ", sid='" + sid + '\'' +

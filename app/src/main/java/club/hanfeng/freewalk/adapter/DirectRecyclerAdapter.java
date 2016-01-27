@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 import org.xutils.x;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.bean.DirectSendBean;
+import club.hanfeng.freewalk.core.studio.data.StudioInfo;
 import club.hanfeng.freewalk.interfaces.studio.OnRecyclerItemClickListener;
 
 /**
@@ -24,13 +24,17 @@ import club.hanfeng.freewalk.interfaces.studio.OnRecyclerItemClickListener;
 public class DirectRecyclerAdapter extends RecyclerView.Adapter<DirectRecyclerAdapter.DirectViewHolder> {
 
     private Context context;
-    private ArrayList<DirectSendBean> data;
+    private List<StudioInfo> data;
     private LayoutInflater inflater;
 
-    public DirectRecyclerAdapter(Context context, ArrayList<DirectSendBean> data) {
+    public DirectRecyclerAdapter(Context context) {
         this.context = context;
-        this.data = data;
         inflater = LayoutInflater.from(context);
+    }
+
+    public void setData(List<StudioInfo> data) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -41,7 +45,7 @@ public class DirectRecyclerAdapter extends RecyclerView.Adapter<DirectRecyclerAd
 
     @Override
     public void onBindViewHolder(final DirectRecyclerAdapter.DirectViewHolder holder, final int position) {
-        DirectSendBean directSendInfo = getItemt(position);
+        StudioInfo directSendInfo = getItemt(position);
 
 
         holder.rootView.setOnClickListener(new View.OnClickListener() {
@@ -65,10 +69,10 @@ public class DirectRecyclerAdapter extends RecyclerView.Adapter<DirectRecyclerAd
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data == null ? 0 : data.size();
     }
 
-    public DirectSendBean getItemt(int position) {
+    public StudioInfo getItemt(int position) {
         return data.get(position);
     }
 

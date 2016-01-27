@@ -62,7 +62,7 @@
             android:name=".activity.UserInfoActivity"
             android:label="个人信息" />
         <activity
-            android:name=".activity.DirectSendActivity"
+            android:name=".studio.StudioActivity"
             android:label="现场直播" />
         <activity
             android:name=".activity.TravelsActivity"
@@ -94,6 +94,7 @@
         <activity
             android:name=".scene.SceneListActivity"
             android:theme="@style/ToolbarWhite" />
+        <activity android:name=".collection.CollectionActivity"></activity>
     </application>
 
 </manifest>

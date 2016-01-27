@@ -55,6 +55,7 @@ public class SceneActivity extends BaseActivity {
     private RelativeLayout rlTop;
     private TextView tvTitle;
     private View headerView;
+    private TextView tvComment, tvCollect, tvShare;
 
     private List<SceneInfo> sceneInfos;
     private String id;
@@ -120,6 +121,12 @@ public class SceneActivity extends BaseActivity {
                 break;
             case R.id.iv_scene_go:
                 break;
+            case R.id.scene_comment:
+                break;
+            case R.id.scene_collect:
+                break;
+            case R.id.scene_share:
+                break;
         }
     }
 
@@ -156,10 +163,17 @@ public class SceneActivity extends BaseActivity {
 
         headerView = View.inflate(this, R.layout.header_lv_scene, null);
         viewPager = (ViewPager) headerView.findViewById(R.id.vp_scene);
+        tvComment = (TextView) headerView.findViewById(R.id.scene_comment);
+        tvCollect = (TextView) headerView.findViewById(R.id.scene_collect);
+        tvShare = (TextView) headerView.findViewById(R.id.scene_share);
+
         listView.addHeaderView(headerView);
 
         ivBack.setOnClickListener(getOnClickListener());
         tbPlay.setOnClickListener(getOnClickListener());
+        tvComment.setOnClickListener(getOnClickListener());
+        tvCollect.setOnClickListener(getOnClickListener());
+        tvShare.setOnClickListener(getOnClickListener());
 
         headerView.measure(0, 0);
         headerViewHeight = headerView.getMeasuredHeight();
