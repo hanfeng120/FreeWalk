@@ -15,7 +15,6 @@ import android.view.View;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.activity.PictureViewerActivity;
 import club.hanfeng.freewalk.adapter.DirectRecyclerAdapter;
 import club.hanfeng.freewalk.core.studio.StudioConstants;
 import club.hanfeng.freewalk.core.studio.StudioManager;
@@ -77,7 +76,9 @@ public class StudioActivity extends BaseActivity {
         adapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener() {
             @Override
             public void onItemClick(View view, int position, long id) {
-                startActivity(new Intent(StudioActivity.this, PictureViewerActivity.class));
+                Intent intent = new Intent(getContext(), PictureViewerActivity.class);
+                intent.putExtra(StudioConstants.EXTRA_TYPE_STUDIO, adapter.getItemt(position));
+                startActivity(intent);
             }
         });
     }

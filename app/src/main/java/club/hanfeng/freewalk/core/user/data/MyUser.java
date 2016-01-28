@@ -10,7 +10,7 @@ public class MyUser extends BmobUser {
     private String nickName;
     private String sex;
     private String tag;//个性签名
-    private String iconUrl;
+    private String portraitUrl;
     private String codeUrl;
 
     private static final long serialVersionUID = 1L;
@@ -39,12 +39,12 @@ public class MyUser extends BmobUser {
         this.tag = tag;
     }
 
-    public String getIconUrl() {
-        return iconUrl;
+    public String getPortraitUrl() {
+        return portraitUrl;
     }
 
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
+    public void setPortraitUrl(String portraitUrl) {
+        this.portraitUrl = portraitUrl;
     }
 
     public String getCodeUrl() {

@@ -168,7 +168,7 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
             String userName = user.getUsername();
             String nickName = user.getNickName();
             String userTag = user.getTag();
-            String userIconUrl = user.getIconUrl();
+            String userIconUrl = user.getPortraitUrl();
             if (!TextUtils.isEmpty(nickName)) {
                 tvName.setText(nickName);
             } else if (!TextUtils.isEmpty(userName)) {

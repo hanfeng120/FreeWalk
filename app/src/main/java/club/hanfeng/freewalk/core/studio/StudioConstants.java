@@ -20,4 +20,6 @@ public class StudioConstants {
     public static final int CAMERA_REQUEST_CODE = 1;
 
     public static final String CACHE_FILE_PATH = "cache_file_path";
+
+    public static final String EXTRA_TYPE_STUDIO = "extra_type_studio";
 }

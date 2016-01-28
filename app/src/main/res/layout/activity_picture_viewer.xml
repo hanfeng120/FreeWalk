@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#111"
     android:onClick="clickItem"
-    tools:context="club.hanfeng.freewalk.activity.PictureViewerActivity">
+    tools:context=".studio.PictureViewerActivity">
 
     <ImageView
         android:id="@+id/iv_picture_viewer_content"

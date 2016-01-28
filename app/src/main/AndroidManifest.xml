@@ -77,7 +77,7 @@
             android:name=".activity.ShakeActivity"
             android:label="@string/title_activity_shake" />
         <activity
-            android:name=".activity.PictureViewerActivity"
+            android:name=".studio.PictureViewerActivity"
             android:theme="@style/NoActionBar" />
 
         <service android:name=".service.VoicePlayerService">

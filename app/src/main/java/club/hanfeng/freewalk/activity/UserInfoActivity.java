@@ -72,7 +72,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         userName = user.getUsername();
         nickName = user.getNickName();
-        iconUrl = user.getIconUrl();
+        iconUrl = user.getPortraitUrl();
         codeUrl = user.getCodeUrl();
         phoneVerified = user.getMobilePhoneNumberVerified();
         sex = user.getSex();
