@@ -9,7 +9,9 @@ import android.widget.TextView;
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
+import club.hanfeng.freewalk.framework.DataCenter;
 import club.hanfeng.freewalk.mainpage.MainPageActivity;
+import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import club.hanfeng.freewalk.utils.FreeWalkUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
@@ -82,6 +84,7 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     startActivity(new Intent(getContext(), MainPageActivity.class));
                 }
+                DataCenter.getInstance().notifyDataChanged(MainPageConstants.TASK_ID_USERPAGE);
                 finish();
             }
 

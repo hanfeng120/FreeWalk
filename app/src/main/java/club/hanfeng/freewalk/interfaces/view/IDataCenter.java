@@ -6,7 +6,7 @@ public interface IDataCenter {
 
     void unregisterListener(int key);
 
-    void nofityDataChange(int key);
+    void notifyDataChanged(int key);
 
     void requestLoadData(int key);
 

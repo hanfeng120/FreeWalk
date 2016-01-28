@@ -1,9 +1,7 @@
 package club.hanfeng.freewalk.interfaces.view;
 
 public interface IDataRefreshTask {
+	public int getTaskId();
 
-    int getTaskId();
-
-    int getRefreshPeriod();
-
+	public int getRefreshPeriod();
 }

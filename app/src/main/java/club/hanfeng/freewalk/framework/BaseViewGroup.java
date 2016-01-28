@@ -17,8 +17,10 @@ import club.hanfeng.freewalk.interfaces.view.IDataRefreshTask;
 import club.hanfeng.freewalk.interfaces.view.IView;
 import club.hanfeng.freewalk.interfaces.view.OnDataChangeListener;
 
+
 public abstract class BaseViewGroup implements IView, OnDataChangeListener {
-    private static final int MSG_REFRESH_DATA = 0;
+    private static final int MSG_REFRESH_DATA_PERIOD = 0;
+    private static final int MSG_REQUEST_LOAD_DATA = 1;
 
     private final Context context;
 
@@ -31,10 +33,18 @@ public abstract class BaseViewGroup implements IView, OnDataChangeListener {
     private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == MSG_REFRESH_DATA) {
-                onRequestLoadData(msg.arg1);
-                Message newMsg = Message.obtain(msg);
-                sendMessageDelayed(newMsg, msg.arg2);
+            switch (msg.what) {
+                case MSG_REFRESH_DATA_PERIOD:
+                    onRequestLoadData(msg.arg1);
+                    Message newMsg = Message.obtain(msg);
+                    sendMessageDelayed(newMsg, msg.arg2);
+                    break;
+                case MSG_REQUEST_LOAD_DATA:
+                    requestLoadData();
+                    break;
+
+                default:
+                    break;
             }
         }
     };
@@ -107,21 +117,16 @@ public abstract class BaseViewGroup implements IView, OnDataChangeListener {
             view.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
 
                 @Override
-                public void onViewAttachedToWindow(View v) {
-                    requestLoadData();
-                    onAttachedToWindow(v);
+                public void onViewAttachedToWindow(View view) {
+                    onAttachedToWindow(view);
                 }
 
                 @Override
-                public void onViewDetachedFromWindow(View v) {
-
-                    onDestroy();
+                public void onViewDetachedFromWindow(View view) {
+                    onDetachedFromWindow(view);
                 }
             });
         }
-    }
-
-    public void onAttachedToWindow(View v) {
     }
 
     private synchronized void requestLoadData() {
@@ -143,7 +148,7 @@ public abstract class BaseViewGroup implements IView, OnDataChangeListener {
         DataCenter.getInstance().registerListener(taskId, BaseViewGroup.this);
         onRequestLoadData(taskId);
         if (refreshPeriod != 0) {
-            Message msg = Message.obtain(handler, MSG_REFRESH_DATA, taskId, refreshPeriod);
+            Message msg = Message.obtain(handler, MSG_REFRESH_DATA_PERIOD, taskId, refreshPeriod);
             handler.sendMessageDelayed(msg, refreshPeriod);
         }
     }
@@ -185,7 +190,16 @@ public abstract class BaseViewGroup implements IView, OnDataChangeListener {
 
     @Override
     public boolean handbleBackKeyPress() {
-        // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public void onAttachedToWindow(View v) {
+        handler.sendEmptyMessage(MSG_REQUEST_LOAD_DATA);
+    }
+
+    @Override
+    public void onDetachedFromWindow(View v) {
+        onDestroy();
     }
 }

@@ -125,14 +125,6 @@ public class MainPageActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MainPageConstants.REQUEST_USER_PAGE && resultCode == RESULT_OK) {
-            mainPageContent.onActivityResult(MainPageConstants.INDEX_USER_PAGE);
-        }
-    }
-
     private void handlerIntent() {
         Intent fromIntent = getIntent();
         if (fromIntent != null) {

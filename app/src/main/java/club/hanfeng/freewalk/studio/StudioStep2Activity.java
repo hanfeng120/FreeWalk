@@ -15,6 +15,7 @@ import com.bmob.btp.callback.UploadListener;
 import java.io.File;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.core.studio.StudioConstants;
 import club.hanfeng.freewalk.core.studio.StudioManager;
 import club.hanfeng.freewalk.core.studio.data.StudioInfo;
@@ -23,6 +24,7 @@ import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.utils.FileUtils;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import club.hanfeng.freewalk.utils.OutputUtils;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -86,6 +88,15 @@ public class StudioStep2Activity extends BaseActivity {
         if (uri != null) {
             ((ImageView) findViewById(R.id.studio_image)).setImageURI(uri);
         }
+        findViewById(R.id.studio_location_content).setOnClickListener(getOnClickListener());
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if (fromUser) {
+
+                }
+            }
+        });
     }
 
     @Override
@@ -157,9 +168,10 @@ public class StudioStep2Activity extends BaseActivity {
 
     private void uploadStudioInfo(String imageUrl) {
         StudioInfo studioInfo = new StudioInfo();
-        studioInfo.setUid(MyUser.getCurrentUser(getContext()).getUsername());
-        studioInfo.setId(id);
-        studioInfo.setName(name);
+        studioInfo.setUid(BmobUser.getCurrentUser(getContext(), MyUser.class).getUsername());
+        studioInfo.setSid(FreeWalkApplication.getSid());
+        studioInfo.setId("0001");
+        studioInfo.setName("鸟巢");
         studioInfo.setIntroduce(comment.getText().toString());
         studioInfo.setImageUrl(imageUrl);
         studioInfo.setComments(12);
@@ -187,8 +199,7 @@ public class StudioStep2Activity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_send) {
-            uploadPicture();
-            FreeWalkProgress.show(getContext(), "发布中...");
+            sendStudioInfo();
         }
         return super.onOptionsItemSelected(item);
     }

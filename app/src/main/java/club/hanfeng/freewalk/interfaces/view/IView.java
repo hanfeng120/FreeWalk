@@ -13,7 +13,6 @@ public interface IView {
      * step1.1 外部注入root view
      *
      * @param rootView
-     * @see #createRootView(ViewGroup)
      */
     void setRootView(View rootView);
 
@@ -65,5 +64,19 @@ public interface IView {
     void onRefresh(int viewId);
 
     boolean handbleBackKeyPress();
+
+    /**
+     * Called when the view is attached to a window.
+     *
+     * @param v The view that was attached
+     */
+    void onAttachedToWindow(View v);
+
+    /**
+     * Called when the view is detached from a window.
+     *
+     * @param v The view that was detached
+     */
+    void onDetachedFromWindow(View v);
 
 }

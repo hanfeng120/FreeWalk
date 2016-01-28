@@ -2,6 +2,7 @@ package club.hanfeng.freewalk.core.studio;
 
 import android.content.Context;
 
+import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadListener;
 
 import java.io.File;
@@ -42,7 +43,7 @@ public class StudioManager implements IStudioManager {
     public void getAllStudios(Context context, FindListener findListener) {
         BmobQuery<StudioInfo> bmobQuery = new BmobQuery<>();
         bmobQuery.setLimit(1000);
-        bmobQuery.order("createdAt");
+        bmobQuery.order("-createdAt");
         bmobQuery.addWhereEqualTo("sid", FreeWalkApplication.getSid());
         bmobQuery.findObjects(context, findListener);
     }
@@ -63,7 +64,7 @@ public class StudioManager implements IStudioManager {
     }
 
     public void upLoadStudioPic(Context context, String filePath, UploadListener uploadListener) {
-
+        BmobProFile.getInstance(context).upload(filePath, uploadListener);
     }
 
     public void upLoadStudio(Context context, StudioInfo studioInfo, SaveListener listener) {

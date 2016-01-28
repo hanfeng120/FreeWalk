@@ -56,7 +56,7 @@ public class DataCenter implements IDataCenter {
     }
 
     @Override
-    public void nofityDataChange(int key) {
+    public void notifyDataChanged(int key) {
         if (listeners.get(key) != null) {
             listeners.get(key).onDataChange(key);
         }

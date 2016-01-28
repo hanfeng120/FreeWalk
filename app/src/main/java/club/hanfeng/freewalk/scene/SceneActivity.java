@@ -28,6 +28,7 @@ import java.util.List;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.adapter.ScenePagerAdapter;
+import club.hanfeng.freewalk.core.collection.CollectionManager;
 import club.hanfeng.freewalk.core.scene.SceneBaseAdapter;
 import club.hanfeng.freewalk.core.scene.SceneConstants;
 import club.hanfeng.freewalk.core.scene.SceneManager;
@@ -39,6 +40,7 @@ import club.hanfeng.freewalk.utils.CommonUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class SceneActivity extends BaseActivity {
 
@@ -124,6 +126,7 @@ public class SceneActivity extends BaseActivity {
             case R.id.scene_comment:
                 break;
             case R.id.scene_collect:
+                collectScene();
                 break;
             case R.id.scene_share:
                 break;
@@ -200,6 +203,24 @@ public class SceneActivity extends BaseActivity {
 
         bindAtService();
         getDataFromServer();
+    }
+
+    private void collectScene() {
+        CollectionManager.getInstance().saveSceneCollection(getContext(), id, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                OutputUtils.toastShort(getContext(), "收藏成功");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                if (i == -1) {
+                    OutputUtils.toastShort(getContext(), "请先登录");
+                } else {
+                    OutputUtils.toastShort(getContext(), "失败啦，请重试");
+                }
+            }
+        });
     }
 
     private void updateUI() {

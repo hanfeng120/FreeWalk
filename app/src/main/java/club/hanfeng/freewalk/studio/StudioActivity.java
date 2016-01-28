@@ -1,5 +1,6 @@
 package club.hanfeng.freewalk.studio;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,9 +20,14 @@ import club.hanfeng.freewalk.adapter.DirectRecyclerAdapter;
 import club.hanfeng.freewalk.core.studio.StudioConstants;
 import club.hanfeng.freewalk.core.studio.StudioManager;
 import club.hanfeng.freewalk.core.studio.data.StudioInfo;
+import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.interfaces.studio.OnRecyclerItemClickListener;
+import club.hanfeng.freewalk.mainpage.MainPageConstants;
+import club.hanfeng.freewalk.user.LoginActivity;
+import club.hanfeng.freewalk.user.UserConstants;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
 
 public class StudioActivity extends BaseActivity {
@@ -159,8 +165,14 @@ public class StudioActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_send) {
-            filePath = StudioManager.getInstance().getPhotoName();
-            showDialog();
+            if (BmobUser.getCurrentUser(getContext(), MyUser.class) == null) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                intent.putExtra(UserConstants.FROM_USERPAGE, true);
+                ((Activity) getContext()).startActivityForResult(intent, MainPageConstants.REQUEST_USER_PAGE);
+            } else {
+                filePath = StudioManager.getInstance().getPhotoName();
+                showDialog();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

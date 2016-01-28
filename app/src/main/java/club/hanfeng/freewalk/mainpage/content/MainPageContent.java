@@ -19,7 +19,8 @@ import club.hanfeng.freewalk.mainpage.content.server.ServerPage;
  */
 public class MainPageContent extends BaseViewGroup implements OnBottomBarSelectedListener {
 
-    private IView homePage, serverPage, findPage, userPage;
+    private IView homePage, serverPage, findPage;
+    private UserPage userPage;
 
     public MainPageContent(Context context) {
         super(context);
@@ -45,6 +46,7 @@ public class MainPageContent extends BaseViewGroup implements OnBottomBarSelecte
         findPage.init();
 
         userPage = new UserPage(getContext());
+        userPage.setTaskId(MainPageConstants.TASK_ID_USERPAGE);
         userPage.createRootView(null);
         userPage.init();
 
@@ -55,14 +57,6 @@ public class MainPageContent extends BaseViewGroup implements OnBottomBarSelecte
 
         onBottomBarSelected(0);
 
-    }
-
-    public void onActivityResult(int index) {
-        switch (index) {
-            case MainPageConstants.INDEX_USER_PAGE:
-                ((UserPage) userPage).onResult();
-                break;
-        }
     }
 
     @Override

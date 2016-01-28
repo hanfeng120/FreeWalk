@@ -14,11 +14,17 @@ import android.widget.TextView;
 
 import org.xutils.x;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.AboutActivity;
 import club.hanfeng.freewalk.activity.CollectActivity;
 import club.hanfeng.freewalk.activity.FeedbackActivity;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
+import club.hanfeng.freewalk.framework.DataCenter;
+import club.hanfeng.freewalk.framework.DataRefreshTask;
+import club.hanfeng.freewalk.interfaces.view.IDataRefreshTask;
 import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.activity.PictureActivity;
@@ -41,8 +47,10 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
     private Button btnExit;
     private ImageView icon;
     private RelativeLayout rlLogin;
+
     private boolean loginState;//用户登录状态
     private MyUser user;
+    private int taskId;
 
     public UserPage(Context activity) {
         super(activity);
@@ -71,8 +79,7 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
         swDownLoad.setOnCheckedChangeListener(this);
 
         setListener();
-        setState();
-        initUserInfo();
+        registerDataCenter();
     }
 
     private void setListener() {
@@ -89,6 +96,29 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
 
     private void setOnClickListener(int id) {
         getRootView().findViewById(id).setOnClickListener(this);
+    }
+
+    @Override
+    public void onDataChange(int key) {
+        if (key == MainPageConstants.TASK_ID_USERPAGE) {
+            refreshData();
+        }
+    }
+
+    @Override
+    public void onRequestLoadData(int key) {
+        if (key == MainPageConstants.TASK_ID_USERPAGE) {
+            refreshData();
+        }
+    }
+
+    private void refreshData() {
+        setState();
+        initUserInfo();
+    }
+
+    private void registerDataCenter() {
+        DataCenter.getInstance().registerListener(taskId, this);
     }
 
     /**
@@ -127,40 +157,52 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
      */
     private void initUserInfo() {
         user = BmobUser.getCurrentUser(getContext(), MyUser.class);
-        if (user == null) {//用户未登录
-            return;
-        }
-        loginState = true;
-        String userName = user.getUsername();
-        String nickName = user.getNickName();
-        String userTag = user.getTag();
-        String userIconUrl = user.getIconUrl();
-        if (!TextUtils.isEmpty(nickName)) {
-            tvName.setText(nickName);
-        } else if (!TextUtils.isEmpty(userName)) {
-            tvName.setText(userName);
-        } else {
+        if (user == null) {
             loginState = false;
+            tvLogin.setVisibility(View.VISIBLE);
+            rlLogin.setVisibility(View.GONE);
+            btnExit.setEnabled(false);
             return;
-        }
-        if (!TextUtils.isEmpty(userTag)) {
-            tvTag.setText(userTag);
-        }
-
-        if (!TextUtils.isEmpty(userIconUrl)) {
-            x.image().bind(icon, userIconUrl);
         } else {
-            icon.setImageResource(R.mipmap.ic_launcher);
+            loginState = true;
+            String userName = user.getUsername();
+            String nickName = user.getNickName();
+            String userTag = user.getTag();
+            String userIconUrl = user.getIconUrl();
+            if (!TextUtils.isEmpty(nickName)) {
+                tvName.setText(nickName);
+            } else if (!TextUtils.isEmpty(userName)) {
+                tvName.setText(userName);
+            } else {
+                loginState = false;
+                return;
+            }
+            if (!TextUtils.isEmpty(userTag)) {
+                tvTag.setText(userTag);
+            }
+
+            if (!TextUtils.isEmpty(userIconUrl)) {
+                x.image().bind(icon, userIconUrl);
+            } else {
+                icon.setImageResource(R.mipmap.ic_launcher);
+            }
+
+            tvLogin.setVisibility(View.GONE);//隐藏登录提示
+            rlLogin.setVisibility(View.VISIBLE);//显示用户信息
+            btnExit.setEnabled(true);
         }
 
-        tvLogin.setVisibility(View.GONE);//隐藏登录提示
-        rlLogin.setVisibility(View.VISIBLE);//显示用户信息
-        btnExit.setEnabled(true);
     }
 
+    public void setTaskId(int taskIdUserpage) {
+        this.taskId = taskIdUserpage;
+    }
 
-    public void onResult() {
-        initUserInfo();
+    @Override
+    public List<IDataRefreshTask> getDataRefreshTasks() {
+        List<IDataRefreshTask> dataRefreshTasks = new ArrayList<>();
+        dataRefreshTasks.add(new DataRefreshTask(taskId, 0));
+        return dataRefreshTasks;
     }
 
     private void startActivity(Class contextClass) {
@@ -169,19 +211,19 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (buttonView == swNews) {//新消息提醒开启
+        if (buttonView == swNews) {
             if (isChecked) {
                 SpUtils.getInstance(getContext()).save(SpUtils.SETTING_NEWS, true);
             } else {
                 SpUtils.getInstance(getContext()).save(SpUtils.SETTING_NEWS, false);
             }
-        } else if (buttonView == swAutoPlay) {//自动播放语音导览
+        } else if (buttonView == swAutoPlay) {
             if (isChecked) {
                 SpUtils.getInstance(getContext()).save(SpUtils.SETTING_AUTOPLAY, true);
             } else {
                 SpUtils.getInstance(getContext()).save(SpUtils.SETTING_AUTOPLAY, false);
             }
-        } else if (buttonView == swDownLoad) {//非WiFi环境下下载文件
+        } else if (buttonView == swDownLoad) {
             if (isChecked) {
                 SpUtils.getInstance(getContext()).save(SpUtils.SETTING_DOWNLOAD, true);
             } else {
@@ -222,13 +264,10 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
                 startActivity(AboutActivity.class);
                 break;
             case R.id.btn_set_exit:
-                rlLogin.setVisibility(View.GONE);
-                tvLogin.setVisibility(View.VISIBLE);
-                btnExit.setEnabled(false);
-                loginState = false;
-                BmobUser.logOut(getContext());//退出登录
+                BmobUser.logOut(getContext());
+                refreshData();
                 break;
-            case R.id.rl_set_user://进入个人信息界面
+            case R.id.rl_set_user:
                 if (loginState) {
                     startActivity(UserInfoActivity.class);
                 } else {

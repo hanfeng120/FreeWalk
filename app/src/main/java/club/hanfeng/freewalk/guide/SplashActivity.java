@@ -7,13 +7,13 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 
-import org.xutils.x;
-
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.mainpage.MainPageActivity;
+import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.utils.sp.SpConstants;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
+import cn.bmob.v3.BmobUser;
 
 
 public class SplashActivity extends BaseActivity {
@@ -36,8 +36,7 @@ public class SplashActivity extends BaseActivity {
                         startActivity(new Intent(getContext(), GuideActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(getContext(), MainPageActivity.class));
-                        finish();
+                        checkLoginState();
                     }
                     break;
                 case WHAT_ENTER_DELAYED:
@@ -45,8 +44,7 @@ public class SplashActivity extends BaseActivity {
                         startActivity(new Intent(getContext(), GuideActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(getContext(), MainPageActivity.class));
-                        finish();
+                        checkLoginState();
                     }
             }
         }
@@ -110,10 +108,13 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-    public void updateUI() {
-        x.image().bind(imgLoad, imgPath);
+    private void checkLoginState() {
+        if (BmobUser.getCurrentUser(getContext()) == null) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+        } else {
+            startActivity(new Intent(getContext(), MainPageActivity.class));
+        }
     }
-
 
     @Override
     public void onClick(View v) {

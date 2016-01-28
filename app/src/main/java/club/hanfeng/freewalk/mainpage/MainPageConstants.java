@@ -20,4 +20,6 @@ public class MainPageConstants {
     public static final String EXTRA_TYPE_SCENE_LIST_CITY_CODE = "extra_type_scene_list_city_code";
     public static final String EXTRA_TYPE_SCENE_LIST_CITY_NAME = "extra_type_scene_list_city_name";
 
+    public static final int TASK_ID_USERPAGE = 0;
+
 }
