@@ -12,6 +12,7 @@ import org.xutils.x;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.core.collection.CollectionManager;
 import club.hanfeng.freewalk.core.scene.SceneConstants;
 import club.hanfeng.freewalk.core.studio.StudioConstants;
 import club.hanfeng.freewalk.core.studio.data.StudioInfo;
@@ -21,6 +22,7 @@ import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.scene.SceneActivity;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class PictureViewerActivity extends BaseActivity {
 
@@ -160,6 +162,24 @@ public class PictureViewerActivity extends BaseActivity {
         }
     }
 
+    private void collectStudio() {
+        CollectionManager.getInstance().saveStudioCollection(getContext(), studioInfo.getObjectId(), new SaveListener() {
+            @Override
+            public void onSuccess() {
+                OutputUtils.toastShort(getContext(), "收藏成功");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                if (i == -1) {
+                    OutputUtils.toastShort(getContext(), "请先登录");
+                } else {
+                    OutputUtils.toastShort(getContext(), "失败啦，请重试");
+                }
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -173,7 +193,7 @@ public class PictureViewerActivity extends BaseActivity {
 
                 break;
             case R.id.iv_picture_viewer_stars:
-
+                collectStudio();
                 break;
             case R.id.iv_picture_viewer_save:
 

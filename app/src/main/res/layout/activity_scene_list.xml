@@ -38,7 +38,7 @@
             android:hint="请选择景区"
             android:paddingLeft="8dp"
             android:textColor="#fff"
-            android:textColorHint="#fff"
+            android:textColorHint="#cccccc"
             android:textSize="16dp" />
 
 

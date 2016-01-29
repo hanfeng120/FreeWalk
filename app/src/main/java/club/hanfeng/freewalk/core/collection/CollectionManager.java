@@ -30,6 +30,18 @@ public class CollectionManager {
     }
 
     public void saveSceneCollection(Context context, String id, SaveListener saveListener) {
+        saveCollection(context, id, CollectionConstants.TYPE_COLLECTION_SCENE, saveListener);
+    }
+
+    public void saveStudioCollection(Context context, String id, SaveListener saveListener) {
+        saveCollection(context, id, CollectionConstants.TYPE_COLLECTION_STUDIO, saveListener);
+    }
+
+    public void saveTravelCollection(Context context, String id, SaveListener saveListener) {
+        saveCollection(context, id, CollectionConstants.TYPE_COLLECTION_TRAVELS, saveListener);
+    }
+
+    private void saveCollection(Context context, String id, String type, SaveListener saveListener) {
         UserCollection userCollection = new UserCollection();
         if (BmobUser.getCurrentUser(context) == null) {
             saveListener.onFailure(-1, "用户未登录");
@@ -37,7 +49,7 @@ public class CollectionManager {
         userCollection.setUserName(BmobUser.getCurrentUser(context).getUsername());
         userCollection.setSid(FreeWalkApplication.getSid());
         userCollection.setId(id);
-        userCollection.setType(CollectionConstants.TYPE_COLLECTION_SCENE);
+        userCollection.setType(type);
         userCollection.save(context, saveListener);
     }
 

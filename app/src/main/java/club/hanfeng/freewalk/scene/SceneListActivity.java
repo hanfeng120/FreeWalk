@@ -16,6 +16,7 @@ import club.hanfeng.freewalk.core.scene.data.SceneListItemInfo;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.mainpage.MainPageActivity;
 import club.hanfeng.freewalk.mainpage.MainPageConstants;
+import club.hanfeng.freewalk.utils.OutputUtils;
 import cn.bmob.v3.listener.FindListener;
 
 public class SceneListActivity extends BaseActivity {
@@ -59,7 +60,7 @@ public class SceneListActivity extends BaseActivity {
 
             @Override
             public void onError(int i, String s) {
-
+                OutputUtils.toastShort(getContext(), "数据加载失败...");
             }
         });
     }

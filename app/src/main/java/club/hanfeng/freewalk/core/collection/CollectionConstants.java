@@ -9,7 +9,7 @@ public class CollectionConstants {
 
     public static final String TYPE_COLLECTION_STUDIO = "type_collection_studio";
 
-    public static final String TYPE_COLLECTION_NOTE = "type_collection_note";
+    public static final String TYPE_COLLECTION_TRAVELS = "type_collection_travels";
 
 
 
