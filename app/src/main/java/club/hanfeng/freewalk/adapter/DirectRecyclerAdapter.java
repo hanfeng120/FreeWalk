@@ -54,7 +54,6 @@ public class DirectRecyclerAdapter extends RecyclerView.Adapter<DirectRecyclerAd
                 onRecyclerItemClickListener.onItemClick(holder.rootView, position, position);
             }
         });
-
         x.image().bind(holder.imageView, directSendInfo.imageUrl);
         if (!TextUtils.isEmpty(directSendInfo.introduce)) {
             holder.tvIntroduce.setVisibility(View.VISIBLE);

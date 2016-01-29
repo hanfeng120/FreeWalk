@@ -96,7 +96,8 @@
             android:theme="@style/ToolbarWhite" />
         <activity android:name=".collection.CollectionActivity" />
         <activity android:name=".studio.StudioStep1Activity" />
-        <activity android:name=".studio.StudioStep2Activity"></activity>
+        <activity android:name=".studio.StudioStep2Activity" />
+        <activity android:name=".studio.StudioSceneListActivity"></activity>
     </application>
 
 </manifest>

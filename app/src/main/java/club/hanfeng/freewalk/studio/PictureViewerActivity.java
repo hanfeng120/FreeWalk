@@ -19,6 +19,7 @@ import club.hanfeng.freewalk.core.user.UserManager;
 import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.scene.SceneActivity;
+import club.hanfeng.freewalk.utils.OutputUtils;
 import cn.bmob.v3.listener.FindListener;
 
 public class PictureViewerActivity extends BaseActivity {
@@ -33,6 +34,9 @@ public class PictureViewerActivity extends BaseActivity {
     private TextView tvStars;
     private ImageView ivSave;
     private TextView tvLocation;
+    private TextView tvSendTime;
+    private ImageView portrait;
+    private TextView userName;
 
     private StudioInfo studioInfo;
 
@@ -50,7 +54,6 @@ public class PictureViewerActivity extends BaseActivity {
     @Override
     protected void initIntentData() {
         studioInfo = (StudioInfo) getIntent().getSerializableExtra(StudioConstants.EXTRA_TYPE_STUDIO);
-
     }
 
     @Override
@@ -70,6 +73,9 @@ public class PictureViewerActivity extends BaseActivity {
         tvStars = (TextView) findViewById(R.id.tv_picture_viewer_stars);
         ivSave = (ImageView) findViewById(R.id.iv_picture_viewer_save);
         tvLocation = (TextView) findViewById(R.id.tv_picture_viewer_location);
+        tvSendTime = (TextView) findViewById(R.id.send_time);
+        portrait = (ImageView) findViewById(R.id.portrait);
+        userName = (TextView) findViewById(R.id.username);
 
         ivContent.setOnClickListener(getOnClickListener());
         rlLabel.setOnClickListener(getOnClickListener());
@@ -81,6 +87,8 @@ public class PictureViewerActivity extends BaseActivity {
         tvStars.setOnClickListener(getOnClickListener());
         ivSave.setOnClickListener(getOnClickListener());
         tvLocation.setOnClickListener(getOnClickListener());
+        portrait.setOnClickListener(getOnClickListener());
+        userName.setOnClickListener(getOnClickListener());
         findViewById(R.id.rl_picture_viewer).setOnClickListener(getOnClickListener());
     }
 
@@ -91,9 +99,19 @@ public class PictureViewerActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        x.image().bind(ivContent, studioInfo.getImageUrl());
-
+        if (studioInfo == null) {
+            return;
+        }
+        loadStudioInfo();
         loadUserInfo();
+    }
+
+    private void loadStudioInfo() {
+        x.image().bind(ivContent, studioInfo.getImageUrl());
+        tvLocation.setText(studioInfo.getName());
+        tvSendTime.setText(studioInfo.getCreatedAt());
+        tvComments.setText(studioInfo.getComments() + "");
+        tvStars.setText(studioInfo.getStars() + "");
     }
 
     private void loadUserInfo() {
@@ -113,7 +131,8 @@ public class PictureViewerActivity extends BaseActivity {
     }
 
     private void initUserInfo(MyUser user) {
-
+        x.image().bind(portrait, user.getPortraitUrl());
+        userName.setText(user.getNickName());
     }
 
     @Override
@@ -125,6 +144,7 @@ public class PictureViewerActivity extends BaseActivity {
      * 显示或者隐藏内容区域以外的菜单
      */
     private void showOrHideMenu() {
+        OutputUtils.toastShort(getContext(), "onClick");
         if (rlLabel.isShown()) {
             AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
             alphaAnimation.setDuration(300);

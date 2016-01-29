@@ -114,6 +114,7 @@ public class SplashActivity extends BaseActivity {
         } else {
             startActivity(new Intent(getContext(), MainPageActivity.class));
         }
+        finish();
     }
 
     @Override

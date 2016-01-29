@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import club.hanfeng.freewalk.activity.FreeWalkApplication;
+import club.hanfeng.freewalk.core.serverpage.data.SceneListInfo;
 import club.hanfeng.freewalk.core.studio.data.StudioInfo;
 import club.hanfeng.freewalk.interfaces.studio.IStudioManager;
 import cn.bmob.v3.BmobQuery;
@@ -69,5 +70,12 @@ public class StudioManager implements IStudioManager {
 
     public void upLoadStudio(Context context, StudioInfo studioInfo, SaveListener listener) {
         studioInfo.save(context, listener);
+    }
+
+    public void getSceneList(Context context, FindListener<SceneListInfo> findListener) {
+        BmobQuery<SceneListInfo> bmobQuery = new BmobQuery<>();
+        bmobQuery.setLimit(1000);
+        bmobQuery.addWhereEqualTo("sid", FreeWalkApplication.getSid());
+        bmobQuery.findObjects(context, findListener);
     }
 }

@@ -13,7 +13,6 @@ import java.io.File;
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.core.studio.StudioConstants;
 import club.hanfeng.freewalk.framework.BaseActivity;
-import club.hanfeng.freewalk.utils.OutputUtils;
 
 public class StudioStep1Activity extends BaseActivity {
 
@@ -32,6 +31,7 @@ public class StudioStep1Activity extends BaseActivity {
 
     @Override
     protected boolean initBackActionBar() {
+        setTitle("");
         return true;
     }
 
@@ -95,7 +95,6 @@ public class StudioStep1Activity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_next) {
-            OutputUtils.toastShort(getContext(), "Test");
             Intent intent = getIntent();
             intent.setClass(getContext(), StudioStep2Activity.class);
             startActivity(intent);

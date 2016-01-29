@@ -6,6 +6,7 @@ import android.content.Context;
 import org.xutils.x;
 
 import club.hanfeng.freewalk.constants.Constants;
+import club.hanfeng.freewalk.environment.ConstantsEnv;
 import club.hanfeng.freewalk.utils.sp.SpConstants;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
 import cn.bmob.v3.Bmob;
@@ -25,14 +26,18 @@ public class FreeWalkApplication extends Application {
     public void onCreate() {
         super.onCreate();
         FreeWalkApplication.context = getApplicationContext();
-
-        init();
-        setSid(null, null, null, null);
+        initFreeWalkApplication();
     }
 
-    private void init() {
+    private void initFreeWalkApplication() {
+        initCommon();
         initBmob();
         initXUtils();
+    }
+
+    private void initCommon() {
+        setSid(null, null, null, null);
+        ConstantsEnv.init(this);
     }
 
     private void initBmob() {

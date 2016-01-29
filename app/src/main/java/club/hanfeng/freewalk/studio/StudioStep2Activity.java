@@ -1,5 +1,6 @@
 package club.hanfeng.freewalk.studio;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bmob.btp.callback.UploadListener;
@@ -31,6 +33,7 @@ import cn.bmob.v3.listener.SaveListener;
 public class StudioStep2Activity extends BaseActivity {
 
     private TextView sceneLocation;
+    private RelativeLayout locationContent;
     private EditText comment;
     private RatingBar ratingBar;
 
@@ -80,6 +83,7 @@ public class StudioStep2Activity extends BaseActivity {
     protected void initContent() {
         sceneLocation = (TextView) findViewById(R.id.studio_location);
         comment = (EditText) findViewById(R.id.studio_comment);
+        locationContent = (RelativeLayout) findViewById(R.id.studio_location_content);
         ratingBar = (RatingBar) findViewById(R.id.studio_rating);
 
         if (!TextUtils.isEmpty(filePath)) {
@@ -93,7 +97,6 @@ public class StudioStep2Activity extends BaseActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 if (fromUser) {
-
                 }
             }
         });
@@ -115,14 +118,30 @@ public class StudioStep2Activity extends BaseActivity {
     }
 
     @Override
-    public void onClick(View v) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 0) {
+            if (!TextUtils.isEmpty(data.getStringExtra("name"))) {
+                name = data.getStringExtra("name");
+                id = data.getStringExtra("id");
+                sceneLocation.setText(name);
+            }
+        }
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.studio_location_content:
+                startActivityForResult(new Intent(getContext(), StudioSceneListActivity.class), 0);
+                break;
+        }
     }
 
     private void sendStudioInfo() {
         if (filePath != null || uri != null) {
             if (!TextUtils.isEmpty(id)) {
-                if (ratingBar.getRating() <= 0) {
+                if (ratingBar.getRating() > 0) {
                     FreeWalkProgress.show(getContext(), "正在发布...");
                     uploadPicture();
                 } else {

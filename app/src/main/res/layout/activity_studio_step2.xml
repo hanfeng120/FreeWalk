@@ -16,13 +16,16 @@
         <ImageView
             android:layout_width="@dimen/list_type_content"
             android:layout_height="@dimen/list_type_content"
-            android:padding="5dp"
-            android:src="@mipmap/ic_launcher" />
+            android:padding="8dp"
+            android:src="@mipmap/ic_loaction_black" />
 
         <TextView
             android:id="@+id/studio_location"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/list_type_content"
+            android:gravity="center_vertical"
+            android:textSize="16dp" />
 
     </RelativeLayout>
 
@@ -74,12 +77,10 @@
 
         <RatingBar
             android:id="@+id/studio_rating"
-            style="@android:style/Widget.Holo.RatingBar.Small"
+            style="@android:style/Widget.Holo.RatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/comment"
-            android:clickable="true" />
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/comment" />
 
     </RelativeLayout>
 
