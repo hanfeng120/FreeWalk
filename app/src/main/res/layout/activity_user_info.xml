@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/bgGray"
     android:orientation="vertical"
-    tools:context="club.hanfeng.freewalk.activity.UserInfoActivity">
+    tools:context=".user.UserDetailActivity">
 
     <RelativeLayout
         android:id="@+id/rl_ui_icon"

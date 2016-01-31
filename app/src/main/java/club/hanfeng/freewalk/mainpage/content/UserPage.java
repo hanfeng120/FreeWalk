@@ -29,7 +29,7 @@ import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.activity.PictureActivity;
 import club.hanfeng.freewalk.activity.ResourceActivity;
-import club.hanfeng.freewalk.activity.UserInfoActivity;
+import club.hanfeng.freewalk.user.UserDetailActivity;
 import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.user.UserConstants;
 import club.hanfeng.freewalk.utils.CommonUtils;
@@ -269,7 +269,7 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
                 break;
             case R.id.rl_set_user:
                 if (loginState) {
-                    startActivity(UserInfoActivity.class);
+                    startActivity(UserDetailActivity.class);
                 } else {
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     intent.putExtra(UserConstants.FROM_USERPAGE, true);

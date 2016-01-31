@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import java.util.List;
@@ -109,7 +112,10 @@ public class PictureViewerActivity extends BaseActivity {
     }
 
     private void loadStudioInfo() {
-        x.image().bind(ivContent, studioInfo.getImageUrl());
+        ImageOptions.Builder builder = new ImageOptions.Builder();
+        builder.setImageScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        ImageOptions options = builder.build();
+        x.image().bind(ivContent, studioInfo.getImageUrl(), options);
         tvLocation.setText(studioInfo.getName());
         tvSendTime.setText(studioInfo.getCreatedAt());
         tvComments.setText(studioInfo.getComments() + "");
@@ -133,7 +139,7 @@ public class PictureViewerActivity extends BaseActivity {
     }
 
     private void initUserInfo(MyUser user) {
-        x.image().bind(portrait, user.getPortraitUrl());
+        Picasso.with(getContext()).load(user.getPortraitUrl()).into(portrait);
         userName.setText(user.getNickName());
     }
 
@@ -146,7 +152,6 @@ public class PictureViewerActivity extends BaseActivity {
      * 显示或者隐藏内容区域以外的菜单
      */
     private void showOrHideMenu() {
-        OutputUtils.toastShort(getContext(), "onClick");
         if (rlLabel.isShown()) {
             AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
             alphaAnimation.setDuration(300);
@@ -187,7 +192,6 @@ public class PictureViewerActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.iv_picture_viewer_share:
-
                 break;
             case R.id.iv_picture_viewer_comments:
 
@@ -209,7 +213,7 @@ public class PictureViewerActivity extends BaseActivity {
                 intent.putExtra(SceneConstants.EXTRA_ID, studioInfo.getId());
                 startActivity(intent);
                 break;
-            case R.id.rl_picture_viewer:
+            case R.id.rl_picture_viewer_label:
                 showOrHideMenu();
                 break;
         }
