@@ -53,8 +53,6 @@
             android:name=".user.LoginActivity"
             android:label="登录"
             android:launchMode="singleTask" />
-        <activity android:name=".activity.PictureActivity" />
-        <activity android:name=".activity.CollectActivity" />
         <activity android:name=".activity.ResourceActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.AboutActivity" />
@@ -97,7 +95,8 @@
         <activity android:name=".collection.CollectionActivity" />
         <activity android:name=".studio.StudioStep1Activity" />
         <activity android:name=".studio.StudioStep2Activity" />
-        <activity android:name=".studio.StudioSceneListActivity"></activity>
+        <activity android:name=".studio.StudioSceneListActivity" />
+        <activity android:name=".photo.PhotoActivity"></activity>
     </application>
 
 </manifest>

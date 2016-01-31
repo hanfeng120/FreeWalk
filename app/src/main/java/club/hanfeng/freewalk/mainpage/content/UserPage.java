@@ -19,19 +19,19 @@ import java.util.List;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.AboutActivity;
-import club.hanfeng.freewalk.activity.CollectActivity;
 import club.hanfeng.freewalk.activity.FeedbackActivity;
+import club.hanfeng.freewalk.activity.ResourceActivity;
+import club.hanfeng.freewalk.collection.CollectionActivity;
+import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.framework.DataCenter;
 import club.hanfeng.freewalk.framework.DataRefreshTask;
 import club.hanfeng.freewalk.interfaces.view.IDataRefreshTask;
 import club.hanfeng.freewalk.mainpage.MainPageConstants;
+import club.hanfeng.freewalk.photo.PhotoActivity;
 import club.hanfeng.freewalk.user.LoginActivity;
-import club.hanfeng.freewalk.activity.PictureActivity;
-import club.hanfeng.freewalk.activity.ResourceActivity;
-import club.hanfeng.freewalk.user.UserDetailActivity;
-import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.user.UserConstants;
+import club.hanfeng.freewalk.user.UserDetailActivity;
 import club.hanfeng.freewalk.utils.CommonUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
@@ -237,14 +237,14 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
         switch (v.getId()) {
             case R.id.tv_picture:
                 if (loginState) {
-                    startActivity(PictureActivity.class);
+                    startActivity(PhotoActivity.class);
                 } else {
                     OutputUtils.toastShort(getContext(), "请先登录");
                 }
                 break;
             case R.id.tv_collect:
                 if (loginState) {
-                    startActivity(CollectActivity.class);
+                    startActivity(CollectionActivity.class);
                 } else {
                     OutputUtils.toastShort(getContext(), "请先登录");
                 }

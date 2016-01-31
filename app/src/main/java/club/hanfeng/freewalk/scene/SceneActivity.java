@@ -217,7 +217,7 @@ public class SceneActivity extends BaseActivity {
                 if (i == -1) {
                     OutputUtils.toastShort(getContext(), "请先登录");
                 } else {
-                    OutputUtils.toastShort(getContext(), "失败啦，请重试");
+                    OutputUtils.toastShort(getContext(), "您已经收藏过了哦");
                 }
             }
         });

@@ -4,7 +4,11 @@ import android.content.Context;
 
 import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.core.collection.data.UserCollection;
+import club.hanfeng.freewalk.core.photo.data.PhotoInfo;
+import club.hanfeng.freewalk.core.serverpage.data.SceneListInfo;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -29,12 +33,30 @@ public class CollectionManager {
         return instance;
     }
 
-    public void saveSceneCollection(Context context, String id, SaveListener saveListener) {
-        saveCollection(context, id, CollectionConstants.TYPE_COLLECTION_SCENE, saveListener);
+    public void loadAllCollections(Context context, FindListener<UserCollection> listener) {
+        BmobQuery<UserCollection> bmobQuery = new BmobQuery<>();
+        bmobQuery.setLimit(1000);
+        bmobQuery.addWhereEqualTo("userName", BmobUser.getCurrentUser(context).getUsername());
+        bmobQuery.findObjects(context, listener);
     }
 
-    public void saveStudioCollection(Context context, String id, SaveListener saveListener) {
-        saveCollection(context, id, CollectionConstants.TYPE_COLLECTION_STUDIO, saveListener);
+    public void loadSceneInfo(Context context, String id, FindListener<SceneListInfo> listener) {
+        BmobQuery<SceneListInfo> bmobQuery = new BmobQuery<>();
+        bmobQuery.setLimit(1000);
+        bmobQuery.addWhereEqualTo("sid", FreeWalkApplication.getSid());
+        bmobQuery.addWhereEqualTo("id", id);
+        bmobQuery.findObjects(context, listener);
+    }
+
+    public void saveStudioPhoto(Context context, String url, SaveListener saveListener) {
+        PhotoInfo photoInfo = new PhotoInfo();
+        photoInfo.setPhotoUrl(url);
+        photoInfo.setUserName(BmobUser.getCurrentUser(context).getUsername());
+        photoInfo.save(context, saveListener);
+    }
+
+    public void saveSceneCollection(Context context, String id, SaveListener saveListener) {
+        saveCollection(context, id, CollectionConstants.TYPE_COLLECTION_SCENE, saveListener);
     }
 
     public void saveTravelCollection(Context context, String id, SaveListener saveListener) {

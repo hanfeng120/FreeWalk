@@ -423,16 +423,13 @@ public class UserDetailActivity extends AppCompatActivity {
                 initEditDialog(editTagListener, "个性签名", user.getTag());
                 break;
             case R.id.img_ui_icon:
-                OutputUtils.toastShort(UserDetailActivity.this, "img Ui Icon");
                 break;
             case R.id.img_ui_tdcode:
                 break;
             case R.id.rl_ui_icon:
                 showDialog();
-                OutputUtils.toastShort(UserDetailActivity.this, "rl Ui Icon");
                 break;
             case R.id.rl_ui_tdcode:
-                OutputUtils.toastShort(UserDetailActivity.this, "rl Ui tdIcon");
                 break;
         }
     }

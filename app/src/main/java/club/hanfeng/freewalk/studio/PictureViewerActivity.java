@@ -168,10 +168,10 @@ public class PictureViewerActivity extends BaseActivity {
     }
 
     private void collectStudio() {
-        CollectionManager.getInstance().saveStudioCollection(getContext(), studioInfo.getObjectId(), new SaveListener() {
+        CollectionManager.getInstance().saveStudioPhoto(getContext(), studioInfo.getImageUrl(), new SaveListener() {
             @Override
             public void onSuccess() {
-                OutputUtils.toastShort(getContext(), "收藏成功");
+                OutputUtils.toastShort(getContext(), "保存到我的相册中");
             }
 
             @Override
@@ -179,7 +179,7 @@ public class PictureViewerActivity extends BaseActivity {
                 if (i == -1) {
                     OutputUtils.toastShort(getContext(), "请先登录");
                 } else {
-                    OutputUtils.toastShort(getContext(), "失败啦，请重试");
+                    OutputUtils.toastShort(getContext(), "已经保存过了哦");
                 }
             }
         });
