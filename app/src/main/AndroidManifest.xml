@@ -98,7 +98,12 @@
         <activity android:name=".studio.StudioSceneListActivity" />
         <activity android:name=".photo.PhotoActivity" />
         <activity android:name=".download.DownloadActivity" />
-        <activity android:name=".download.DownloadVoiceActivity"></activity>
+        <activity
+            android:name=".download.DownloadMapActivity"
+            android:theme="@style/Toolbar" />
+        <activity
+            android:name=".download.DownloadVoiceActivity"
+            android:theme="@style/Toolbar" />
     </application>
 
 </manifest>

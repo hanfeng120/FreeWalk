@@ -1,8 +1,11 @@
 package club.hanfeng.freewalk.download;
 
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import com.amap.api.maps.MapsInitializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,7 @@ import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.core.download.DownloadPagerAdapter;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
+import club.hanfeng.freewalk.utils.map.AMapUtils;
 
 /**
  * Created by zhaoxunyi on 2016/2/1.
@@ -19,6 +23,12 @@ public class DownloadMapActivity extends BaseActivity {
 
     private DownloadPagerAdapter adapter;
     private List<BaseViewGroup> list = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        MapsInitializer.sdcardDir = AMapUtils.getSdCacheDir(getContext());
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected int getContentViewResId() {

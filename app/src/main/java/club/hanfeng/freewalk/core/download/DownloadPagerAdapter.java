@@ -22,7 +22,7 @@ public class DownloadPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return data.size();
+        return data == null ? 0 : data.size();
     }
 
     @Override
