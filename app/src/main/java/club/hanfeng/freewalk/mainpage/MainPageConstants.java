@@ -22,4 +22,12 @@ public class MainPageConstants {
 
     public static final int TASK_ID_USERPAGE = 0;
 
+    public static final int TASK_ID_FINDPAGE = TASK_ID_USERPAGE + 1;
+
+    public static final int TASK_ID_SERVERPAGE = TASK_ID_FINDPAGE + 1;
+
+    public static final int TASK_ID_HOMEPAGE = TASK_ID_SERVERPAGE + 1;
+
+    public static final int TASK_ID_SCENE_CHANGED = TASK_ID_HOMEPAGE + 1;
+
 }

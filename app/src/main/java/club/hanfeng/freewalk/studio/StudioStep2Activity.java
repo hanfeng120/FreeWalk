@@ -23,6 +23,7 @@ import club.hanfeng.freewalk.core.studio.StudioManager;
 import club.hanfeng.freewalk.core.studio.data.StudioInfo;
 import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
+import club.hanfeng.freewalk.framework.DataCenter;
 import club.hanfeng.freewalk.utils.FileUtils;
 import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import club.hanfeng.freewalk.utils.OutputUtils;
@@ -199,6 +200,7 @@ public class StudioStep2Activity extends BaseActivity {
             @Override
             public void onSuccess() {
                 FreeWalkProgress.dismiss(getContext());
+                DataCenter.getInstance().notifyDataChanged(StudioConstants.STUDIO_TASKID);
                 finish();
             }
 

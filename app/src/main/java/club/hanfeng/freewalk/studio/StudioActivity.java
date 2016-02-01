@@ -6,33 +6,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import java.util.List;
+import android.widget.FrameLayout;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.adapter.DirectRecyclerAdapter;
 import club.hanfeng.freewalk.core.studio.StudioConstants;
 import club.hanfeng.freewalk.core.studio.StudioManager;
-import club.hanfeng.freewalk.core.studio.data.StudioInfo;
 import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.framework.BaseActivity;
-import club.hanfeng.freewalk.interfaces.studio.OnRecyclerItemClickListener;
 import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.user.UserConstants;
-import club.hanfeng.freewalk.utils.FreeWalkProgress;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.listener.FindListener;
 
 public class StudioActivity extends BaseActivity {
 
-    private RecyclerView recycleView;
-    private DirectRecyclerAdapter adapter;
     private String[] items = new String[]{"拍照", "从相册选择"};
     private String filePath;
 
@@ -63,24 +53,16 @@ public class StudioActivity extends BaseActivity {
 
     @Override
     protected void initTopBar() {
-        FreeWalkProgress.show(getContext(), "正在努力加载...");
     }
 
     @Override
     protected void initContent() {
-        recycleView = (RecyclerView) findViewById(R.id.rv_direct);
+        StudioDetail studioDetail = new StudioDetail(getContext());
+        studioDetail.setTaskId(StudioConstants.STUDIO_TASKID);
+        studioDetail.createRootView(null);
+        studioDetail.init();
 
-        adapter = new DirectRecyclerAdapter(this);
-        recycleView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        recycleView.setAdapter(adapter);
-        adapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position, long id) {
-                Intent intent = new Intent(getContext(), PictureViewerActivity.class);
-                intent.putExtra(StudioConstants.EXTRA_TYPE_STUDIO, adapter.getItemt(position));
-                startActivity(intent);
-            }
-        });
+        ((FrameLayout) findViewById(R.id.studio_content)).addView(studioDetail.getRootView());
     }
 
     @Override
@@ -90,18 +72,7 @@ public class StudioActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        StudioManager.getInstance().getAllStudios(getContext(), new FindListener<StudioInfo>() {
-            @Override
-            public void onSuccess(List<StudioInfo> list) {
-                adapter.setData(list);
-                FreeWalkProgress.dismiss(getContext());
-            }
 
-            @Override
-            public void onError(int i, String s) {
-                FreeWalkProgress.dismiss(getContext());
-            }
-        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

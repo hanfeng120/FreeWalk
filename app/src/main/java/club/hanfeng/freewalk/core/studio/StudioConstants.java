@@ -22,4 +22,6 @@ public class StudioConstants {
     public static final String CACHE_FILE_PATH = "cache_file_path";
 
     public static final String EXTRA_TYPE_STUDIO = "extra_type_studio";
+
+    public static final int STUDIO_TASKID = 0;
 }

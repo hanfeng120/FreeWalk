@@ -6,7 +6,9 @@ import android.content.Context;
 import org.xutils.x;
 
 import club.hanfeng.freewalk.constants.Constants;
+import club.hanfeng.freewalk.core.utils.ImageLoaderUtil;
 import club.hanfeng.freewalk.environment.ConstantsEnv;
+import club.hanfeng.freewalk.environment.DebugEnv;
 import club.hanfeng.freewalk.utils.sp.SpConstants;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
 import cn.bmob.v3.Bmob;
@@ -38,6 +40,7 @@ public class FreeWalkApplication extends Application {
     private void initCommon() {
         setSid(null, null, null, null);
         ConstantsEnv.init(this);
+        ImageLoaderUtil.initImageLoader(getApplicationContext());
     }
 
     private void initBmob() {
@@ -46,7 +49,9 @@ public class FreeWalkApplication extends Application {
 
     private void initXUtils() {
         x.Ext.init(this);
-        x.Ext.setDebug(true);
+        if (DebugEnv.DEBUG) {
+            x.Ext.setDebug(true);
+        }
     }
 
     public static void setSid(String sid, String cityCode, String cityName, String sceneName) {

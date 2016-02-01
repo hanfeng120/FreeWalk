@@ -25,6 +25,8 @@ import org.xutils.x;
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.core.user.UserManager;
 import club.hanfeng.freewalk.core.user.data.MyUser;
+import club.hanfeng.freewalk.framework.DataCenter;
+import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.utils.OutputUtils;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
@@ -376,6 +378,7 @@ public class UserDetailActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess() {
                                     tvName.setText(content);
+                                    DataCenter.getInstance().notifyDataChanged(MainPageConstants.TASK_ID_USERPAGE);
                                     OutputUtils.toastShort(UserDetailActivity.this, "更新成功");
                                 }
 
@@ -409,6 +412,7 @@ public class UserDetailActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess() {
                                     tvTag.setText(content);
+                                    DataCenter.getInstance().notifyDataChanged(MainPageConstants.TASK_ID_USERPAGE);
                                     OutputUtils.toastShort(UserDetailActivity.this, "更新成功");
                                 }
 

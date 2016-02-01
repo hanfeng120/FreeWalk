@@ -51,7 +51,7 @@
                 android:onClick="clickItem"
                 android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/portrait"
                     android:layout_width="30dp"
                     android:layout_height="30dp"

@@ -14,6 +14,7 @@ import club.hanfeng.freewalk.core.scene.SceneListBaseAdapter;
 import club.hanfeng.freewalk.core.scene.SceneManager;
 import club.hanfeng.freewalk.core.scene.data.SceneListItemInfo;
 import club.hanfeng.freewalk.framework.BaseActivity;
+import club.hanfeng.freewalk.framework.DataCenter;
 import club.hanfeng.freewalk.mainpage.MainPageActivity;
 import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.utils.OutputUtils;
@@ -79,6 +80,7 @@ public class SceneListActivity extends BaseActivity {
                 intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_CITY_CODE, adapter.getItem(position).getCityCode());
                 intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_CITY_NAME, adapter.getItem(position).getCityName());
                 startActivity(intent);
+                DataCenter.getInstance().notifyDataChanged(MainPageConstants.TASK_ID_SCENE_CHANGED);
                 finish();
             }
         });

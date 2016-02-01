@@ -12,7 +12,12 @@ import java.util.List;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.BrowserActivity;
+import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.core.scene.SceneConstants;
+import club.hanfeng.freewalk.framework.DataCenter;
+import club.hanfeng.freewalk.framework.DataRefreshTask;
+import club.hanfeng.freewalk.interfaces.view.IDataRefreshTask;
+import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.scene.SceneActivity;
 import club.hanfeng.freewalk.adapter.ServerPageBaseAdapter;
 import club.hanfeng.freewalk.adapter.ServerPageLvBaseAdapter;
@@ -51,20 +56,23 @@ public class ServerPage extends BaseViewGroup {
         gridLayout = (GridView) header.findViewById(R.id.gl_header_sp);
         listView.addHeaderView(header);
 
-        checkSid();
     }
 
-    private void checkSid() {
-//        sid = SpUtils.getInstance(getContext()).getValue(SpConstants.SCENIC_ID, null);
-//        if (sid != null) {
-//            getDataFromServer();
-//        } else {
-//            //TODO 景区唯一编号为空，跳转到景区选择页面
-//        }
-        getDataFromServer();
+    @Override
+    public void onDataChange(int key) {
+        onRequestLoadData(key);
     }
 
-    public void getDataFromServer() {
+    @Override
+    public List<IDataRefreshTask> getDataRefreshTasks() {
+        DataCenter.getInstance().registerListener(MainPageConstants.TASK_ID_SCENE_CHANGED, this);
+        List<IDataRefreshTask> list = new ArrayList<>();
+        list.add(new DataRefreshTask(MainPageConstants.TASK_ID_SERVERPAGE, 0));
+        return list;
+    }
+
+    @Override
+    public void onRequestLoadData(int key) {
         list = new ArrayList<>();
         list.add(new ServerInfo("景点分布", "http://192.168.20.75:8080/freewalk/images/btn_index_hotel.png", "null"));
         list.add(new ServerInfo("旅行贴士", "http://192.168.20.75:8080/freewalk/images/btn_index_graduate.png", "www.sina.cn"));
@@ -72,13 +80,13 @@ public class ServerPage extends BaseViewGroup {
         list.add(new ServerInfo("更多攻略", "http://192.168.20.75:8080/freewalk/images/btn_index_amuse.png", ""));
 
         BmobQuery<SceneListInfo> bmob = new BmobQuery<>();
-//        bmob.addWhereEqualTo("sid", sid);
+        bmob.addWhereEqualTo("sid", FreeWalkApplication.getSid());
         bmob.setLimit(1000);
         bmob.findObjects(getContext(), new FindListener<SceneListInfo>() {
             @Override
             public void onSuccess(List<SceneListInfo> list) {
                 listScene = list;
-                parseData();//解析数据
+                parseData();
             }
 
             @Override
@@ -86,7 +94,6 @@ public class ServerPage extends BaseViewGroup {
                 OutputUtils.toastShort(getContext(), "网络错误，请重试");
             }
         });
-
     }
 
     /**
@@ -95,7 +102,6 @@ public class ServerPage extends BaseViewGroup {
     public void parseData() {
         gridLayout.setAdapter(new ServerPageBaseAdapter(getContext(), list));
         listView.setAdapter(new ServerPageLvBaseAdapter(getContext(), listScene));
-
 
         gridLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

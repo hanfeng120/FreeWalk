@@ -18,13 +18,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.core.scene.SceneConstants;
-import club.hanfeng.freewalk.scene.SceneActivity;
 import club.hanfeng.freewalk.core.homepage.HomePageManager;
 import club.hanfeng.freewalk.core.homepage.data.HomePagePoi;
+import club.hanfeng.freewalk.core.scene.SceneConstants;
 import club.hanfeng.freewalk.core.tabbar.TabBarConstants;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
+import club.hanfeng.freewalk.scene.SceneActivity;
 import cn.bmob.v3.listener.FindListener;
 
 /**
@@ -52,6 +52,11 @@ public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListe
     @Override
     public void onInitChildren() {
 
+    }
+
+    @Override
+    public void onDataChange(int key) {
+        super.onDataChange(key);
     }
 
     public void setAMap(AMap aMap) {

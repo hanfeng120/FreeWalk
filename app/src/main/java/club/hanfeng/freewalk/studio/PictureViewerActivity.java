@@ -7,8 +7,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
@@ -21,6 +19,7 @@ import club.hanfeng.freewalk.core.studio.StudioConstants;
 import club.hanfeng.freewalk.core.studio.data.StudioInfo;
 import club.hanfeng.freewalk.core.user.UserManager;
 import club.hanfeng.freewalk.core.user.data.MyUser;
+import club.hanfeng.freewalk.core.utils.ImageLoaderUtil;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.scene.SceneActivity;
 import club.hanfeng.freewalk.utils.OutputUtils;
@@ -139,7 +138,7 @@ public class PictureViewerActivity extends BaseActivity {
     }
 
     private void initUserInfo(MyUser user) {
-        Picasso.with(getContext()).load(user.getPortraitUrl()).into(portrait);
+        ImageLoaderUtil.displayImageInRound(user.getPortraitUrl(), portrait);
         userName.setText(user.getNickName());
     }
 

@@ -20,9 +20,9 @@ import java.util.List;
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.AboutActivity;
 import club.hanfeng.freewalk.activity.FeedbackActivity;
-import club.hanfeng.freewalk.activity.ResourceActivity;
 import club.hanfeng.freewalk.collection.CollectionActivity;
 import club.hanfeng.freewalk.core.user.data.MyUser;
+import club.hanfeng.freewalk.download.DownloadActivity;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.framework.DataCenter;
 import club.hanfeng.freewalk.framework.DataRefreshTask;
@@ -250,7 +250,7 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
                 }
                 break;
             case R.id.tv_resource:
-                startActivity(ResourceActivity.class);
+                startActivity(DownloadActivity.class);
                 break;
             case R.id.tv_helper:
                 break;

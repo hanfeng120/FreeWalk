@@ -1,4 +1,4 @@
-package club.hanfeng.freewalk.adapter;
+package club.hanfeng.freewalk.core.studio;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -21,13 +21,13 @@ import club.hanfeng.freewalk.interfaces.studio.OnRecyclerItemClickListener;
 /**
  * Created by HanFeng on 2015/12/2.
  */
-public class DirectRecyclerAdapter extends RecyclerView.Adapter<DirectRecyclerAdapter.DirectViewHolder> {
+public class StudioBaseAdapter extends RecyclerView.Adapter<StudioBaseAdapter.DirectViewHolder> {
 
     private Context context;
     private List<StudioInfo> data;
     private LayoutInflater inflater;
 
-    public DirectRecyclerAdapter(Context context) {
+    public StudioBaseAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
@@ -38,13 +38,13 @@ public class DirectRecyclerAdapter extends RecyclerView.Adapter<DirectRecyclerAd
     }
 
     @Override
-    public DirectRecyclerAdapter.DirectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StudioBaseAdapter.DirectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_rv_direct, parent, false);
         return new DirectViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final DirectRecyclerAdapter.DirectViewHolder holder, final int position) {
+    public void onBindViewHolder(final StudioBaseAdapter.DirectViewHolder holder, final int position) {
         StudioInfo directSendInfo = getItemt(position);
 
 
