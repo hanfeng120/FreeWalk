@@ -1,6 +1,7 @@
 package club.hanfeng.freewalk.core.scene;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import org.xutils.x;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.comments.CommentActivity;
+import club.hanfeng.freewalk.core.comments.CommentConstants;
 import club.hanfeng.freewalk.core.scene.data.SceneInfo;
 
 /**
@@ -89,13 +92,22 @@ public class SceneBaseAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        SceneInfo sceneInfo = getItem(position);
+        final SceneInfo sceneInfo = getItem(position);
 
         switch (getItemViewType(position)) {
             case 0:
                 holder.tvName.setText(sceneInfo.name);
                 holder.tvNameEN.setText(sceneInfo.nameEN);
                 holder.tvComment.setText(sceneInfo.comment);
+                holder.tvComment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, CommentActivity.class);
+                        intent.putExtra(CommentConstants.EXTRA_SCENE_NAME, sceneInfo.name);
+                        intent.putExtra(CommentConstants.EXTRA_SCENE_ID, sceneInfo.id);
+                        context.startActivity(intent);
+                    }
+                });
                 break;
             case 1:
                 holder.tvTitle.setText(sceneInfo.name);

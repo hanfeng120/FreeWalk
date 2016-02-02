@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/actionbar_height"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/menu_back"
+        android:layout_width="@dimen/actionbar_height"
+        android:layout_height="@dimen/actionbar_height"
+        android:clickable="true"
+        android:padding="12dp"
+        android:src="@drawable/ic_ab_back_material_light" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/download_manager"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:button="@null"
+            android:text="下载管理" />
+
+        <RadioButton
+            android:id="@+id/download_list"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:button="@null"
+            android:text="资源列表" />
+
+
+    </RadioGroup>
+
+</RelativeLayout>

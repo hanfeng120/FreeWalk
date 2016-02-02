@@ -51,6 +51,12 @@ public class DownloadVoiceActivity extends BaseActivity {
         adapter.setData(list);
 
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.topbar);
+        DownloadTopBar downloadTopBar = new DownloadTopBar(getContext());
+        downloadTopBar.setOnClickListener(getOnClickListener());
+        downloadTopBar.createRootView(null);
+        downloadTopBar.init();
+        downloadTopBar.initWithTitle(null, viewPager);
+        frameLayout.addView(downloadTopBar.getRootView());
     }
 
     @Override
@@ -70,6 +76,8 @@ public class DownloadVoiceActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-
+        if (v.getId() == R.id.menu_back) {
+            finish();
+        }
     }
 }

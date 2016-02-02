@@ -124,6 +124,7 @@ public class SceneActivity extends BaseActivity {
             case R.id.iv_scene_go:
                 break;
             case R.id.scene_comment:
+
                 break;
             case R.id.scene_collect:
                 collectScene();
