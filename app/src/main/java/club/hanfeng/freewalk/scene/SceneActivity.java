@@ -28,7 +28,9 @@ import java.util.List;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.adapter.ScenePagerAdapter;
+import club.hanfeng.freewalk.comments.WriteCommentActivity;
 import club.hanfeng.freewalk.core.collection.CollectionManager;
+import club.hanfeng.freewalk.core.comments.CommentConstants;
 import club.hanfeng.freewalk.core.scene.SceneBaseAdapter;
 import club.hanfeng.freewalk.core.scene.SceneConstants;
 import club.hanfeng.freewalk.core.scene.SceneManager;
@@ -61,6 +63,7 @@ public class SceneActivity extends BaseActivity {
 
     private List<SceneInfo> sceneInfos;
     private String id;
+    private String title;
     private SceneBaseAdapter adapter;
     private int headerViewHeight;
     private boolean isLoading;
@@ -124,7 +127,10 @@ public class SceneActivity extends BaseActivity {
             case R.id.iv_scene_go:
                 break;
             case R.id.scene_comment:
-
+                Intent intent = new Intent(getContext(), WriteCommentActivity.class);
+                intent.putExtra(CommentConstants.EXTRA_SCENE_NAME, title);
+                intent.putExtra(CommentConstants.EXTRA_SCENE_ID, id);
+                startActivity(intent);
                 break;
             case R.id.scene_collect:
                 collectScene();
@@ -147,6 +153,7 @@ public class SceneActivity extends BaseActivity {
     @Override
     protected void initIntentData() {
         id = getIntent().getStringExtra(SceneConstants.EXTRA_ID);
+        title = getIntent().getStringExtra(SceneConstants.EXTRA_TITLE);
     }
 
     @Override

@@ -34,6 +34,7 @@ public class CommentManager {
         bmobQuery.setLimit(1000);
         bmobQuery.addWhereEqualTo("sid", FreeWalkApplication.getSid());
         bmobQuery.addWhereEqualTo("id", id);
+        bmobQuery.order("-createdAt");
         bmobQuery.findObjects(context, findListener);
     }
 
