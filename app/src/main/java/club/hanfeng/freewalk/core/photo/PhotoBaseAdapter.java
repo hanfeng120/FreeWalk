@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.xutils.x;
 
+import java.util.Date;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
@@ -54,7 +56,10 @@ public class PhotoBaseAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_photo, null);
-            holder.ivContent = (ImageView) convertView.findViewById(R.id.content);
+            holder.tvDay = (TextView) convertView.findViewById(R.id.tv_day);
+            holder.tvMonth = (TextView) convertView.findViewById(R.id.tv_month);
+            holder.tvContent = (TextView) convertView.findViewById(R.id.content);
+            holder.ivContent = (ImageView) convertView.findViewById(R.id.photo);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -64,11 +69,13 @@ public class PhotoBaseAdapter extends BaseAdapter {
 
         holder.ivContent.setImageResource(R.mipmap.default_photo);
         x.image().bind(holder.ivContent, photoInfo.getPhotoUrl());
+        Date date =
 
         return convertView;
     }
 
     static class ViewHolder {
+        TextView tvDay, tvMonth, tvContent;
         ImageView ivContent;
     }
 }

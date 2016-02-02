@@ -10,6 +10,8 @@ public class PhotoInfo extends BmobObject {
     private String photoName;
     private String photoUrl;
     private String userName;
+    private String introduce;
+    private long time;
 
     public PhotoInfo() {
     }
@@ -26,6 +28,14 @@ public class PhotoInfo extends BmobObject {
         return userName;
     }
 
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
     public void setPhotoName(String photoName) {
         this.photoName = photoName;
     }
@@ -36,5 +46,13 @@ public class PhotoInfo extends BmobObject {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }
