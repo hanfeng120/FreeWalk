@@ -1,15 +1,75 @@
 package club.hanfeng.freewalk.download;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.FrameLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.core.download.DownloadPagerAdapter;
+import club.hanfeng.freewalk.framework.BaseActivity;
+import club.hanfeng.freewalk.framework.BaseViewGroup;
 
-public class DownloadVoiceActivity extends AppCompatActivity {
+public class DownloadVoiceActivity extends BaseActivity {
+
+    private DownloadPagerAdapter adapter;
+    private List<BaseViewGroup> list = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_download_voice);
+    protected int getContentViewResId() {
+        return R.layout.activity_download_map;
+    }
+
+    @Override
+    protected View getContentRootView() {
+        return null;
+    }
+
+    @Override
+    protected void initTopBar() {
+
+    }
+
+    @Override
+    protected void initContent() {
+        VoiceManagerPage voiceManagerPage = new VoiceManagerPage(getContext());
+        voiceManagerPage.createRootView(null);
+        voiceManagerPage.init();
+
+        VoiceListPage voiceListPage = new VoiceListPage(getContext());
+        voiceListPage.createRootView(null);
+        voiceListPage.init();
+
+        list.add(voiceManagerPage);
+        list.add(voiceListPage);
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpage);
+        adapter = new DownloadPagerAdapter();
+        viewPager.setAdapter(adapter);
+        adapter.setData(list);
+
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.topbar);
+    }
+
+    @Override
+    protected void initBottomBar() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void refreshView(int viewId) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
