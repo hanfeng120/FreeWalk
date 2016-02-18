@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import org.xutils.x;
 
-import java.util.Date;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
@@ -69,7 +68,6 @@ public class PhotoBaseAdapter extends BaseAdapter {
 
         holder.ivContent.setImageResource(R.mipmap.default_photo);
         x.image().bind(holder.ivContent, photoInfo.getPhotoUrl());
-        Date date =
 
         return convertView;
     }

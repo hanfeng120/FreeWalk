@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bmob.btp.callback.UploadListener;
 
 import java.io.File;
+import java.util.Random;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.FreeWalkApplication;
@@ -190,12 +191,13 @@ public class StudioStep2Activity extends BaseActivity {
         StudioInfo studioInfo = new StudioInfo();
         studioInfo.setUid(BmobUser.getCurrentUser(getContext(), MyUser.class).getUsername());
         studioInfo.setSid(FreeWalkApplication.getSid());
-        studioInfo.setId("0001");
-        studioInfo.setName("鸟巢");
+        studioInfo.setId(id);
+        studioInfo.setName(name);
         studioInfo.setIntroduce(comment.getText().toString());
         studioInfo.setImageUrl(imageUrl);
-        studioInfo.setComments(12);
-        studioInfo.setStars(23);
+        studioInfo.setComments(new Random().nextInt(1000));
+        studioInfo.setStars(new Random().nextInt(1000));
+        studioInfo.setTime(System.currentTimeMillis());
         StudioManager.getInstance().upLoadStudio(getContext(), studioInfo, new SaveListener() {
             @Override
             public void onSuccess() {

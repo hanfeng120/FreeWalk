@@ -19,8 +19,17 @@ public class StudioInfo extends BmobObject {
     public String name;
     public int comments;
     public int stars;
+    private long time;
 
     public StudioInfo() {
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public long getTime() {
+        return time;
     }
 
     public String getUid() {
