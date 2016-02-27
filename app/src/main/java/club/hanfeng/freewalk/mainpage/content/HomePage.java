@@ -2,43 +2,31 @@ package club.hanfeng.freewalk.mainpage.content;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.MarkerOptions;
+import org.xutils.image.ImageOptions;
+import org.xutils.x;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.core.homepage.HomePageManager;
-import club.hanfeng.freewalk.core.homepage.data.HomePagePoi;
-import club.hanfeng.freewalk.core.scene.SceneConstants;
-import club.hanfeng.freewalk.core.tabbar.TabBarConstants;
+import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
-import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
-import club.hanfeng.freewalk.scene.SceneActivity;
-import cn.bmob.v3.listener.FindListener;
+import club.hanfeng.freewalk.framework.DataRefreshTask;
+import club.hanfeng.freewalk.interfaces.view.IDataRefreshTask;
+import club.hanfeng.freewalk.mainpage.MainPageConstants;
+import club.hanfeng.freewalk.navigation.NavigateActivity;
 
 /**
  * Created by HanFeng on 2015/10/22.
  */
-public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListener, LocationSource, AMapLocationListener, AMap.OnMarkerClickListener, AMap.OnInfoWindowClickListener, AMap.OnMapClickListener {
+public class HomePage extends BaseViewGroup {
 
-    private AMap aMap;
-    private UiSettings uiSettings;
-    private OnLocationChangedListener locationChangedListener;
-    private AMapLocationClient locationClient;
-    private AMapLocationClientOption optionClient;
-    private Marker marker;
-    private HashMap<String, String> idMaps = new HashMap<>();
+    private ImageView ivInfo;
+    private Button btnNavigate;
 
     public HomePage(Context context) {
         super(context);
@@ -51,134 +39,32 @@ public class HomePage extends BaseViewGroup implements OnHomeTopBarSelectedListe
 
     @Override
     public void onInitChildren() {
+        ivInfo = (ImageView) getRootView().findViewById(R.id.introduce);
+        btnNavigate = (Button) getRootView().findViewById(R.id.navigate);
 
+        btnNavigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NavigateActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public List<IDataRefreshTask> getDataRefreshTasks() {
+        List<IDataRefreshTask> task = new ArrayList<>();
+        task.add(new DataRefreshTask(MainPageConstants.TASK_ID_SCENE_CHANGED, 0));
+        return task;
     }
 
     @Override
     public void onDataChange(int key) {
-        super.onDataChange(key);
-    }
-
-    public void setAMap(AMap aMap) {
-        this.aMap = aMap;
-        this.uiSettings = aMap.getUiSettings();
-        initAMap();
-        initData();
-    }
-
-    private void initData() {
-        HomePageManager.getInstance().getScenes(getContext(), TabBarConstants.TYPE_ID_ALL_SCENE, new FindListener<HomePagePoi>() {
-            @Override
-            public void onSuccess(List<HomePagePoi> list) {
-                showAllPoi(list);
-            }
-
-            @Override
-            public void onError(int i, String s) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onTopBarSelected(String type) {
-        HomePageManager.getInstance().getScenes(getContext(), type, new FindListener<HomePagePoi>() {
-            @Override
-            public void onSuccess(List<HomePagePoi> list) {
-                showAllPoi(list);
-            }
-
-            @Override
-            public void onError(int i, String s) {
-
-            }
-        });
-    }
-
-    private void showAllPoi(List<HomePagePoi> list) {
-        aMap.clear();
-        for (HomePagePoi poi : list) {
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(new LatLng(Double.valueOf(poi.getLat()), Double.valueOf(poi.getLon())));
-            markerOptions.title(poi.getName());
-            marker = aMap.addMarker(markerOptions);
-            marker.setTitle(poi.getName());
-            idMaps.put(poi.getName(), poi.getId());
+        if (key == MainPageConstants.TASK_ID_SCENE_CHANGED) {
+            ImageOptions.Builder builder = new ImageOptions.Builder();
+            builder.setImageScaleType(ImageView.ScaleType.FIT_XY);
+            x.image().bind(ivInfo, FreeWalkApplication.getSceneMapUrl(), builder.build());
         }
     }
 
-    private void initAMap() {
-        uiSettings.setScaleControlsEnabled(true);
-        uiSettings.setZoomControlsEnabled(true);
-        uiSettings.setCompassEnabled(true);
-        uiSettings.setMyLocationButtonEnabled(true);
-        uiSettings.setScrollGesturesEnabled(true);
-        uiSettings.setRotateGesturesEnabled(true);
-
-        aMap.setOnMapClickListener(this);
-        aMap.setOnMarkerClickListener(this);
-        aMap.setOnInfoWindowClickListener(this);
-        aMap.setMyLocationEnabled(true);
-        aMap.setLocationSource(this);
-    }
-
-    public void reLoadMap() {
-        if (aMap != null) {
-            aMap.reloadMap();
-        }
-    }
-
-    @Override
-    public void activate(OnLocationChangedListener onLocationChangedListener) {
-        locationChangedListener = onLocationChangedListener;
-        if (locationClient == null) {
-            locationClient = new AMapLocationClient(getContext());
-            optionClient = new AMapLocationClientOption();
-            //设置定位监听
-            locationClient.setLocationListener(this);
-            //设置为高精度定位模式
-            optionClient.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-            //设置定位参数
-            locationClient.setLocationOption(optionClient);
-            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-            // 在定位结束后，在合适的生命周期调用onDestroy()方法
-            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-            locationClient.startLocation();
-        }
-    }
-
-    @Override
-    public void deactivate() {
-        locationChangedListener = null;
-        if (locationClient != null) {
-            locationClient.stopLocation();
-            locationClient.onDestroy();
-        }
-        locationClient = null;
-    }
-
-    @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-        if (locationChangedListener != null) {
-            locationChangedListener.onLocationChanged(aMapLocation);
-        }
-    }
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
-    }
-
-    @Override
-    public void onInfoWindowClick(Marker marker) {
-        Intent intent = new Intent(getContext(), SceneActivity.class);
-        intent.putExtra(SceneConstants.EXTRA_ID, idMaps.get(marker.getTitle()));
-        getContext().startActivity(intent);
-    }
-
-    @Override
-    public void onMapClick(LatLng latLng) {
-
-    }
 }

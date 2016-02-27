@@ -1,15 +1,11 @@
 package club.hanfeng.freewalk.mainpage.content;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.FrameLayout;
-
-import com.amap.api.maps.AMap;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.interfaces.main.OnBottomBarSelectedListener;
-import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
 import club.hanfeng.freewalk.interfaces.view.IView;
 import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.mainpage.content.server.ServerPage;
@@ -61,7 +57,6 @@ public class MainPageContent extends BaseViewGroup implements OnBottomBarSelecte
 
     @Override
     public void onBottomBarSelected(int index) {
-        reLoadAMap(index);
         FrameLayout rootView = (FrameLayout) getRootView();
         if (rootView.getChildAt(0) != children.get(index).getRootView()) {
             rootView.removeAllViews();
@@ -69,21 +64,4 @@ public class MainPageContent extends BaseViewGroup implements OnBottomBarSelecte
         }
     }
 
-    private void reLoadAMap(int index) {
-        if (index == 0) {
-            ((HomePage) homePage).reLoadMap();
-        }
-    }
-
-    public View getAMapView() {
-        return homePage.getRootView().findViewById(R.id.amap);
-    }
-
-    public void setAMap(AMap aMap) {
-        ((HomePage) homePage).setAMap(aMap);
-    }
-
-    public OnHomeTopBarSelectedListener getOnHomeTopBarSelectedListener() {
-        return (HomePage) homePage;
-    }
 }

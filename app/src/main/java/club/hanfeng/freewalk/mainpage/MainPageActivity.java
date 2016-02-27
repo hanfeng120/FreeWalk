@@ -9,15 +9,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.amap.api.maps.MapView;
-import com.amap.api.maps.MapsInitializer;
-
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.mainpage.content.MainPageContent;
 import club.hanfeng.freewalk.mainpage.topbar.MainPageTopBar;
 import club.hanfeng.freewalk.utils.OutputUtils;
-import club.hanfeng.freewalk.utils.map.AMapUtils;
 
 public class MainPageActivity extends BaseActivity {
 
@@ -27,7 +23,6 @@ public class MainPageActivity extends BaseActivity {
     private MainPageContent mainPageContent;
     private MainPageBottomBar bottomBar;
     private MainPageTopBar mainPageTopBar;
-    private MapView mapView;
 
     private boolean isExit = false;
 
@@ -48,14 +43,6 @@ public class MainPageActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initAMap(savedInstanceState);
-    }
-
-    private void initAMap(Bundle savedInstanceState) {
-        MapsInitializer.sdcardDir = AMapUtils.getSdCacheDir(getContext());
-        mapView = (MapView) mainPageContent.getAMapView();
-        mapView.onCreate(savedInstanceState);
-        mainPageContent.setAMap(mapView.getMap());
     }
 
     @Override
@@ -90,8 +77,6 @@ public class MainPageActivity extends BaseActivity {
         mainPageContent = new MainPageContent(getContext());
         mainPageContent.setRootView(findViewById(R.id.fl_content));
         mainPageContent.init();
-
-
     }
 
     @Override
@@ -108,7 +93,6 @@ public class MainPageActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mainPageTopBar.setOnHomeTopBarSelectedListener(mainPageContent.getOnHomeTopBarSelectedListener());
         bottomBar.setOnBottomBarSelectedListeners(mainPageTopBar);
         bottomBar.setOnBottomBarSelectedListeners(mainPageContent);
     }
@@ -160,24 +144,20 @@ public class MainPageActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mapView.onResume();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mapView.onDestroy();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        mapView.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mapView.onPause();
     }
 }

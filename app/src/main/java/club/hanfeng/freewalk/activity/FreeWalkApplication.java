@@ -23,6 +23,10 @@ public class FreeWalkApplication extends Application {
     private static String sceneName;
     private static String cityCode;
     private static String cityName;
+    /**
+     * HomePage景区地图简介
+     */
+    private static String sceneMapUrl;
 
     @Override
     public void onCreate() {
@@ -87,4 +91,11 @@ public class FreeWalkApplication extends Application {
         return FreeWalkApplication.sceneName;
     }
 
+    public static void setSceneMapUrl(String sceneMapUrl) {
+        FreeWalkApplication.sceneMapUrl = sceneMapUrl;
+    }
+
+    public static String getSceneMapUrl() {
+        return sceneMapUrl;
+    }
 }

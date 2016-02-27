@@ -74,9 +74,11 @@ public class SceneListActivity extends BaseActivity {
                     return;
                 }
                 FreeWalkApplication.setSid(adapter.getItem(position).getSid(), adapter.getItem(position).getCityCode(), adapter.getItem(position).getCityName(), adapter.getItem(position).getName());
+                FreeWalkApplication.setSceneMapUrl(adapter.getItem(position).getImgUrl());
                 Intent intent = new Intent(getContext(), MainPageActivity.class);
                 intent.putExtra(MainPageConstants.EXTRA_TYPE_FROM, MainPageConstants.EXTRA_TYPE_FROM_SCENE_LIST);
                 intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_SCENE_NAME, adapter.getItem(position).getName());
+                intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_SCENE_IMAGE_MAP, adapter.getItem(position).getImgUrl());
                 intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_CITY_CODE, adapter.getItem(position).getCityCode());
                 intent.putExtra(MainPageConstants.EXTRA_TYPE_SCENE_LIST_CITY_NAME, adapter.getItem(position).getCityName());
                 startActivity(intent);

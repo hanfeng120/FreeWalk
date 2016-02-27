@@ -14,6 +14,7 @@ public class SceneListItemInfo extends BmobObject {
     private String cityName;
     private Integer type;
     private Integer num;
+    private String imgUrl;
 
     public SceneListItemInfo() {
 
@@ -73,5 +74,13 @@ public class SceneListItemInfo extends BmobObject {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
     }
 }

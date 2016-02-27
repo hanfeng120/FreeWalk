@@ -105,7 +105,8 @@
             android:name=".download.DownloadVoiceActivity"
             android:theme="@style/Toolbar" />
         <activity android:name=".comments.CommentActivity" />
-        <activity android:name=".comments.WriteCommentActivity"></activity>
+        <activity android:name=".comments.WriteCommentActivity" />
+        <activity android:name=".navigation.NavigateActivity"></activity>
     </application>
 
 </manifest>
