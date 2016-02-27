@@ -4,7 +4,6 @@ import android.content.Context;
 
 import club.hanfeng.freewalk.framework.BaseViewGroup;
 import club.hanfeng.freewalk.interfaces.main.OnBottomBarSelectedListener;
-import club.hanfeng.freewalk.interfaces.main.OnHomeTopBarSelectedListener;
 
 /**
  * Created by HanFeng on 2016/1/23.
@@ -29,10 +28,6 @@ public class MainPageTopBar extends BaseViewGroup implements OnBottomBarSelected
     @Override
     public void onBottomBarSelected(int index) {
         homeTopBar.setOnCheckedIndex(index);
-    }
-
-    public void setOnHomeTopBarSelectedListener(OnHomeTopBarSelectedListener onHomeTopBarSelectedListener) {
-        homeTopBar.setOnHomeTopBarSelectedListener(onHomeTopBarSelectedListener);
     }
 
     public void setTopBarInfo(String sceneName, String cityName) {

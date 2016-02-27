@@ -13,9 +13,18 @@ public class HomePagePoi extends BmobObject {
     private String name;
     private String lon;
     private String lat;
+    private String voicePath;
 
     public HomePagePoi() {
 
+    }
+
+    public void setVoicePath(String voicePath) {
+        this.voicePath = voicePath;
+    }
+
+    public String getVoicePath() {
+        return voicePath;
     }
 
     public String getSid() {

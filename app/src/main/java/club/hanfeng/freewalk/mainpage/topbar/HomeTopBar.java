@@ -119,15 +119,15 @@ public class HomeTopBar extends BaseViewGroup implements View.OnClickListener {
                 getContext().startActivity(new Intent(getContext(), SceneListActivity.class));
                 break;
             case R.id.title:
-                if (listPopupWindow == null) {
-                    getTabBars();
-                    return;
-                }
-                if (listPopupWindow.isShowing()) {
-                    listPopupWindow.dismiss();
-                } else {
-                    listPopupWindow.show();
-                }
+//                if (listPopupWindow == null) {
+//                    getTabBars();
+//                    return;
+//                }
+//                if (listPopupWindow.isShowing()) {
+//                    listPopupWindow.dismiss();
+//                } else {
+//                    listPopupWindow.show();
+//                }
                 break;
             case R.id.topbar_right:
                 break;
