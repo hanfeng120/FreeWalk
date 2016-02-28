@@ -67,7 +67,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initContent() {
-        imgLoad = (ImageView) findViewById(R.id.img_sp_net);
+
     }
 
     @Override

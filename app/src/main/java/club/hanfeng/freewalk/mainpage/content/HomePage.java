@@ -62,7 +62,7 @@ public class HomePage extends BaseViewGroup {
     public void onDataChange(int key) {
         if (key == MainPageConstants.TASK_ID_SCENE_CHANGED) {
             ImageOptions.Builder builder = new ImageOptions.Builder();
-            builder.setImageScaleType(ImageView.ScaleType.FIT_XY);
+            builder.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
             x.image().bind(ivInfo, FreeWalkApplication.getSceneMapUrl(), builder.build());
         }
     }

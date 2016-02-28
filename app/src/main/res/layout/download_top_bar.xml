@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/actionbar_height"
-    android:background="@color/colorPrimary">
+    android:background="#fff">
 
     <ImageView
         android:id="@+id/menu_back"
@@ -10,7 +10,7 @@
         android:layout_height="@dimen/actionbar_height"
         android:clickable="true"
         android:padding="12dp"
-        android:src="@drawable/ic_ab_back_material_light" />
+        android:src="@drawable/ic_ab_back_material_blue" />
 
     <RadioGroup
         android:id="@+id/radiogroup"
@@ -21,16 +21,23 @@
 
         <RadioButton
             android:id="@+id/download_manager"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="35dp"
+            android:background="@drawable/download_top_bar"
             android:button="@null"
+            android:checked="true"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="下载管理" />
 
         <RadioButton
             android:id="@+id/download_list"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="35dp"
+            android:background="@drawable/download_top_bar"
             android:button="@null"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="资源列表" />
 
 

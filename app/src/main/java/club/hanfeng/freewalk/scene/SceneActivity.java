@@ -1,9 +1,14 @@
 package club.hanfeng.freewalk.scene;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
+import android.os.RemoteException;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AbsListView;
@@ -30,10 +35,14 @@ import club.hanfeng.freewalk.core.scene.SceneBaseAdapter;
 import club.hanfeng.freewalk.core.scene.SceneConstants;
 import club.hanfeng.freewalk.core.scene.SceneManager;
 import club.hanfeng.freewalk.core.scene.data.SceneInfo;
+import club.hanfeng.freewalk.core.utils.FreeWalkToast;
 import club.hanfeng.freewalk.framework.BaseActivity;
-import club.hanfeng.freewalk.service.VoicePlayerAgency;
+import club.hanfeng.freewalk.navigation.NavigateActivity;
+import club.hanfeng.freewalk.service.VoicePlayerService;
+import club.hanfeng.freewalk.service.aidl.IVoicePlayerService;
 import club.hanfeng.freewalk.utils.CommonUtils;
 import club.hanfeng.freewalk.utils.OutputUtils;
+import club.hanfeng.freewalk.utils.ShareUtils;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -56,15 +65,19 @@ public class SceneActivity extends BaseActivity {
     private TextView tvComment, tvCollect, tvShare;
 
     private List<SceneInfo> sceneInfos;
+    private String sid;
     private String id;
     private String title;
     private SceneBaseAdapter adapter;
     private int headerViewHeight;
-    private boolean isLoading;
 
+    private boolean isLoading;
     private boolean autoPlay;
     private boolean perDownInG;
+
     private File file;
+
+    private IVoicePlayerService playerService;
 
     private Handler handler = new Handler() {
         @Override
@@ -73,7 +86,7 @@ public class SceneActivity extends BaseActivity {
                 case WHAT_PROGRESS_UPDATE:
                     int curDuration = 0;
                     try {
-                        curDuration = VoicePlayerAgency.getInstance().getCurrentPosition();
+                        curDuration = playerService.getCurrentPosition();
                         sbProgress.setProgress(curDuration);
                         handler.sendEmptyMessageDelayed(WHAT_PROGRESS_UPDATE, 500);
                         tvCurDur.setText(CommonUtils.stringForTime(curDuration));
@@ -82,6 +95,18 @@ public class SceneActivity extends BaseActivity {
                     }
                     break;
             }
+        }
+    };
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            playerService = IVoicePlayerService.Stub.asInterface(service);
+            updateUI();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
         }
     };
 
@@ -93,7 +118,9 @@ public class SceneActivity extends BaseActivity {
                 break;
             case R.id.tb_media_play:
                 if (file.exists()) {
-                    VoicePlayerAgency.getInstance().playOrPause();
+                    if (playerService != null) {
+                        playOrPause();
+                    }
                 } else if (isLoading) {
                     OutputUtils.toastShort(this, "语音文件正在加载...");
                 } else {
@@ -102,6 +129,7 @@ public class SceneActivity extends BaseActivity {
                 }
                 break;
             case R.id.iv_scene_go:
+                startActivity(new Intent(getContext(), NavigateActivity.class));
                 break;
             case R.id.scene_comment:
                 Intent intent = new Intent(getContext(), WriteCommentActivity.class);
@@ -113,6 +141,7 @@ public class SceneActivity extends BaseActivity {
                 collectScene();
                 break;
             case R.id.scene_share:
+                ShareUtils.shareInfo(getContext());
                 break;
         }
     }
@@ -129,8 +158,12 @@ public class SceneActivity extends BaseActivity {
 
     @Override
     protected void initIntentData() {
+        sid = getIntent().getStringExtra(SceneConstants.EXTRA_SID);
         id = getIntent().getStringExtra(SceneConstants.EXTRA_ID);
         title = getIntent().getStringExtra(SceneConstants.EXTRA_TITLE);
+        if (getIntent().getBooleanExtra(SceneConstants.EXTRA_AUTO_PLAY, false)) {
+            autoPlay = true;
+        }
     }
 
     @Override
@@ -186,6 +219,7 @@ public class SceneActivity extends BaseActivity {
         autoPlay = SpUtils.getInstance(this).getValue(SpUtils.SETTING_AUTOPLAY, false);
         perDownInG = SpUtils.getInstance(this).getValue(SpUtils.SETTING_DOWNLOAD, false);
 
+        bindAtService();
         getDataFromServer();
     }
 
@@ -208,23 +242,35 @@ public class SceneActivity extends BaseActivity {
     }
 
     private void updateUI() {
-        if (file != null && file.exists()) {
-            if (!file.getPath().equals(VoicePlayerAgency.getInstance().getFilePath())) {
-                handler.removeCallbacksAndMessages(null);
-                VoicePlayerAgency.getInstance().stop();
-                sbProgress.setProgress(0);
-                tvCurDur.setText("00:00");
-                tvDuration.setText("00:00");
-                createPlayerService();
+        try {
+            if (file != null && file.exists()) {
+                if (!file.getPath().equals(playerService.getFilePath())) {
+                    handler.removeCallbacksAndMessages(null);
+                    playerService.stop();
+                    sbProgress.setProgress(0);
+                    tvCurDur.setText("00:00");
+                    tvDuration.setText("00:00");
+                    createPlayerService();
+                }
             }
+            if (playerService != null) {
+                if (playerService.isPlaying()) {
+                    tbPlay.setChecked(true);
+                    setMediaDefault();
+                    handler.sendEmptyMessage(WHAT_PROGRESS_UPDATE);
+                } else {
+                    tbPlay.setChecked(false);
+                }
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
-        if (VoicePlayerAgency.getInstance().isPlaying()) {
-            tbPlay.setChecked(true);
-            setMediaDefault();
-            handler.sendEmptyMessage(WHAT_PROGRESS_UPDATE);
-        } else {
-            tbPlay.setChecked(false);
-        }
+    }
+
+    private void bindAtService() {
+        Intent serviceIntent = new Intent(this, VoicePlayerService.class);
+        bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
+        startService(serviceIntent);
     }
 
     @Override
@@ -239,20 +285,30 @@ public class SceneActivity extends BaseActivity {
         sbProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    VoicePlayerAgency.getInstance().seekTo(progress);
-                    tvCurDur.setText(CommonUtils.stringForTime(progress));
+                if (fromUser && playerService != null) {
+                    try {
+                        playerService.seekTo(progress);
+                        tvCurDur.setText(CommonUtils.stringForTime(progress));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                VoicePlayerAgency.getInstance().pause();
+                if (playerService != null) {
+                    pause();
+                }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                sbProgress.setProgress(0);
+                if (playerService != null) {
+                    play();
+                } else {
+                    sbProgress.setProgress(0);
+                }
             }
         });
 
@@ -286,7 +342,12 @@ public class SceneActivity extends BaseActivity {
             public void onSuccess(List<SceneInfo> list) {
                 if (list != null && list.size() > 0) {
                     sceneInfos = list;
-                    parseData();
+                    if (sceneInfos != null && sceneInfos.size() > 0) {
+                        parseData();
+                    } else {
+                        finish();
+                        FreeWalkToast.shortToast("暂无该景点介绍");
+                    }
                 }
             }
 
@@ -301,9 +362,9 @@ public class SceneActivity extends BaseActivity {
      * 解析服务器数据，设置页面
      */
     public void parseData() {
-        if (sceneInfos.get(0).headImages.size() > 0) {
+        if (sceneInfos.get(0).headImages != null && sceneInfos.get(0).headImages.size() > 0) {
             viewPager.setAdapter(new ScenePagerAdapter(this, sceneInfos.get(0).headImages));
-            viewPager.setCurrentItem(0);
+            viewPager.setCurrentItem(sceneInfos.get(0).headImages.size() * 500);
         } else {
             //TODO 默认图片
         }
@@ -320,7 +381,10 @@ public class SceneActivity extends BaseActivity {
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
-        if (!file.exists() && perDownInG && autoPlay) {
+        if (file.exists() && autoPlay) {
+            createPlayerService();
+            playOrPause();
+        } else if (perDownInG && autoPlay) {
             downloadVoiceFile();
         }
     }
@@ -354,7 +418,7 @@ public class SceneActivity extends BaseActivity {
             public void onSuccess(File result) {
                 pbDialog.dismiss();
                 createPlayerService();
-                VoicePlayerAgency.getInstance().playOrPause();
+                playOrPause();
             }
 
             @Override
@@ -380,9 +444,24 @@ public class SceneActivity extends BaseActivity {
     private void createPlayerService() {
         try {
             if (file.exists()) {
-                VoicePlayerAgency.getInstance().create(file.getPath());
+                playerService.createMediaPlayer(file.getPath());
             }
             setMediaDefault();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 播放或者暂停播放语音导览
+     */
+    private void playOrPause() {
+        try {
+            if (playerService.isPlaying()) {//暂停播放
+                pause();
+            } else {//播放
+                play();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -393,9 +472,36 @@ public class SceneActivity extends BaseActivity {
      */
     private void setMediaDefault() {
         try {
-            sbProgress.setMax(VoicePlayerAgency.getInstance().getDuration());
-            tvDuration.setText(CommonUtils.stringForTime(VoicePlayerAgency.getInstance().getDuration()));
+            sbProgress.setMax(playerService.getDuration());
+            tvDuration.setText(CommonUtils.stringForTime(playerService.getDuration()));
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 暂停播放
+     */
+    private void pause() {
+        try {
+            tbPlay.setChecked(false);
+            playerService.pause();
+            handler.removeMessages(WHAT_PROGRESS_UPDATE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 开始播放
+     */
+    private void play() {
+        try {
+            tbPlay.setChecked(true);
+            playerService.play();
+            handler.removeMessages(WHAT_PROGRESS_UPDATE);
+            handler.sendEmptyMessage(WHAT_PROGRESS_UPDATE);
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
@@ -412,6 +518,12 @@ public class SceneActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+
+        if (conn != null) {
+            unbindService(conn);
+            conn = null;
+        }
+
         handler.removeCallbacksAndMessages(null);
         super.onDestroy();
     }

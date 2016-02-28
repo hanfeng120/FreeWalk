@@ -1,7 +1,5 @@
 package club.hanfeng.freewalk.core.download.data;
 
-import java.util.ArrayList;
-
 /**
  * Created by zhaoxunyi on 2016/2/2.
  */
@@ -11,7 +9,7 @@ public class VoiceInfo {
     private String id;
     private String sceneName;
     private long size;
-    private ArrayList<String> voicesUrl;
+    private String voicesUrl;
     private String introduce;
 
     public VoiceInfo() {
@@ -33,7 +31,7 @@ public class VoiceInfo {
         return size;
     }
 
-    public ArrayList<String> getVoicesUrl() {
+    public String getVoicesUrl() {
         return voicesUrl;
     }
 
@@ -57,7 +55,7 @@ public class VoiceInfo {
         this.size = size;
     }
 
-    public void setVoicesUrl(ArrayList<String> voicesUrl) {
+    public void setVoicesUrl(String voicesUrl) {
         this.voicesUrl = voicesUrl;
     }
 

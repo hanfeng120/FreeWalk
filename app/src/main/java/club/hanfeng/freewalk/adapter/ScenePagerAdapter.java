@@ -2,7 +2,6 @@ package club.hanfeng.freewalk.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,7 +27,7 @@ public class ScenePagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return data == null ? 0 : data.size();
+        return data == null ? 0 : data.size() * 1000;
     }
 
     @Override
@@ -38,6 +37,7 @@ public class ScenePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        position = position % data.size();
         ImageView imageView = new ImageView(context);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         x.image().bind(imageView, data.get(position));

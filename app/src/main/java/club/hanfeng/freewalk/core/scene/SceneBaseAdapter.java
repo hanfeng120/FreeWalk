@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.comments.CommentActivity;
 import club.hanfeng.freewalk.core.comments.CommentConstants;
 import club.hanfeng.freewalk.core.scene.data.SceneInfo;
+import club.hanfeng.freewalk.navigation.NavigateActivity;
 
 /**
  * Created by HanFeng on 2015/11/26.
@@ -68,8 +71,9 @@ public class SceneBaseAdapter extends BaseAdapter {
                     convertView = inflater.inflate(R.layout.type_scene_zero, parent, false);
                     holder.tvName = (TextView) convertView.findViewById(R.id.tv_type_scene_name);
                     holder.tvNameEN = (TextView) convertView.findViewById(R.id.tv_type_scene_name_en);
-                    holder.ivStar = (ImageView) convertView.findViewById(R.id.iv_type_scene_star);
+                    holder.ivStar = (RatingBar) convertView.findViewById(R.id.iv_type_scene_star);
                     holder.tvComment = (TextView) convertView.findViewById(R.id.tv_type_scene_comment);
+                    holder.ivGo = (ImageView) convertView.findViewById(R.id.iv_scene_go);
                     break;
                 case 1:
                     holder = new ViewHolder();
@@ -98,6 +102,7 @@ public class SceneBaseAdapter extends BaseAdapter {
             case 0:
                 holder.tvName.setText(sceneInfo.name);
                 holder.tvNameEN.setText(sceneInfo.nameEN);
+                holder.ivStar.setRating(sceneInfo.star);
                 holder.tvComment.setText(sceneInfo.comment);
                 holder.tvComment.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -108,6 +113,12 @@ public class SceneBaseAdapter extends BaseAdapter {
                         context.startActivity(intent);
                     }
                 });
+                holder.ivGo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        context.startActivity(new Intent(context, NavigateActivity.class));
+                    }
+                });
                 break;
             case 1:
                 holder.tvTitle.setText(sceneInfo.name);
@@ -116,7 +127,10 @@ public class SceneBaseAdapter extends BaseAdapter {
                 holder.tvContent.setText(sceneInfo.content);
                 break;
             case 3:
-                x.image().bind(holder.ivContent, sceneInfo.imagePath);
+                ImageOptions.Builder builder = new ImageOptions.Builder();
+                builder.setImageScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                ImageOptions options = builder.build();
+                x.image().bind(holder.ivContent, sceneInfo.imagePath, options);
                 break;
             case 4:
                 break;
@@ -131,7 +145,7 @@ public class SceneBaseAdapter extends BaseAdapter {
         public ImageView ivContent;
         public TextView tvName;
         public TextView tvNameEN;
-        public ImageView ivStar;
+        public RatingBar ivStar;
         public TextView tvComment;
         public ImageView ivGo;
 

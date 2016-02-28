@@ -19,7 +19,6 @@ import java.util.List;
 
 import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.AboutActivity;
-import club.hanfeng.freewalk.activity.FeedbackActivity;
 import club.hanfeng.freewalk.collection.CollectionActivity;
 import club.hanfeng.freewalk.core.user.data.MyUser;
 import club.hanfeng.freewalk.download.DownloadActivity;
@@ -255,10 +254,8 @@ public class UserPage extends BaseViewGroup implements View.OnClickListener, Com
             case R.id.tv_helper:
                 break;
             case R.id.tv_feedback:
-                startActivity(FeedbackActivity.class);
                 break;
             case R.id.rl_update:
-                OutputUtils.toastShort(getContext(), "rl_update");
                 break;
             case R.id.tv_about:
                 startActivity(AboutActivity.class);

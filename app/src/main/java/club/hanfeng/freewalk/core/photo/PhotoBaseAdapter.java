@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import org.xutils.x;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import club.hanfeng.freewalk.R;
@@ -68,6 +70,15 @@ public class PhotoBaseAdapter extends BaseAdapter {
 
         holder.ivContent.setImageResource(R.mipmap.default_photo);
         x.image().bind(holder.ivContent, photoInfo.getPhotoUrl());
+
+        if (photoInfo.getTime() > 0) {
+            Date date = new Date(photoInfo.getTime());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            holder.tvDay.setText(calendar.get(Calendar.DAY_OF_MONTH) + "");
+            holder.tvMonth.setText(calendar.get(Calendar.MONTH) + "月");
+        }
+        holder.tvContent.setText(photoInfo.getIntroduce());
 
         return convertView;
     }

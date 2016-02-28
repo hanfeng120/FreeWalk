@@ -5,15 +5,17 @@ package club.hanfeng.freewalk.core.scene;
  */
 public class SceneConstants {
 
+    public static final String EXTRA_SID = "extra_sid";
+
     public static final String EXTRA_ID = "extra_id";
 
     public static final String EXTRA_TITLE = "extra_title";
 
+    public static final String EXTRA_AUTO_PLAY = "extra_auto_play";
+
     public static final int SCENE_LIST_VIEW_TYPE_COUNT = 2;
 
+
     public static final int SCENE_LIST_ITEM_TYPE_TITLE = 0;
-
     public static final int SCENE_LIST_ITEM_TYPE_CONTENT = 1;
-
-
 }

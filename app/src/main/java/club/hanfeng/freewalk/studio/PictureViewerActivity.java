@@ -3,6 +3,7 @@ package club.hanfeng.freewalk.studio;
 import android.content.Intent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import club.hanfeng.freewalk.core.utils.ImageLoaderUtil;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.scene.SceneActivity;
 import club.hanfeng.freewalk.utils.OutputUtils;
+import club.hanfeng.freewalk.utils.ShareUtils;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -32,11 +34,11 @@ public class PictureViewerActivity extends BaseActivity {
     private RelativeLayout rlLabel;
     private ImageView ivBack;
     private ImageView ivShare;
-    private ImageView ivComments;
+    private Button ivComments;
     private TextView tvComments;
-    private ImageView ivStars;
+    private Button ivStars;
     private TextView tvStars;
-    private ImageView ivSave;
+    private Button ivSave;
     private TextView tvLocation;
     private TextView tvSendTime;
     private ImageView portrait;
@@ -71,11 +73,11 @@ public class PictureViewerActivity extends BaseActivity {
         rlLabel = (RelativeLayout) findViewById(R.id.rl_picture_viewer_label);
         ivBack = (ImageView) findViewById(R.id.iv_picture_viewer_back);
         ivShare = (ImageView) findViewById(R.id.iv_picture_viewer_share);
-        ivComments = (ImageView) findViewById(R.id.iv_picture_viewer_comments);
+        ivComments = (Button) findViewById(R.id.iv_picture_viewer_comments);
         tvComments = (TextView) findViewById(R.id.tv_picture_viewer_comments);
-        ivStars = (ImageView) findViewById(R.id.iv_picture_viewer_stars);
+        ivStars = (Button) findViewById(R.id.iv_picture_viewer_stars);
         tvStars = (TextView) findViewById(R.id.tv_picture_viewer_stars);
-        ivSave = (ImageView) findViewById(R.id.iv_picture_viewer_save);
+        ivSave = (Button) findViewById(R.id.iv_picture_viewer_save);
         tvLocation = (TextView) findViewById(R.id.tv_picture_viewer_location);
         tvSendTime = (TextView) findViewById(R.id.send_time);
         portrait = (ImageView) findViewById(R.id.portrait);
@@ -167,7 +169,7 @@ public class PictureViewerActivity extends BaseActivity {
     }
 
     private void collectStudio() {
-        CollectionManager.getInstance().saveStudioPhoto(getContext(), studioInfo.getImageUrl(), new SaveListener() {
+        CollectionManager.getInstance().saveStudioPhoto(getContext(), studioInfo, new SaveListener() {
             @Override
             public void onSuccess() {
                 OutputUtils.toastShort(getContext(), "保存到我的相册中");
@@ -191,6 +193,7 @@ public class PictureViewerActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.iv_picture_viewer_share:
+                ShareUtils.shareInfo(getContext(), "", studioInfo.getImageUrl());
                 break;
             case R.id.iv_picture_viewer_comments:
 

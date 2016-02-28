@@ -14,13 +14,14 @@ import club.hanfeng.freewalk.R;
 import club.hanfeng.freewalk.activity.BrowserActivity;
 import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.core.scene.SceneConstants;
+import club.hanfeng.freewalk.core.utils.FreeWalkToast;
 import club.hanfeng.freewalk.framework.DataCenter;
 import club.hanfeng.freewalk.framework.DataRefreshTask;
 import club.hanfeng.freewalk.interfaces.view.IDataRefreshTask;
 import club.hanfeng.freewalk.mainpage.MainPageConstants;
 import club.hanfeng.freewalk.scene.SceneActivity;
-import club.hanfeng.freewalk.adapter.ServerPageBaseAdapter;
-import club.hanfeng.freewalk.adapter.ServerPageLvBaseAdapter;
+import club.hanfeng.freewalk.core.serverpage.ServerPageBaseAdapter;
+import club.hanfeng.freewalk.core.serverpage.ServerPageLvBaseAdapter;
 import club.hanfeng.freewalk.core.serverpage.data.SceneListInfo;
 import club.hanfeng.freewalk.core.serverpage.data.ServerInfo;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
@@ -35,7 +36,7 @@ public class ServerPage extends BaseViewGroup {
 
     private ListView listView;
     private GridView gridLayout;
-    private List<ServerInfo> list;
+    private List<ServerInfo> listServer;
     private List<SceneListInfo> listScene = new ArrayList<>();
     private String sid;//景区标识
 
@@ -73,15 +74,26 @@ public class ServerPage extends BaseViewGroup {
 
     @Override
     public void onRequestLoadData(int key) {
-        list = new ArrayList<>();
-        list.add(new ServerInfo("景点分布", "http://192.168.20.75:8080/freewalk/images/btn_index_hotel.png", "null"));
-        list.add(new ServerInfo("旅行贴士", "http://192.168.20.75:8080/freewalk/images/btn_index_graduate.png", "www.sina.cn"));
-        list.add(new ServerInfo("本地交通", "http://192.168.20.75:8080/freewalk/images/btn_index_food.png", "www.qq.com"));
-        list.add(new ServerInfo("更多攻略", "http://192.168.20.75:8080/freewalk/images/btn_index_amuse.png", ""));
+        final BmobQuery<ServerInfo> serverInfo = new BmobQuery<>();
+        serverInfo.setLimit(1000);
+        serverInfo.addWhereEqualTo("sid", FreeWalkApplication.getSid());
+        serverInfo.order("id");
+        serverInfo.findObjects(getContext(), new FindListener<ServerInfo>() {
+            @Override
+            public void onSuccess(List<ServerInfo> list) {
+                listServer = list;
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
 
         BmobQuery<SceneListInfo> bmob = new BmobQuery<>();
         bmob.addWhereEqualTo("sid", FreeWalkApplication.getSid());
         bmob.setLimit(1000);
+        bmob.order("id");
         bmob.findObjects(getContext(), new FindListener<SceneListInfo>() {
             @Override
             public void onSuccess(List<SceneListInfo> list) {
@@ -100,18 +112,18 @@ public class ServerPage extends BaseViewGroup {
      * 解析数据
      */
     public void parseData() {
-        gridLayout.setAdapter(new ServerPageBaseAdapter(getContext(), list));
+        gridLayout.setAdapter(new ServerPageBaseAdapter(getContext(), listServer));
         listView.setAdapter(new ServerPageLvBaseAdapter(getContext(), listScene));
 
         gridLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), BrowserActivity.class);
-                if (list.get(position).url.equals("null")) {
-                    OutputUtils.toastShort(getContext(), "即将开放，敬请期待");
+                if (!listServer.get(position).isOpen()) {
+                    FreeWalkToast.shortToast("即将开放，敬请期待");
                 } else {
-                    intent.putExtra("url", list.get(position).url);
-                    intent.putExtra("title", list.get(position).name);
+                    intent.putExtra("url", listServer.get(position).getUrl());
+                    intent.putExtra("title", listServer.get(position).getName());
                     getContext().startActivity(intent);
                 }
             }

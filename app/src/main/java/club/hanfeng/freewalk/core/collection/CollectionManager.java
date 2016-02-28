@@ -6,6 +6,7 @@ import club.hanfeng.freewalk.activity.FreeWalkApplication;
 import club.hanfeng.freewalk.core.collection.data.UserCollection;
 import club.hanfeng.freewalk.core.photo.data.PhotoInfo;
 import club.hanfeng.freewalk.core.serverpage.data.SceneListInfo;
+import club.hanfeng.freewalk.core.studio.data.StudioInfo;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
@@ -48,9 +49,11 @@ public class CollectionManager {
         bmobQuery.findObjects(context, listener);
     }
 
-    public void saveStudioPhoto(Context context, String url, SaveListener saveListener) {
+    public void saveStudioPhoto(Context context, StudioInfo studioInfo, SaveListener saveListener) {
         PhotoInfo photoInfo = new PhotoInfo();
-        photoInfo.setPhotoUrl(url);
+        photoInfo.setPhotoUrl(studioInfo.getImageUrl());
+        photoInfo.setIntroduce(studioInfo.getIntroduce());
+        photoInfo.setTime(System.currentTimeMillis());
         photoInfo.setUserName(BmobUser.getCurrentUser(context).getUsername());
         photoInfo.save(context, saveListener);
     }

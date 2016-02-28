@@ -153,7 +153,7 @@ public class NavigateActivity extends AppCompatActivity implements LocationSourc
             //设置是否强制刷新WIFI，默认为强制刷新
             optionClient.setWifiActiveScan(true);
             //设置是否允许模拟位置,默认为false，不允许模拟位置
-            optionClient.setMockEnable(false);
+            optionClient.setMockEnable(true);
             //设置定位间隔,单位毫秒,默认为2000ms
             optionClient.setInterval(2000);
             //设置为高精度定位模式
@@ -170,6 +170,7 @@ public class NavigateActivity extends AppCompatActivity implements LocationSourc
                 Intent intent = new Intent(GEOFENCE_BROADCAST_ACTION);
                 intent.putExtra(NavigationConstants.TYPE_ID, list.get(i).getId());
                 intent.putExtra(NavigationConstants.TYPE_VOICE_PATH, list.get(i).getVoicePath());
+                intent.putExtra(SceneConstants.EXTRA_TITLE, getTitle());
                 PendingIntent mPendingIntent;
                 mPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
 
@@ -212,7 +213,6 @@ public class NavigateActivity extends AppCompatActivity implements LocationSourc
 
     @Override
     public void onMapClick(LatLng latLng) {
-
     }
 
     @Override

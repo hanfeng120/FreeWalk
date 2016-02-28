@@ -75,12 +75,13 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true">
 
-            <ImageView
+            <Button
                 android:id="@+id/iv_picture_viewer_comments"
                 android:layout_width="@dimen/actionbar_height"
                 android:layout_height="@dimen/actionbar_height"
                 android:background="#ccc"
-                android:onClick="clickItem" />
+                android:onClick="clickItem"
+                android:text="点赞" />
 
             <TextView
                 android:id="@+id/tv_picture_viewer_comments"
@@ -92,14 +93,15 @@
                 android:textColor="#fff"
                 android:textSize="14dp" />
 
-            <ImageView
+            <Button
                 android:id="@+id/iv_picture_viewer_stars"
                 android:layout_width="@dimen/actionbar_height"
                 android:layout_height="@dimen/actionbar_height"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/tv_picture_viewer_comments"
                 android:background="#ccc"
-                android:onClick="clickItem" />
+                android:onClick="clickItem"
+                android:text="收藏" />
 
             <TextView
                 android:id="@+id/tv_picture_viewer_stars"
@@ -113,14 +115,15 @@
 
                 />
 
-            <ImageView
+            <Button
                 android:id="@+id/iv_picture_viewer_save"
                 android:layout_width="@dimen/actionbar_height"
                 android:layout_height="@dimen/actionbar_height"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="4dp"
                 android:background="#ccc"
-                android:onClick="clickItem" />
+                android:onClick="clickItem"
+                android:text="保存" />
 
         </RelativeLayout>
 

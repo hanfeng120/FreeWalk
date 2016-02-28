@@ -64,8 +64,8 @@ public class FreeWalkApplication extends Application {
 
     public static void setSid(String sid, String cityCode, String cityName, String sceneName) {
         if (sid == null || cityCode == null || cityName == null || sceneName == null) {
-            FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpConstants.SCENIC_ID, "32030001");
-            FreeWalkApplication.sceneName = SpUtils.getInstance(context).getValue(SpConstants.SCENE_NAME, "天安门");
+            FreeWalkApplication.sid = SpUtils.getInstance(context).getValue(SpConstants.SCENIC_ID, "1001");
+            FreeWalkApplication.sceneName = SpUtils.getInstance(context).getValue(SpConstants.SCENE_NAME, "故宫博物院");
             FreeWalkApplication.cityCode = SpUtils.getInstance(context).getValue(SpConstants.CITY_CODE, "010");
             FreeWalkApplication.cityName = SpUtils.getInstance(context).getValue(SpConstants.CITY_NAME, "北京");
         } else {

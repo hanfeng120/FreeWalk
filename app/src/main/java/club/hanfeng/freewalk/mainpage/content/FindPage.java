@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.view.View;
 
 import club.hanfeng.freewalk.R;
-import club.hanfeng.freewalk.studio.StudioActivity;
-import club.hanfeng.freewalk.activity.HotMapActivity;
-import club.hanfeng.freewalk.activity.TravelsActivity;
 import club.hanfeng.freewalk.framework.BaseViewGroup;
+import club.hanfeng.freewalk.scan.ScanActivity;
+import club.hanfeng.freewalk.studio.StudioActivity;
+import club.hanfeng.freewalk.utils.ShareUtils;
 
 /**
  * Created by HanFeng on 2015/10/22.
@@ -29,7 +29,6 @@ public class FindPage extends BaseViewGroup {
     public void onInitChildren() {
         setOnClickListener(R.id.tv_find_send);
         setOnClickListener(R.id.tv_find_travels);
-        setOnClickListener(R.id.tv_find_map);
         setOnClickListener(R.id.tv_find_scan);
         setOnClickListener(R.id.tv_find_shake);
         setOnClickListener(R.id.tv_find_share);
@@ -52,17 +51,14 @@ public class FindPage extends BaseViewGroup {
                     startActivity(StudioActivity.class);
                     break;
                 case R.id.tv_find_travels:
-                    startActivity(TravelsActivity.class);
-                    break;
-                case R.id.tv_find_map:
-                    startActivity(HotMapActivity.class);
                     break;
                 case R.id.tv_find_scan:
+                    getContext().startActivity(new Intent(getContext(), ScanActivity.class));
                     break;
                 case R.id.tv_find_shake:
                     break;
                 case R.id.tv_find_share:
-
+                    ShareUtils.shareInfo(getContext());
                     break;
             }
         }

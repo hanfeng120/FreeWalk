@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FreeWalk</string>
+    <string name="app_name">自由行</string>
     <string name="title_activity_direct_send">DirectSendActivity</string>
 
     <string name="hello_world">Hello world!</string>

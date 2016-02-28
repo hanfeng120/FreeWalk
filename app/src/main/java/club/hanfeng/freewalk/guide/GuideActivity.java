@@ -28,7 +28,7 @@ public class GuideActivity extends Activity {
     private List<View> pointerList;
     private Button btnEnter;
     private SharedPreferences mPrep;
-    private int[] imageRes = new int[]{R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+    private int[] imageRes = new int[]{R.mipmap.guide1, R.mipmap.guide2, R.mipmap.guide3};
     private boolean once;
 
     @Override
@@ -44,6 +44,8 @@ public class GuideActivity extends Activity {
         data = new ArrayList<>();
         pointerList = new ArrayList<>();
 
+        once = getIntent().getBooleanExtra("once", false);
+
         initData();
 
     }
@@ -56,6 +58,8 @@ public class GuideActivity extends Activity {
         for (int i = 0; i < imageRes.length; i++) {
             ImageView imageView = new ImageView(this);
             imageView.setImageResource(imageRes[i]);
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             data.add(imageView);
         }
         for (int j = 0; j < imageRes.length; j++) {
@@ -81,7 +85,7 @@ public class GuideActivity extends Activity {
     public void updateUI() {
         MyGuidePagerAdapter adapter = new MyGuidePagerAdapter();
         vpGuide.setAdapter(adapter);
-        vpGuide.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        vpGuide.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

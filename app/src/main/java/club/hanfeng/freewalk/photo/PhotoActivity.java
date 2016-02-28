@@ -2,7 +2,7 @@ package club.hanfeng.freewalk.photo;
 
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
 
 import java.util.List;
 
@@ -40,11 +40,11 @@ public class PhotoActivity extends BaseActivity {
 
     @Override
     protected void initContent() {
-        GridView gridView = (GridView) findViewById(R.id.gridview);
+        ListView listView = (ListView) findViewById(R.id.listview);
         adapter = new PhotoBaseAdapter(getContext());
-        gridView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
