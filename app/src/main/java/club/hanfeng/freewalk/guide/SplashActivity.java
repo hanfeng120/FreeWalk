@@ -1,5 +1,7 @@
 package club.hanfeng.freewalk.guide;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -7,13 +9,18 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.List;
+
 import club.hanfeng.freewalk.R;
+import club.hanfeng.freewalk.core.guide.SplashInfo;
 import club.hanfeng.freewalk.framework.BaseActivity;
 import club.hanfeng.freewalk.mainpage.MainPageActivity;
 import club.hanfeng.freewalk.user.LoginActivity;
 import club.hanfeng.freewalk.utils.sp.SpConstants;
 import club.hanfeng.freewalk.utils.sp.SpUtils;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.FindListener;
 
 
 public class SplashActivity extends BaseActivity {
@@ -39,13 +46,6 @@ public class SplashActivity extends BaseActivity {
                         checkLoginState();
                     }
                     break;
-                case WHAT_ENTER_DELAYED:
-                    if (isFirst) {
-                        startActivity(new Intent(getContext(), GuideActivity.class));
-                        finish();
-                    } else {
-                        checkLoginState();
-                    }
             }
         }
     };
@@ -79,7 +79,7 @@ public class SplashActivity extends BaseActivity {
     protected void initData() {
         startTime = System.currentTimeMillis();
         isFirst = SpUtils.getInstance(getContext()).getValue(SpConstants.IS_FIRST, true);
-        getDataFromNet();
+        checkAppState();
     }
 
     @Override
@@ -87,25 +87,57 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-    /**
-     * 从网络上获取闪屏页面的信息
-     */
-    public void getDataFromNet() {
+    private void checkAppState() {
+        BmobQuery<SplashInfo> bmobQuery = new BmobQuery<>();
+        bmobQuery.findObjects(getContext(), new FindListener<SplashInfo>() {
+            @Override
+            public void onSuccess(List<SplashInfo> list) {
+                if (list != null && list.size() > 0) {
+                    if (list.get(0).isOpen()) {
+                        enterMainPage();
+                    } else {
+                        showAlertDialog(list.get(0).getMessage(), true);
+                    }
+                } else {
+                    showAlertDialog("应用出错了", true);
+                }
+            }
 
-        try {
-            Thread.sleep((long) (Math.random() * 2000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onError(int i, String s) {
+                showAlertDialog("网络连接错误，请重试", false);
+            }
+        });
 
+    }
+
+    private void showAlertDialog(String message, final boolean isConnected) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("提示").setMessage(message).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).setPositiveButton(isConnected ? "确定" : "重试", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (isConnected) {
+                    finish();
+                } else {
+                    checkAppState();
+                }
+            }
+        }).setCancelable(false).show();
+    }
+
+    private void enterMainPage() {
         endTime = System.currentTimeMillis();
         long spendTime = endTime - startTime;
         if (spendTime < 4000) {
-            handler.sendEmptyMessageDelayed(WHAT_ENTER_DELAYED, 4000 - spendTime);
+            handler.sendEmptyMessageDelayed(WHAT_ENTER, 4000 - spendTime);
         } else {
             handler.sendEmptyMessage(WHAT_ENTER);
         }
-
     }
 
     private void checkLoginState() {
