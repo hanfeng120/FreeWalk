@@ -160,6 +160,7 @@ public class NavigateActivity extends AppCompatActivity implements LocationSourc
             optionClient.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
             //设置定位参数
             locationClient.setLocationOption(optionClient);
+            locationClient.setLocationListener(this);
             locationClient.startLocation();
         }
     }

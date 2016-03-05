@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-    package="club.hanfeng.freewalk"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="club.hanfeng.freewalk">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".activity.FreeWalkApplication"
@@ -29,90 +29,90 @@
         tools:replace="android:icon">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="c7c1c361def02d77a76c40135aeb0667"/>
+            android:value="c7c1c361def02d77a76c40135aeb0667" />
 
         <activity
             android:name=".guide.SplashActivity"
-            android:theme="@style/SplashToolbar"
-            >
+            android:theme="@style/SplashToolbar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".guide.GuideActivity"
-            android:theme="@style/NoActionBar"/>
-        <activity android:name=".activity.BrowserActivity"/>
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".activity.BrowserActivity" />
         <activity
             android:name=".scene.SceneActivity"
-            android:theme="@style/NoActionBar"/>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".user.RegistStep2Activity"
-            android:label="注册"/>
+            android:label="注册" />
         <activity
             android:name=".user.LoginActivity"
             android:label="登录"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activity.FeedbackActivity"/>
-        <activity android:name=".activity.AboutActivity"/>
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.FeedbackActivity" />
+        <activity android:name=".activity.AboutActivity" />
         <activity
             android:name=".user.UserDetailActivity"
-            android:label="个人信息"/>
+            android:label="个人信息" />
         <activity
             android:name=".studio.StudioActivity"
-            android:label="现场直播"/>
+            android:label="现场直播" />
         <activity
             android:name=".activity.TravelsActivity"
-            android:label="@string/title_activity_travels"/>
-        <activity android:name=".scan.ScanActivity"/>
-        <activity android:name=".activity.ShakeActivity"/>
+            android:label="@string/title_activity_travels" />
+        <activity android:name=".scan.ScanActivity" />
+        <activity android:name=".activity.ShakeActivity" />
         <activity
             android:name=".studio.PictureViewerActivity"
-            android:theme="@style/NoActionBar"/>
+            android:theme="@style/NoActionBar" />
 
         <service android:name=".service.VoicePlayerService">
             <intent-filter>
-                <action android:name="club.hanfeng.freewalk.service.VOICEPLAYERSERVICE"/>
+                <action android:name="club.hanfeng.freewalk.service.VOICEPLAYERSERVICE" />
             </intent-filter>
         </service>
 
-        <activity android:name=".user.RegistStep1Activity"/>
+        <activity android:name=".user.RegistStep1Activity" />
         <activity
             android:name=".mainpage.MainPageActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Toolbar"/>
+            android:theme="@style/Toolbar" />
         <activity
             android:name=".scene.SceneListActivity"
-            android:theme="@style/ToolbarWhite"/>
-        <activity android:name=".collection.CollectionActivity"/>
-        <activity android:name=".studio.StudioStep1Activity"/>
-        <activity android:name=".studio.StudioStep2Activity"/>
-        <activity android:name=".studio.StudioSceneListActivity"/>
-        <activity android:name=".photo.PhotoActivity"/>
-        <activity android:name=".download.DownloadActivity"/>
+            android:theme="@style/ToolbarWhite" />
+        <activity android:name=".collection.CollectionActivity" />
+        <activity android:name=".studio.StudioStep1Activity" />
+        <activity android:name=".studio.StudioStep2Activity" />
+        <activity android:name=".studio.StudioSceneListActivity" />
+        <activity android:name=".photo.PhotoActivity" />
+        <activity android:name=".download.DownloadActivity" />
         <activity
             android:name=".download.DownloadMapActivity"
-            android:theme="@style/DownloadToolbar"/>
+            android:theme="@style/DownloadToolbar" />
         <activity
             android:name=".download.DownloadVoiceActivity"
-            android:theme="@style/DownloadToolbar"/>
-        <activity android:name=".comments.CommentActivity"/>
-        <activity android:name=".comments.WriteCommentActivity"/>
+            android:theme="@style/DownloadToolbar" />
+        <activity android:name=".comments.CommentActivity" />
+        <activity android:name=".comments.WriteCommentActivity" />
         <activity
             android:name=".navigation.NavigateActivity"
-            android:launchMode="singleInstance"/>
-        <activity android:name="com.zxing.activity.CaptureActivity"/>
+            android:launchMode="singleInstance" />
+        <activity android:name="com.zxing.activity.CaptureActivity" />
 
         <receiver
             android:name=".navigation.AMapReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="club.hanfeng.freewalk.geofence.broadcast"/>
+                <action android:name="club.hanfeng.freewalk.geofence.broadcast" />
             </intent-filter>
         </receiver>
+        <service android:name="com.amap.api.location.APSService"/>
     </application>
 
 </manifest>
